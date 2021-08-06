@@ -1,0 +1,44 @@
+@import "~styles/cc";
+@import "~components/cards/mixins";
+
+.titleLink {
+  line-height: 0;
+  color: $color-navy;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  @include expand-clickable-area-to-parent();
+}
+
+.heading {
+  color: $color-navy;
+  margin-bottom: px-rem(2);
+  @include fade-truncation(1.6, 3);
+}
+
+.completedHeading {
+  color: $color-white;
+  @include fade-truncation(1.6, 3, $brand-dark-blue);
+}
+
+.inProgressHeading {
+  @include fade-truncation(1.6, 3, $brand-yellow);
+}
+
+.completed {
+  background-color: $brand-dark-blue;
+}
+
+.inProgress {
+  background-color: $brand-yellow;
+  color: $color-blue-1000;
+}
+
+.imageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: px-rem(14);
+}

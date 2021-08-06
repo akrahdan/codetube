@@ -1,0 +1,28 @@
+// Background  Gradient
+
+// light gradient
+
+.bg-light-gradient {
+  background: rgba(221, 218, 255, 0.2);
+  background: linear-gradient(180deg, rgba(221, 218, 255, 0.2) 0%, rgba(255, 255, 255, 0) 80%);
+  background: -webkit-linear-gradient(180deg, rgba(221, 218, 255, 0.2) 0%, rgba(255, 255, 255, 0) 80%);
+  background: -moz-linear-gradient(180deg, rgba(221, 218, 255, 0.2) 0%, rgba(255, 255, 255, 0) 80%);
+}
+
+// light gradient bottom
+
+.bg-light-gradient-bottom {
+  background: rgba(221, 218, 255, 0.3);
+  background: linear-gradient(360deg, rgba(221, 218, 255, 0.3) 0%, rgba(255, 255, 255, 0) 80%);
+  background: -webkit-linear-gradient(360deg, rgba(221, 218, 255, 0.3) 0%, rgba(255, 255, 255, 0) 80%);
+  background: -moz-linear-gradient(360deg, rgba(221, 218, 255, 0.3) 0%, rgba(255, 255, 255, 0) 80%);
+}
+
+// light gradient top
+
+.bg-light-gradient-top {
+  background: rgba(221, 218, 255, 0.3);
+  background: linear-gradient(180deg, rgba(221, 218, 255, 0.3) 0%, rgba(255, 255, 255, 0) 80%);
+  background: -webkit-linear-gradient(180deg, rgba(221, 218, 255, 0.3) 0%, rgba(255, 255, 255, 0) 80%);
+  background: -moz-linear-gradient(180deg, rgba(221, 218, 255, 0.3) 0%, rgba(255, 255, 255, 0) 80%);
+}

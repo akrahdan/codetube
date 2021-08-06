@@ -1,0 +1,161 @@
+@import "styles/cc";
+
+$angle: 16deg;
+
+.showOnMobile {
+  display: none;
+}
+
+.showOnDesktop {
+  display: block;
+}
+
+.container {
+  position: relative;
+}
+
+.contentContainer {
+  position: relative;
+  padding-bottom: 6rem;
+}
+
+.asideContainer,
+.asideContent {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: $color-white;
+  font-weight: bold;
+}
+
+.asideContent {
+  max-width: 28rem;
+}
+
+.asideTitle {
+  color: $color-white;
+  margin-top: 3rem;
+}
+
+.slopeContainer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 12rem 0 4rem;
+  transform: rotate($angle);
+}
+
+.supportingPointContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 25rem;
+  margin: 0 2rem;
+  transform: rotate(-$angle);
+}
+
+.supportingPointTitle {
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  margin-top: 2rem;
+}
+
+.supportingPointDescription {
+  font-weight: bold;
+}
+
+@include screen-size-lte(86rem) {
+  $angle: 20deg;
+
+  .asideContainer {
+    right: -8rem;
+  }
+
+  .asideContent {
+    right: 6rem;
+    max-width: 20rem;
+    margin-right: 1rem;
+  }
+
+  .slopeContainer {
+    margin-right: -3rem;
+    transform: rotate($angle);
+  }
+
+  .supportingPointContainer {
+    transform: rotate(-$angle);
+  }
+}
+
+@include device-tablet {
+  $angle: 29deg;
+
+  .contentContainer {
+    padding-bottom: 4rem;
+  }
+
+  .slopeContainer {
+    width: 105%;
+    transform: rotate($angle);
+  }
+
+  .supportingPointContainer {
+    margin-top: 3rem;
+    transform: rotate(-$angle);
+  }
+}
+
+@include device-phone {
+  .showOnDesktop {
+    display: none;
+  }
+
+  .showOnMobile {
+    display: block;
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+  }
+
+  .asideRunoff {
+    display: none;
+  }
+
+  .mobileHeader {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    font-weight: bold;
+    height: 7rem;
+    padding: 0.25rem 2rem;
+    position: relative;
+  }
+
+  .mobileWrapper {
+    max-width: calc(420px + 1.5rem);
+    margin-left: 2.5rem;
+    width: 100%;
+
+    > * {
+      max-width: 14rem;
+      color: $color-white;
+    }
+  }
+
+  .slopeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2rem;
+    margin-top: -4rem;
+    transform: rotate(0deg);
+    padding: 2rem;
+    max-width: calc(100% - 2rem);
+  }
+
+  .supportingPointContainer {
+    display: block;
+    margin-top: 1rem;
+    transform: rotate(0deg);
+  }
+}

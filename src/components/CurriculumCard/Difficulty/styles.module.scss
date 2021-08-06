@@ -1,0 +1,22 @@
+@import "~styles/cc";
+
+.difficulty {
+  font-size: px-rem(14);
+  color: $color-gray-700;
+  margin: 0;
+}
+
+.difficulty > span {
+  width: px-rem(8);
+  height: px-rem(8);
+  border-radius: px-rem(8);
+  display: inline-block;
+  margin-right: px-rem(4);
+  vertical-align: middle;
+  background-color: $color-white;
+  border: 1px solid $color-navy;
+}
+
+.difficulty > span.filled {
+  background-color: $color-navy;
+}

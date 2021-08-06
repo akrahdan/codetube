@@ -1,0 +1,71 @@
+:root {
+    --player-tooltip-border-radius: 10%;
+    --player-tooltip-border-radius-wide: 4%/12%;
+  }
+  
+  .root {
+    display: block;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+  }
+  
+  .root svg {
+    position: relative;
+    top: 2px;
+  }
+  
+  .fill {
+    fill: var(--psColorsTextIconHighOnDark);
+  }
+  
+  .hover .fill {
+    fill: var(--psColorsTextIconHighOnDark);
+  }
+  
+  .square {
+    background: var(--colorsMenu);
+    border-radius: var(--player-tooltip-border-radius);
+    position: relative;
+  }
+  
+  .square:before {
+    content: '';
+    display: block;
+    border-radius: var(--player-tooltip-border-radius);
+  
+    position: absolute;
+    top: 10%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  
+    background: var(--colorsMenu);
+  }
+  
+  .square svg {
+    position: relative;
+  }
+  
+  .square .fill {
+    fill: var(--psColorsTextIconHighOnDark);
+  }
+  
+  .wide.square {
+    border-radius: var(--player-tooltip-border-radius-wide);
+  }
+  
+  .wide.square:before {
+    border-radius: var(--player-tooltip-border-radius-wide);
+  }
+  
+  .circle {
+    border-radius: 50%;
+    background: var(--colorsMenu);
+    line-height: 0;
+  }
+  
+  .circle .fill {
+    fill: var(--psColorsTextIconHighOnDark);
+  }
+  

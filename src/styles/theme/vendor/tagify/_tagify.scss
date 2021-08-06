@@ -1,0 +1,29 @@
+// Tagify
+
+.tagify {
+  border-color: $gray-200;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  --tag-bg: #eae7f5;
+  --tag-hover: #d5c9fd;
+  --tag-invalid-color: #fa9e9d;
+  --tag-text-color: $dark;
+  --tags-focus-border-color: $primary;
+  &__tag {
+    &:hover:not([readonly]) {
+      & div::before {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        box-shadow: 0 0 0 1.1em #d3e2e2 inset;
+        box-shadow: 0 0 0 var(--tag-inset-shadow-size, 1.1em) var(--tag-hover, #d3e2e2) inset;
+      }
+    }
+  }
+
+}
+.tagify--focus{
+  border-color: $primary !important;
+  box-shadow: 0px 0px 0px 3px rgba(231, 225, 253, 0.75);
+}

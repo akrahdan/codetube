@@ -1,0 +1,35 @@
+@import "~styles/cc";
+
+@mixin fade-truncation($line-height: 1.5, $lines: 2, $color: $color-white) {
+  position: relative;
+  width: 100%;
+  max-height: $line-height * $lines * 1rem;
+  display: inline-block;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    text-align: right;
+    position: absolute;
+    top: $line-height * ($lines - 1) * 1rem;
+    right: 0;
+    width: 35%;
+    height: $line-height * 1rem;
+    background: linear-gradient(to right, rgba($color, 0), rgba($color, 1) 75%);
+  }
+}
+
+// Inject this into an anchor/link whose clickable area you want to cover
+// more than just the link itself. It will instead take up the entire area of its nearest
+// parent with "position: relative".
+@mixin expand-clickable-area-to-parent() {
+  &::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}

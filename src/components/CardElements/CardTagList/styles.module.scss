@@ -1,0 +1,9 @@
+.tagList {
+  list-style-type: none;
+  padding: 0 0 1rem;
+  margin: 0;
+  display: grid;
+  grid-auto-columns: minmax(auto, max-content);
+  grid-gap: 0.5rem;
+  grid-auto-flow: column;
+}

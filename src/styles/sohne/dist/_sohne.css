@@ -1,0 +1,32 @@
+/* Sohne - Light */
+@font-face {
+  font-family: "Sohne";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local("Sohne Leicht"), local("Sohne-Leicht"), url("fonts/sohne-leicht.woff2") format("woff2"), url("fonts/sohne-leicht.woff") format("woff");
+}
+/* Sohne - Regular */
+@font-face {
+  font-family: "Sohne";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Sohne Buch"), local("Sohne-Buch"), url("fonts/sohne-buch.woff2") format("woff2"), url("fonts/sohne-buch.woff") format("woff");
+}
+/* Sohne - Bold */
+@font-face {
+  font-family: "Sohne";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local("Sohne Halbfett"), local("Sohne-Halbfett"), url("fonts/sohne-halbfett.woff2") format("woff2"), url("fonts/sohne-halbfett.woff") format("woff");
+}
+/* Sohne - Schmal - Semibold */
+@font-face {
+  font-family: "Sohne Schmal";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local("Sohne Schmal Dreiviertelfett"), local("Sohne-Schmal-Dreiviertelfett"), url("fonts/sohne-schmal-dreiviertelfett.woff2") format("woff2"), url("fonts/sohne-schmal-dreiviertelfett.woff") format("woff");
+}

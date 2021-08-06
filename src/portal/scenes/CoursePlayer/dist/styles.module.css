@@ -1,0 +1,6 @@
+.courseLayout {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  transition: all 0.25s linear;
+}

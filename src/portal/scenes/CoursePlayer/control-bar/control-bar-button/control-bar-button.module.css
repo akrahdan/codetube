@@ -1,0 +1,27 @@
+.wrapper {
+    position: relative;
+    width: 42px;
+    padding: 3px 0;
+  }
+  
+  .wrapper .icon {
+    cursor: pointer;
+  
+    height: 33px;
+    width: 41px;
+  
+    padding: 1px 7px 0;
+  
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+  }
+  
+  .icon[active] path {
+    fill: var(--psColorsTextIconHighOnDark);
+  }
+  
+  .icon[active] {
+    border-color: var(--psColorsTextIconHighOnDark);
+    color: var(--psColorsTextIconHighOnDark);
+  }
+  

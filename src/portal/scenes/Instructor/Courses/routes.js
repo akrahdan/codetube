@@ -1,0 +1,10 @@
+export const CURRICULUM = 'curriculum';
+export const COURSE_DESCRIPTION = 'course_description';
+export const COVER_MEDIA = 'cover_media';
+export const SUBMIT_REVIEW = 'submit_review';
+export const PRICING = 'pricing';
+export const TARGET = 'target';
+export const TITLE = 'title';
+export const CATEGORY = 'category';
+export const CHOICE ='choice';
+export const DESCRIPTION = 'description'

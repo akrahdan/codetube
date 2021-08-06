@@ -1,0 +1,19 @@
+@import "~styles/cc";
+$card-height: px-rem(200px);
+$card-width: px-rem(320px);
+
+.loadingScreen {
+  background-color: $color-purple-200;
+  z-index: 1;
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  pointer-events: none;
+}
+
+.stretchToFit {
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}

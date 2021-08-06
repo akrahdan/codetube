@@ -1,0 +1,40 @@
+.has-tooltip {
+    position: relative;
+    z-index: var(--zIndexTooltips);
+    height: 35px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .has-tooltip:after {
+    content: attr(data-text);
+    display: inline-block;
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: var(--colorsMenu);
+    border-radius: 3px;
+    color: var(--psColorsTextIconHighOnDark);
+    padding: 5px 8px;
+    white-space: nowrap;
+    font-size: var(--psTypeFontSizeXSmall);
+    letter-spacing: var(--letterSpacingFontSizeXSmall);
+    visibility: hidden;
+  }
+  
+  .has-tooltip.is-far-left:after {
+    left: 0;
+    transform: none;
+  }
+  
+  .has-tooltip.is-far-right:after {
+    left: initial;
+    right: 0;
+    transform: none;
+  }
+  
+  .has-tooltip:not(.is-disabled):hover:after {
+    visibility: visible;
+  }
+  

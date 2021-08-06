@@ -1,0 +1,31 @@
+.playbackSpeed {
+    height: inherit;
+    width: inherit;
+    display: flex;
+    align-items: center;
+  }
+  
+  :root .playbackSpeed button {
+    border: 2px solid var(--psColorsTextIconHighOnDark);
+    padding: 0;
+    width: 35px;
+    height: 21px;
+    font-size: 11px;
+    letter-spacing: var(--letterSpacingFontSizeXSmall);
+    color: var(--psColorsTextIconHighOnDark);
+    position: relative;
+    margin: 0 7px;
+    background-color: inherit;
+    border-radius: 2px;
+    line-height: normal;
+  
+    &.active {
+      border-color: var(--psColorsTextIconHighOnDark);
+      color: var(--psColorsTextIconHighOnDark);
+    }
+  }
+  
+  .text {
+    text-align: center;
+  }
+  

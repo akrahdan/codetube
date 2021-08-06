@@ -1,0 +1,16 @@
+@import "~styles/cc";
+@import "~components/cards/mixins.scss";
+
+$truncatLines: (1, 2, 3, 4);
+
+.description {
+  position: relative;
+  margin: 0;
+  line-height: 1.5;
+}
+
+@each $line in $truncatLines {
+  .truncateLine_#{$line} {
+    @include fade-truncation(1.5, $line);
+  }
+}

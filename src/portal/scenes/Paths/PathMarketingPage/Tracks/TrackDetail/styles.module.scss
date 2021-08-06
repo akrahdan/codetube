@@ -1,0 +1,37 @@
+@import "~styles/cc";
+
+.trackDetailContainer {
+  background-color: $color-white;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: solid 1px $color-gray-200;
+}
+
+.trackDetailNumber {
+  font-size: px-rem(36px);
+  font-weight: bold;
+  color: $color-gray-600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: px-rem(200px);
+}
+
+.trackDetailText {
+  margin-right: 15px;
+  width: 100%;
+}
+
+.trackDetailTitle {
+  font-size: 1.4rem;
+  margin-top: px-rem(22px);
+}
+
+.trackDetailDescription {
+  margin-top: px-rem(-8px);
+  font-size: px-rem(16px);
+  width: 100%;
+  color: $color-gray-800;
+}

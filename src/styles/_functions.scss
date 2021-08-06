@@ -1,0 +1,32 @@
+  @function viewport-height($value: 0) {
+    @if $value > 0 {
+      @return calc(#{"100vh + #{$value}"});
+    }
+    @elseif $value < 0 {
+      @return calc(#{"100vh - #{$value * -1}"});
+    } @else {
+      @return 100vh;
+    }
+  }
+  
+  @function viewport-width($value: 0) {
+    @if $value > 0 {
+      @return calc(#{"100vw + #{$value}"});
+    }
+    @elseif $value < 0 {
+      @return calc(#{"100vw - #{$value * -1}"});
+    } @else {
+      @return 100vw;
+    }
+  }
+  
+  // DEPRECATED: gamut alias, use `px-rem`
+  @function rem($px, $base-px: 16) {
+    @return px-rem($px, $base-px);
+  }
+  
+  // DEPRECATED: gamut alias, use `px-em`
+  @function em($px, $base-px: 16) {
+    @return px-em($px, $base-px);
+  }
+  

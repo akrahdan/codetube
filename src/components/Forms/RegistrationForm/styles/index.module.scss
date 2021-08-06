@@ -1,0 +1,103 @@
+@import "~styles/cc";
+
+$padding-unit: 1rem;
+$font-size: 0.9rem;
+
+.registrationContainer {
+  max-width: 22rem;
+}
+
+.recaptchaError {
+  color: $color-red-600;
+  font-size: $font-size !important;
+  margin-bottom: $padding-unit/2;
+}
+
+.padBottomIfNotEmpty:not(:empty) {
+  margin-bottom: $padding-unit;
+}
+
+.tooltipContainer {
+  @include sm-viewport {
+    max-width: 30vw !important;
+    right: -2vw;
+    left: unset !important;
+  }
+}
+
+:global(.grecaptcha-badge) {
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.textDisplay {
+  display: block !important;
+  font-size: 1.6em !important;
+  font-family: "Sohne", "Helvetica", "Apercu";
+}
+
+.textCenter {
+  text-align: center !important;
+
+}
+.textLink {
+  text-decoration: underline !important;
+  cursor: pointer;
+}
+
+.cButton {
+  padding: 1.2em 2.8em;
+  font-size: 1.2em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 500;
+  line-height: 2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 1.2em;
+  transition: background 250ms ease, box-shadow 250ms ease, opacity 250ms ease;
+  vertical-align: middle;
+  border: 0;
+  font-family: "Sohne", "Helvetica", "Arial", sans-serif
+}
+
+.cButton:focus,.cButton.focus {
+  outline: 0
+}
+
+.cButton.disabled,.cButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5
+}
+
+.cButton:not(:disabled):not(.disabled) {
+  cursor: pointer
+}
+
+.loginForm button {
+  padding: 1.2em 2.8em;
+  font-size: 1.2em;
+  width: 100% !important;
+  background-color: #f24462;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 500;
+  line-height: 2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 1.2em;
+  transition: background 250ms ease, box-shadow 250ms ease, opacity 250ms ease;
+  vertical-align: middle;
+  border: 0;
+  font-family: "Sohne", "Helvetica", "Arial", sans-serif
+}
+
+.loginForm button:not(:disabled):not(.disabled):hover {
+  background-color: #f45c76;
+  color: #fff
+}

@@ -1,0 +1,141 @@
+@import 'styles/cfi';
+.sectionList {
+  margin-top: 35px;
+  padding-bottom: 30px;
+  border: 1px solid #6a6f73;
+  background-color: #f7f9fa;
+  list-style: none;
+  font-size: 15px;
+  line-height: 1.43;
+}
+
+.curriculumWrapper {
+  position: relative;
+}
+
+.addItemSection {
+  margin-left: 60px;
+  margin-right: 10px;
+}
+
+.curriculum-list {
+ margin-bottom: 3rem;
+}
+
+.listWrapperSection {
+  width: 100%;
+  margin-left: -60px;
+  position: absolute;
+  top: -80px;
+  height: 80px;
+}
+
+.addItemButton {
+  width: 40px;
+  height: 27px;
+  top: 45px;
+  left: -19px;
+  opacity: 0;
+  transition: all 500ms;
+  position: absolute;
+  border: 1px dashed #6a6f73;
+  border-right: 0;
+  background: #fff;
+  padding: 2px 8px;
+  font-size: 13px;
+  line-height: 1.35135;
+  border-radius: 0;
+}
+
+.addItemButton:active:before,
+.addItemButton:active:before,
+.addItemButton:focus:before,
+.addItemButton:hover:before {
+  transition: all 500ms;
+  content: "";
+  position: absolute;
+  right: -11px;
+  top: 2px;
+  height: 21px;
+  width: 21px;
+  background: #fff;
+  border: 1px dashed #6a6f73;
+  border-bottom: none;
+  border-left: none;
+  transform: rotate(35deg) skew(-15deg);
+}
+
+.btnLink {
+  color: #5624d0;
+  font-weight: 400;
+  border-radius: 0;
+}
+
+
+
+.addItemIcon {
+    position: relative;
+    left: 0;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 500ms;
+    vertical-align: -8%;
+    font-family: cfIcons!important;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+}
+
+.addItemIcon:before {
+    content: "\E730"
+}
+
+.itemBarSection {
+    border: 0;
+    padding: 20px 10px;
+    position: relative;
+    cursor: move;
+    display: flex;
+}
+
+.fx {
+    flex: 1;
+    min-width: 1px;
+}
+
+.fxWrap {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.itemBar {
+    flex: 1 0 auto;
+    max-width: 100%;
+    min-width: 1px;
+}
+
+.itemBarLeft {
+    flex: 1 0 auto;
+    max-width: 100%;
+    min-width: 1px;
+}
+
+.itemBarTitle {
+    max-width: 480px;
+    padding: 5px 5px 5px 0;
+    white-space: nowrap;
+}
+
+.fxlc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.itemBarStatus {
+    font-weight: 700;
+}

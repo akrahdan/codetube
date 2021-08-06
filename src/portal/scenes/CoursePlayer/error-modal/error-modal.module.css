@@ -1,0 +1,36 @@
+.errorModal {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    z-index: var(--zIndexErrorModal);
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .error-modal__content {
+    max-width: 600px;
+    padding: 20px;
+    text-align: center;
+    font-size: var(--psTypeFontSizeSmall);
+    letter-spacing: var(--letterSpacingFontSizeSmall);
+    line-height: 1.4;
+  }
+  
+  @media only screen and (min-width: 500px) {
+    .error-modal__content {
+      font-size: var(--psTypeFontSizeMedium);
+      letter-spacing: var(--letterSpacingFontSizeMedium);
+    }
+  }
+  
+  .error-modal__btn {
+    margin: 20px 10px;
+  }
+  
+  .error-modal__link {
+    color: #ffffff !important; /* override design system :( */
+  }
+  

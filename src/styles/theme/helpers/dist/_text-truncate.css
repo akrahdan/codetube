@@ -1,0 +1,4 @@
+.text-truncate-line-2 {
+  overflow: hidden;
+  max-height: 3rem;
+}

@@ -1,0 +1,34 @@
+@import "~styles/cc";
+
+$anim-duration: 0.3s;
+
+.socialAuthContainer {
+  padding-bottom: 0;
+}
+
+.btnContainer {
+  padding: 0;
+  display: flex;
+  margin-bottom: px-rem(16px);
+}
+
+.btnContainerItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnContainerItem + .btnContainerItem {
+  margin-left: 0.5rem;
+}
+
+.icon {
+  transition: transform $anim-duration ease-in;
+  width: 1.5rem;
+}
+
+.heading {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}

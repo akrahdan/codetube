@@ -1,0 +1,66 @@
+.marker-button {
+    position: absolute;
+    z-index: var(--zIndexTimelineMarker);
+    background: none;
+    border: none;
+    padding: 0;
+    position: absolute;
+    bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+    opacity: 0.75;
+    cursor: pointer;
+  
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+  
+    &.visible {
+      animation: 10ms ease-out 50ms fade-from-visually-hidden;
+      height: initial;
+      width: initial;
+      overflow: initial;
+      clip: initial;
+      opacity: 0.75;
+    }
+  
+    &.visible:hover {
+      opacity: 1;
+    }
+  
+    &:not(.is-keyboard-mode) {
+      outline: none;
+    }
+  }
+  
+  .marker-button__icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--psColorsTextIconHighOnDark);
+  }
+  
+  .marker-button__text {
+    margin-left: 2px;
+    font-size: 12px;
+    letter-spacing: var(--letterSpacingFontSizeXSmall);
+    font-family: 'PS TT Commons Roman', 'Gotham SSm A', 'Gotham SSm B', Arial, sans-serif;
+    line-height: 1;
+    color: var(--psColorsTextIconHighOnDark);
+    text-shadow: 0 0 2px black;
+  }
+  
+  @keyframes fade-from-visually-hidden {
+    0% {
+      height: initial;
+      width: initial;
+      overflow: initial;
+      clip: initial;
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.75;
+    }
+  }
+  

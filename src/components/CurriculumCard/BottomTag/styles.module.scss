@@ -1,0 +1,22 @@
+@import "~styles/cc";
+
+.bottomTag {
+  font-weight: bold;
+  display: inline-block;
+  padding: px-rem(4) px-rem(12);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: $color-navy;
+  font-size: px-rem(14);
+  line-height: 1rem;
+  &.green {
+    background-color: $color-pale-green;
+  }
+  &.pink {
+    background-color: $color-pale-pink;
+  }
+  &.blue {
+    background-color: $color-pale-blue;
+  }
+}

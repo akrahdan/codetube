@@ -1,0 +1,53 @@
+.progressBarWrapper {
+    position: relative;
+    width: calc(100% - 1.6rem);
+    margin: 0 0.8rem;
+    transition: all var(--bar-speed) ease-out;
+  }
+  
+  [is-ie='true'] .progressBarWrapper {
+    transition: unset;
+  }
+  
+  :root .slider {
+    transition: height var(--bar-speed) ease-out;
+  }
+  
+  :root .hiddenSlider {
+    height: var(--progress-bar-height);
+  }
+  
+  .hidden {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .progressBar {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  :root .bufferedTime {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .timestamp {
+    position: absolute;
+    top: -20px;
+    font-size: 12px;
+    letter-spacing: var(--letterSpacingFontSizeXSmall);
+    background-color: var(--colorsMenu);
+    border-radius: 3px;
+    color: var(--psColorsTextIconHighOnDark);
+    padding: 3px 8px 2px;
+    opacity: 0;
+    margin-left: -20px;
+    pointer-events: none;
+    z-index: var(--zIndexProgressBarTimestamp);
+  }
+  
+  .timestampFadeIn {
+    opacity: 1;
+    transition: opacity 150ms ease-out;
+  }
+  

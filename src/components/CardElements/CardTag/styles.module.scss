@@ -1,0 +1,15 @@
+@import "~styles/cc";
+
+.tag {
+  border: 1px solid $color-gray-200;
+  color: $color-gray-700;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.88rem;
+  border-radius: 3px;
+  white-space: nowrap;
+
+  &:last-of-type {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

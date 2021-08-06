@@ -1,0 +1,10 @@
+.asButton {
+  background: transparent;
+  padding: 0;
+  border: 0;
+  &:hover,
+  &:focus,
+  &:active {
+    color: inherit;
+  }
+}

@@ -1,0 +1,88 @@
+.container {
+    position: absolute;
+    bottom: var(--spacingMenuBottom);
+    right: var(--spacingMenuRight);
+  
+    background: var(--colorsMenu);
+    width: 204px;
+    border-radius: 2px;
+    padding: 7px 10px 10px;
+  
+    opacity: 1;
+    transition: opacity var(--menu-speed) ease-out;
+  }
+  
+  .title {
+    font-size: var(--psTypeFontSizeXSmall);
+    letter-spacing: var(--letterSpacingFontSizeXSmall);
+    margin: 0;
+    cursor: default;
+    margin-bottom: 2px;
+    display: flex;
+    justify-content: center;
+    max-height: 20px;
+  }
+  
+  .title__content {
+    text-align: left;
+    display: block;
+  
+    /* placeholder for widest text so it doesn't 
+    jump around as you change the speed */
+    &:after {
+      content: attr(data-widest);
+      visibility: hidden;
+      display: block;
+    }
+  }
+  
+  .slider {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  .slider li {
+    cursor: pointer;
+    width: 15px;
+    line-height: 1;
+  }
+  
+  .slider li .button {
+    cursor: pointer;
+  
+    font-size: 0;
+    border: none;
+    width: 2px;
+    height: 16px;
+    padding: 0 !important;
+    position: relative;
+    left: 4px;
+    margin: 0 1px;
+  
+    &:focus {
+      outline: none;
+    }
+  }
+  
+  .lessThan .button {
+    background: var(--psColorsPrimaryActionBackground);
+  }
+  
+  .equalTo .button {
+    background: var(--psColorsTextIconHighOnDark);
+    position: relative;
+    width: 4px !important;
+    margin: 0;
+  }
+  
+  .greaterThan .button {
+    background: var(--psColorsTextIconLowOnDark);
+  }
+  
+  .hidden {
+    display: none;
+  }
+  

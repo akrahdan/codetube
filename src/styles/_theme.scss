@@ -1,0 +1,30 @@
+/* Theme: Geeks */
+
+// Inter Fonts
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+// Font Awesome
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css");
+
+// Emojis
+@import url("https://emoji-css.afeld.me/emoji.css");
+
+// Bootstrap functions
+@import "~bootstrap/scss/functions";
+
+
+
+// theme variables
+@import "theme/variables";
+
+//utilities
+@import "theme/utilities";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// Theme
+@import "theme/theme";
+
+// User
+// @import "user";

@@ -1,0 +1,40 @@
+.actionOverlay {
+    width: 100%;
+    height: 100%;
+  
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  
+    z-index: var(--zIndexActionOverlay);
+  
+    pointer-events: none;
+  }
+  
+  .icon {
+    height: 100px;
+    width: 100px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .actionOverlay--fade {
+    opacity: 0;
+    animation: fadeout 800ms ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes fadeout {
+    0% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+    }
+  }
+  

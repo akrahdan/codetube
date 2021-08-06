@@ -1,0 +1,50 @@
+.pageContent {
+  min-height: 100vh;
+}
+
+.visualBlock {
+  background: none;
+  margin-bottom: -15px;
+  overflow: visible;
+  z-index: 1;
+}
+
+.userInfo {
+  position: relative;
+  z-index: 2;
+}
+
+.navLinks {
+  margin-top: 74px;
+  max-width: 1070px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
+}
+
+.left {
+  float: left;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navLink_icon {
+  margin-right: 8px;
+  display: inline-block;
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  font-size: 13px;
+  font-family: "icomoon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

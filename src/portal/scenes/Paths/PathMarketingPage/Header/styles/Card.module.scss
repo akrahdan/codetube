@@ -1,0 +1,69 @@
+$height-header: 4rem;
+$height-max: calc(#{"100vh - #{$height-header * 2}"});
+
+
+
+$bp-desktop-large: 1376px;
+$color-white: #fff;
+$brand-pink:#f288e9;
+$brand-purple: #6400e4;
+
+.card {
+  background-color: $color-white;
+  border-radius: 0.5rem;
+  justify-self: right;
+  padding: 2rem;
+  width: 26.25rem;
+
+  
+}
+
+
+@media screen and (max-width: 960px) {
+  .card {
+      padding:1.5rem;
+      justify-self: center
+  }
+}
+
+@media screen and (max-width: 736px) {
+  .card {
+      margin:0 1.5rem;
+      max-width: 26.25rem;
+      width: auto
+  }
+}
+
+.header {
+  display: flex;
+  font-size: .875rem;;
+  font-weight: bold;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.content {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.highlight {
+  box-shadow: inset 0 -0.8rem $brand-pink, inset 0 0 $brand-pink;
+  font-style: normal;
+}
+
+.logo {
+  color: $brand-purple;
+}
+
+
+
+
+
+

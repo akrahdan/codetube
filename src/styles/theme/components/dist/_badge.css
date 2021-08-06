@@ -1,0 +1,10 @@
+.badge-dot {
+  font-size: 0;
+  vertical-align: middle;
+  padding: 0;
+  border-radius: 50%;
+  line-height: 1;
+  height: 0.5rem;
+  width: 0.5rem;
+  display: inline-block;
+}

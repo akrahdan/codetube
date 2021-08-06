@@ -1,0 +1,61 @@
+.scrollable {
+    overflow-y: auto;
+  }
+  
+  .scrollable::-webkit-scrollbar-thumb {
+    background: var(--colorsMenuHover);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  
+  .scrollable::-webkit-scrollbar {
+    background: transparent;
+  }
+  
+  .searchbox {
+    display: flex;
+    background: var(--psColorsBackgroundDark1);
+    border-radius: 2px;
+    align-items: center;
+    padding-left: 5px;
+    font-size: 12px;
+    letter-spacing: var(--letterSpacingFontSizeXSmall);
+    margin: 7px;
+  
+    &:focus-within {
+      box-shadow: 0 0 0 3px var(--psColorsBlue6);
+      border-radius: 4px;
+    }
+  
+    &:focus-within input {
+      outline: none;
+    }
+  }
+  
+  .searchbox * {
+    font-size: 12px !important;
+    letter-spacing: var(--letterSpacingFontSizeXSmall);
+  }
+  
+  .searchbox__input {
+    background: transparent;
+    width: 100%;
+    font-size: var(--psTypeFontSizeSmall);
+    letter-spacing: var(--letterSpacingFontSizeXSmall);
+    line-height: var(--psTypeLineHeightStandard);
+    font-weight: 400;
+    color: var(--psColorsTextIconLowOnDark);
+    padding: 4px 6px;
+    border: none;
+    margin: 0;
+    flex: 1;
+  }
+  
+  .settings-menu {
+    width: 197px;
+    position: absolute;
+    bottom: var(--spacingMenuBottom);
+    right: var(--spacingMenuRight);
+  }
+  

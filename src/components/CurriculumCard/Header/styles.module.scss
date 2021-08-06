@@ -1,0 +1,21 @@
+@import "~styles/cc";
+
+.header {
+  margin-bottom: px-rem(10);
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.text {
+  color: $color-navy;
+  font-family: $font-family-accent;
+}
+
+.invertedText {
+  color: $color-white;
+}

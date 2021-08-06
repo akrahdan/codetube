@@ -1,0 +1,24 @@
+// Extended from Bootstrap
+
+// Close
+
+.btn-close {
+  box-sizing: content-box;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: $gray-400;
+  background: transparent; // include transparent for button elements
+  border: 0; // for button elements
+  font-size: 24px;
+  line-height: 1;
+  padding-right: 0;
+  // Override <a>'s hover style
+  &:hover {
+    color: $primary;
+    text-decoration: none;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}

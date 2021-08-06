@@ -1,0 +1,35 @@
+.avatar {
+    position: relative;
+    display: inline-block;
+    width: 3rem;
+    height: 3rem
+}
+
+
+
+.avatarLg {
+    width: 3.0rem;
+    height: 3.0rem
+}
+
+.roundedCircle {
+    border-radius: 50%!important;
+}
+
+
+.avatarInitials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    text-transform: uppercase
+}
+
+.avatarPrimary .avatarInitials {
+    color: #fff;
+    background-color: rgb(68, 37, 37)
+}
+
+

@@ -1,0 +1,46 @@
+.caret_container {
+  position: absolute;
+  top: 0px;
+  right: 16px;
+  bottom: 0px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.caretButton {
+  height: 24px;
+  overflow: hidden;
+  font-size: 12px;
+  padding: 0px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 300ms ease 0s;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.caret {
+  line-height: 0;
+  transition: -webkit-transform 300ms ease 0s, transform 300ms ease 0s;
+}
+
+.caretDown {
+  display: inline-flex;
+  height: 24px;
+  width: 24px;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.caretDown svg {
+  fill: currentcolor;
+  flex: 1 1 0%;
+}
+.caretExpand {
+  transform: rotateZ(180deg);
+}

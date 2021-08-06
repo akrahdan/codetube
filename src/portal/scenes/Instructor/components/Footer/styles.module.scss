@@ -1,0 +1,19 @@
+@import "~styles/cc";
+
+$footer-height: 50px;
+$footer-z: 14;
+
+.footer {
+  height: $footer-height;
+  background-color: $platform-purple-900;
+  color: $color-white;
+  z-index: $footer-z;
+}
+
+.footerTab {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

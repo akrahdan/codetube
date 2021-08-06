@@ -1,0 +1,26 @@
+//
+// Extended from bootstrap
+//
+// Text scss
+
+// Weight and italics
+
+// Text Inherit
+.text-inherit {
+  color: $dark;
+}
+
+// Muted hover
+a.text-muted:hover {
+  color: $primary !important;
+}
+
+// Primary hover
+a:hover .text-primary-hover {
+  color: $primary !important;
+}
+
+// disableClick
+.disableClick {
+  pointer-events: none;
+}

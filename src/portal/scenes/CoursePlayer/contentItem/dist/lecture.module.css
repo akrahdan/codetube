@@ -1,0 +1,70 @@
+.lectureContainer {
+  border-top: 1px solid var(--psColorsBorderLowOnDark) !important;
+}
+
+.lectureContainer:last-child {
+  border-bottom: 1px solid var(--psColorsBorderLowOnDark);
+}
+
+.lectureSubContainer {
+  position: relative;
+  padding-right: 54px;
+  cursor: pointer;
+  transition: background 300ms ease 0s;
+}
+.lectureSubContainer.active {
+  background: rgba(138, 153, 168, 0.25);
+}
+
+.lectureSubContainer:hover, .lectureSubContainer:focus {
+  background: rgba(138, 153, 168, 0.25);
+}
+
+.lectureDiv {
+  margin-right: calc(-54px);
+  padding-left: 16px;
+  padding-right: 54px;
+}
+
+.progressContainer {
+  width: 63px;
+  min-width: 63px;
+  display: flex;
+  justify-content: center;
+}
+
+.svgProgress {
+  transform: rotate(-90deg);
+  height: 29px;
+  width: 29px;
+  min-width: 29px;
+  margin: 4px;
+}
+
+.svgCircleBackgroud {
+  fill: transparent;
+  stroke: var(--psColorsTextIconLowOnDark);
+}
+
+.svgProgressText {
+  transform: rotate(90deg);
+  fill: var(--psColorsTextIconHighOnDark);
+  font-size: 13px;
+  letter-spacing: var(--letterSpacingFontSizeSmall);
+}
+
+.svgProgressCircle {
+  fill: none;
+  stroke: var(--psColorsTextIconHighOnDark);
+}
+
+.lectureItemContainer {
+  background: #181c20;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0px inset;
+  transition: box-shadow 300ms ease 0s;
+}
+
+.heightTransition {
+  max-height: 1000px;
+  transition: max-height 300ms ease 0s;
+}

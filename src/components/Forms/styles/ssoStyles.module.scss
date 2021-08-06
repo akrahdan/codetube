@@ -1,0 +1,22 @@
+@import "~styles/cc";
+
+.passwordTipsPopOver {
+  white-space: pre-line;
+}
+
+.loginLink {
+  color: $color-red-600;
+  text-decoration: underline;
+}
+
+.forgotPassword {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+.emailField {
+  line-break: anywhere;
+}

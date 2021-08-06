@@ -1,0 +1,18 @@
+.wrapper {
+    z-index: var(--zIndexKeyboardShortcuts);
+    position: relative;
+  }
+  
+  .modal-header {
+    margin-bottom: var(--psLayoutSpacingLarge);
+  }
+  
+  .modal-container {
+    margin: var(--psLayoutSpacingMedium);
+  }
+  
+  .shortcuts {
+    font-size: var(--psTypeFontSizeSmall);
+    letter-spacing: var(--letterSpacingFontSizeSmall);
+  }
+  

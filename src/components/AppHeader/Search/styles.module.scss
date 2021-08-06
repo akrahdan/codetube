@@ -1,0 +1,72 @@
+@import "~styles/cc";
+
+.container {
+  background-color: $color-white;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  @include device-phone {
+    display: none;
+  }
+
+  @include device-tablet {
+    display: none;
+  }
+  border-bottom: 1px solid $color-navy;
+  box-shadow: none;
+  border-top: 2px solid $color-gray-100;
+}
+
+.innerContainer {
+  width: auto;
+  border: none;
+}
+
+.queryContainer {
+  display: flex;
+  padding-top: 2rem;
+  padding-bottom: 0;
+}
+
+.displayHorizontal {
+  display: flex;
+  width: 100%;
+}
+
+.search {
+  width: 100%;
+  margin-left: px-rem(8);
+}
+
+.input {
+  width: 100%;
+  outline: none;
+  border: 0;
+  background: none;
+  font-size: px-rem(31);
+  font-weight: bold;
+}
+
+.searchIcon {
+  color: $color-gray-500;
+}
+
+.suggestionContainer {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.suggestionButtons {
+  margin-left: -0.6rem;
+}
+
+.suggestionList {
+  justify-content: space-between;
+}
+
+.formContainer {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid $color-gray-600;
+  align-items: baseline;
+}

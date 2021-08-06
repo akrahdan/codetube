@@ -1,0 +1,10 @@
+.video {
+    position: absolute;
+    bottom: 1px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: var(--zIndexVideo);
+    background-color: black;
+  }
+  

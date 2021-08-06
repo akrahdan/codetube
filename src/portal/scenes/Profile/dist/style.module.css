@@ -1,0 +1,178 @@
+.modalOpen {
+  overflow-x: hidden;
+  overflow-y: auto;
+  opacity: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  outline: 0;
+}
+
+.modalDialog {
+  width: 600px;
+  margin: 30px auto;
+  position: relative;
+  transition: transform 0.3s ease-out;
+}
+
+.modalContent {
+  position: relative;
+  border-radius: 0;
+  width: 800px;
+  max-width: 100%;
+  padding: 1em;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: center;
+  border: none;
+  padding: 15px;
+  vertical-align: baseline;
+  font-size: 100%;
+}
+
+.modalHeader:before,
+.modalHeader:after {
+  display: table;
+  content: " ";
+}
+
+.close {
+  position: absolute;
+  top: 0.25em;
+  right: 0.5em;
+  font-weight: 400;
+  font-size: 35px;
+  outline: none;
+  margin-top: -2px;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  appearance: none;
+  float: right;
+  opacity: 0.2;
+}
+
+.textCenter {
+  text-align: center !important;
+}
+
+.mbh4 {
+  margin-bottom: var(--cf-scale-2);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+  font-size: var(--cf-scale-6);
+}
+
+.modalBody {
+  position: relative;
+  padding: 15px;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+.modalBody input {
+  width: 100%;
+  height: 2.5em;
+  padding: 8px;
+  font-size: 15px;
+  line-height: 22px;
+  border: 1px solid rgba(77, 87, 103, 0.1);
+}
+
+@media (min-width: 960px) {
+  .userContainer {
+    margin: 0 50px;
+    height: 125px;
+  }
+}
+.avatarEditHolder {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  position: relative;
+}
+
+.profilePhoto {
+  width: 8em;
+  float: left;
+  margin: 0;
+}
+
+.uploadPhoto {
+  width: 60%;
+  float: right;
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  background: none;
+  box-shadow: inset 0 0 0 1px var(--cf-theme-border-contrast);
+  color: var(--cf-theme-text);
+  cursor: pointer;
+}
+
+.cButton {
+  padding: var(--cf-scale-3) var(--cf-scale-7);
+  font-size: var(--cf-scale-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 500;
+  line-height: 2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: var(--cf-scale-3);
+  transition: background 250ms ease, box-shadow 250ms ease, opacity 250ms ease;
+  vertical-align: middle;
+  border: 0;
+  font-family: "Sohne", "Helvetica", "Arial", sans-serif;
+}
+
+.buttonFacebook {
+  background-color: #3c5a99;
+}
+
+.fieldsContainer {
+  margin: 0 25px;
+}
+
+.name {
+  display: inline-block;
+  width: 49%;
+  margin-right: 2%;
+}
+
+.first {
+  margin-right: 2%;
+}
+
+.input {
+  width: 100%;
+  height: 2.5em;
+  padding: 8px;
+  font-size: 15px;
+  line-height: 22px;
+  border: 1px solid rgba(77, 87, 103, 0.1);
+}
+
+.cButtonPrimary {
+  background-color: #f24462;
+  width: 100%;
+  margin-top: var(--mc-scale-3);
+}

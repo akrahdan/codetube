@@ -1,0 +1,111 @@
+{
+  "data": [
+    {
+      "id": "5b32457b646caa5007c30975",
+      "organization_id": "codecademy",
+      "title": "Web Development",
+      "slug": "web-development",
+      "created_at": "2018-06-26T13:54:03.066+00:00",
+      "last_modified_at": "2020-07-01T18:17:25.832+00:00",
+      "published": true,
+      "goal": "career",
+      "completion_time": "30 weeks",
+      "track_ids": [
+        "5e69ad201a62fbfde13230b4b97b5c8f",
+        "f9acfc84e999f32af43b97f7d06c5681",
+        "be88fcc4fc3bc85d1f4ba713914121a2",
+        "9ff38f25cce74477bb466ab5fea0ecbb",
+        "482b44c398f7adabebf9cba692c0fddb",
+        "36ae898a1d1c8524815305b2d1d2ebab",
+        "7fd959e17e2be6f281d799e67e5573dc",
+        "c87ba0541f8be78bc2f4ba1128233f6f",
+        "a8ab218d5950c29861635cc0bf12fd13",
+        "f92ce4a5b0f69cccbe0e460e58663f2d",
+        "661adb88223017115361e4b3f3017bf7",
+        "1d125af7bcfbab6a97521308dddc81a9",
+        "59b23686e43b81aee1d95e42b8041226",
+        "3fca610cbaa3d44470b9d68f059cf983"
+      ],
+      "resource_article_id": null,
+      "description": "Ready to start building polished websites and web applications? Get the skills you need to turn your ideas into reality! This path begins with the basics of HTML but progresses quickly through CSS, JavaScript, and React so that you can go from no-code to full-stack at your own pace at a fraction of the cost of a bootcamp.",
+      "short_description": "Master the languages of the web: HTML, CSS, JavaScript, and SQL. This path is great for budding front-end or back-end engineers!",
+      "completion_message": null,
+      "video_url": "https://www.youtube.com/watch?v=8XcfXoDxUKM",
+      "splash_image": {
+        "url": "https://content.codecademy.com/PRO/paths/web-development/web-dev-cover-illo.png",
+        "alt": "Web development path splash image"
+      },
+      "theme_color": "#00AAFF",
+      "difficulty": "Beginner",
+      "content_item_type_counts": {
+        "project": 71,
+        "article": 31,
+        "video": 4,
+        "quiz": 60,
+        "informational": 16,
+        "lesson": 92
+      },
+      "category_ids": ["5f5a7a04cd50ba06ed7e277e"],
+      "alert_description": null,
+      "alert_type": null,
+      "alert_cta": null,
+      "alert_cta_destination": null
+    },
+    {
+      "id": "5cb678013709022f5b908913",
+      "organization_id": "codecademy",
+      "title": "Create a Back-End App with JavaScript",
+      "slug": "create-a-back-end-app-with-javascript",
+      "created_at": "2019-04-17T00:49:05.388+00:00",
+      "last_modified_at": "2019-05-07T16:42:27.480+00:00",
+      "published": true,
+      "goal": "skill",
+      "completion_time": "8 weeks",
+      "track_ids": [
+        "be2b676d0f8544bef541a6a8a569f62c",
+        "066d9c7fccb2e3b455985014e5d2876b",
+        "d801e539c4505396c16bf19783b9069f",
+        "4daeb59fca69497934c7a730bad0fb54",
+        "4ea2cca2fc7590add1e86ca3222c41e6",
+        "8921ae1f962f2691980ce34ebbddb03d",
+        "08da084a5a430f29e96929c169c272a5",
+        "dc97e385be2f770f45ceb20a68f6f5eb"
+      ],
+      "resource_article_id": null,
+      "description": "What we see is just the surface of the Internet. From posting to streaming, everything happens on the back-end of the web. Get ready to learn the technologies behind the scenes of companies like Twitter and PayPal.",
+      "short_description": "Learn how to build back-end web APIs using Express.js, Node.js, SQL, and a Node.js-SQLite database library.",
+      "completion_message": null,
+      "video_url": null,
+      "splash_image": {
+        "url": "https://content.codecademy.com/PRO/paths/banner-images/hero-loggedin-backendjs.svg",
+        "alt": null
+      },
+      "theme_color": "#164032",
+      "difficulty": "Beginner",
+      "content_item_type_counts": {
+        "video": 1,
+        "project": 19,
+        "informational": 16,
+        "quiz": 18,
+        "lesson": 29,
+        "article": 16
+      },
+      "category_ids": [
+        "5ef4b137dd98a830e8f7733c",
+        "5ef4b138dd98a830e8f77349",
+        "5f5a7a05cd50ba06ed7e277f"
+      ],
+      "alert_description": null,
+      "alert_type": null,
+      "alert_cta": null,
+      "alert_cta_destination": null
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "total_pages": 1,
+    "page_size": 2,
+    "total_documents": 2
+  },
+  "page": 1
+}

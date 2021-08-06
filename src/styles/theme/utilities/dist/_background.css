@@ -1,0 +1,14 @@
+.bg-cover {
+  background: no-repeat center center/cover;
+}
+
+.bg-grayscale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+@media (max-width: 1200px) {
+  .bg-auto {
+    background-size: auto !important;
+  }
+}

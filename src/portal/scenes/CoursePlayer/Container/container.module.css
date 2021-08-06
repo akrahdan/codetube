@@ -1,0 +1,32 @@
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: var(--psColorsBackgroundDark1);
+    width: 100%;
+    
+    min-height: 211px;
+    min-width: 375px;
+    user-select: none;
+  }
+  
+  .container[interaction-mode='KEYBOARD'] [tabindex]:focus {
+    outline: 3px solid var(--psColorsBlue6);
+  }
+  
+  .container[interaction-mode='MOUSE'] [tabindex]:focus {
+    outline: none;
+  }
+  
+  .container[interaction-mode='TOUCH'] [tabindex]:focus {
+    outline: none;
+  }
+  
+  .content {
+    position: relative;
+    overflow: hidden;
+    height: 700px;
+    width: 1243px;
+    background: var(--psColorsBackgroundDark1);
+  }

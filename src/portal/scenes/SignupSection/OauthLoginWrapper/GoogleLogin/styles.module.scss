@@ -1,0 +1,51 @@
+@import '~styles/modal';
+
+.buttonGoogle {
+    background-color: #4285f4
+}
+
+.buttonGoogle:not(:disabled):not(.disabled):hover {
+    background-color: #6199f6
+}
+
+.buttonGoogle:not(:disabled):not(.disabled):active {
+    background-color: #4285f4
+}
+
+.buttonFacebook {
+    background-color: #3c5a99
+}
+
+.buttonFullwidth {
+    width: 100%
+}
+
+.c-button--with-icon {
+    display: flex;
+    align-self: center;
+    justify-content: center
+}
+
+.c-button:focus,.c-button.focus {
+    outline: 0
+}
+
+.c-button.disabled,.c-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5
+}
+
+.c-button:not(:disabled):not(.disabled) {
+    cursor: pointer
+}
+
+
+
+.mr3 {
+ margin-right: var(--cf-scale-2);
+ vertical-align: middle;
+}
+
+.mb4 {
+    margin-bottom: var(--cf-scale-3);
+  }

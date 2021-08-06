@@ -1,0 +1,71 @@
+.course-container {
+  position: fixed;
+  width: 100%;
+  min-height: 100vh;
+}
+@media (max-width: 576px) {
+  .course-container {
+    position: relative;
+    min-height: inherit;
+  }
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .course-container {
+    position: relative;
+    min-height: inherit;
+  }
+}
+.course-container .content {
+  position: relative;
+  left: 0;
+  margin-left: 25.25rem;
+}
+@media (max-width: 576px) {
+  .course-container .content {
+    margin-left: 0rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .course-container .content {
+    margin-left: 0rem;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .course-container .content {
+    margin-left: 23.375rem;
+  }
+  .course-container .content .embed-responsive {
+    height: calc(95vh - 137px) !important;
+  }
+}
+@media (min-width: 1200px) {
+  .course-container .content {
+    padding-right: 1.25rem;
+  }
+  .course-container .content .embed-responsive {
+    height: calc(95vh - 137px) !important;
+  }
+}
+
+.course-sidebar {
+  position: fixed;
+  width: 23.75rem;
+  min-height: 100vh;
+  z-index: 1;
+  top: 4.34rem;
+  border-radius: 0px;
+}
+@media (max-width: 576px) {
+  .course-sidebar {
+    top: 1.25rem;
+    width: 100%;
+    position: relative;
+  }
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .course-sidebar {
+    top: 1.25rem;
+    width: 100%;
+    position: relative;
+  }
+}

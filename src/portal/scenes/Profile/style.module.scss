@@ -1,0 +1,296 @@
+@import "~styles/modal";
+
+.cfInvert {
+  color: var(--cf--theme-text);
+  --cf--theme-background: #fff;
+  --cf--theme-text: #000;
+  --cf--theme-text-hr-span-after: rgba(0, 0, 0, 0.3);
+  --cf--theme-separator: rgba(0, 0, 0, 0.3);
+  --cf--theme-border-contrast: rgba(0, 0, 0, 0.5);
+  --cf--theme-border-contrast-hover: #000;
+  --cf--theme-applepay-border: inset 0 0 0 1px #000;
+  --cf--theme-badge-bg: #272c33;
+  --cf--theme-badge-text: #fff;
+  --cf--theme-badge-dim-bg: #dbdde1;
+  --cf--theme-badge-dim-text: #000;
+  --cf--theme-carousel-dot: rgba(0, 0, 0, 0.6);
+  --cf--theme-carousel-dot-active: #000;
+  --cf--theme-dropdown-border: #f3f3f3;
+  --cf--theme-dropdown-bg: #fff;
+  --cf--theme-dropdown-hover-bg: #f3f3f3;
+  --cf--theme-tooltip-bg: #fff;
+  --cf--theme-tooltip-border: #f3f3f3;
+  --cf--theme-tooltip-arrow: #f3f3f3;
+  --cf--theme-tooltip-arrow-after: #fff;
+  --cf--theme-checkbox-bg: #fff;
+  --cf--theme-checkbox-border: #949aa4;
+  --cf--theme-checkbox-checked: #272c33;
+  --cf--theme-checkbox-active-border: #596170;
+  --cf--theme-checkbox-dis-bg: #f3f3f3;
+  --cf--theme-checkbox-dis-border: #dbdde1;
+  --cf--theme-checkbox-dis-active-border: #dbdde1;
+  --cf--theme-form-bg: #fff;
+  --cf--theme-form-border: #949aa4;
+  --cf--theme-form-elem-color: #000;
+  --cf--theme-form-elem-placehold-color: rgba(0, 0, 0, 0.3);
+  --cf--theme-form-dis-bg: #f3f3f3;
+  --cf--theme-form-dis-border: inset 0 0 0 1px #dbdde1;
+  --cf--theme-form-dis-active: #dbdde1;
+  --cf--theme-form-dis-elem: rgba(0, 0, 0, 0.3);
+  --cf--theme-form-append: rgba(0, 0, 0, 0.3);
+  --cf--theme-radio-bg: #fff;
+  --cf--theme-radio-border: #949aa4;
+  --cf--theme-radio-checked: #000;
+  --cf--theme-radio-dis-bg: #f3f3f3;
+  --cf--theme-radio-dis-border: inset 0 0 0 1px #dbdde1;
+  --cf--theme-select-menu-bg: #fff;
+  --cf--theme-select-menu-border: #f3f3f3;
+  --cf--theme-select-option-bg: #f3f3f3;
+}
+
+.cfBackdrop {
+  position: fixed;
+  background: rgba(0,0,0,0.8);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 1040
+}
+.modalOpen {
+  overflow-x: hidden;
+  overflow-y: auto;
+  opacity: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  outline: 0;
+  font-size: 10px;
+}
+
+.modalDialog {
+  width: 600px;
+  margin: 30px auto;
+  position: relative;
+  transition: transform 0.3s ease-out;
+}
+
+.modalContent {
+  position: relative;
+  border-radius: 0;
+  width: 800px;
+  max-width: 100%;
+  padding: 1em;
+  box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+  background-color: #fff;
+  background-clip: padding-box;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: center;
+  border: none;
+  padding: 15px;
+  vertical-align: baseline;
+  font-size: 100%;
+}
+
+.modalHeader:before,
+.modalHeader:after {
+  display: table;
+  content: " ";
+}
+
+button.close {
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.close {
+  position: absolute;
+  top: 0.25em;
+  right: 0.5em;
+  font-weight: 400;
+  font-size: 35px;
+  outline: none;
+  margin-top: -2px;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  appearance: none;
+  float: right;
+  opacity: 0.2;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+}
+
+.close span {
+  font-size: 35px;
+  line-height: normal;
+  width: auto;
+  margin: 0;
+  text-transform: uppercase;
+  display: block;
+  text-align: center;
+  letter-spacing: 1.17px;
+  position: relative;
+  color: #48588f;
+}
+
+.textCenter {
+  text-align: center !important;
+}
+
+.mbh4 {
+  margin-bottom: 1em;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+  font-size: 2.4em;
+  font-family: "Sohne", "Helvetica", "Arial", sans-serif;
+}
+
+.modalBody {
+  position: relative;
+  padding: 15px;
+  border: 0;
+  font-size: 10px;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+.modalBody input {
+  width: 100%;
+  height: 2.5em;
+  padding: 8px;
+  font-size: 15px;
+  line-height: 22px;
+  border: 1px solid rgba(77, 87, 103, 0.1);
+}
+@media (min-width: 960px) {
+  .userContainer {
+    margin: 0 50px;
+    height: 125px;
+  }
+}
+
+.avatarEditHolder {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  position: relative;
+}
+
+.profilePhoto {
+  width: 12em;
+  float: left;
+  margin: 0;
+}
+
+.uploadPhoto {
+  width: 60%;
+  float: right;
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  background: none;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+  color: #000 !important;
+  cursor: pointer;
+}
+
+.cButton {
+  padding: 1.2em 2.8em;
+  font-size: 1.2em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  line-height: 2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 1.2em;
+  transition: background 250ms ease, box-shadow 250ms ease, opacity 250ms ease;
+  vertical-align: middle;
+  border: 0;
+  font-family: "Sohne", "Helvetica", "Arial", sans-serif;
+}
+
+.buttonFacebook {
+  background-color: #3c5a99;
+  width: 60%;
+  float: right;
+
+  margin-top: 1em;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none !important;
+}
+.fieldsContainer {
+  margin: 0 25px;
+}
+
+.fieldsContainer ul {
+  list-style: none;
+  margin-top: 2em;
+  padding-left: 0px;
+}
+.fieldsContainer p {
+  font-size: 1.8em;
+  margin-bottom: 0%;
+}
+
+.name {
+  display: inline-block;
+  width: 49%;
+}
+
+.first {
+  margin-right: 2%;
+}
+
+.input {
+  width: 100%;
+  height: 2.5em;
+  padding: 8px;
+  font-size: 15px;
+  line-height: 22px;
+  border: 1px solid rgba(77, 87, 103, 0.1);
+}
+
+.cButtonPrimary {
+  background-color: #f24462;
+  width: 100%;
+  margin-top: 1.2em;
+}

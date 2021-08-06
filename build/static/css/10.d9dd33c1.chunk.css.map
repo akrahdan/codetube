@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/portal/scenes/Instructor/Courses/Landing/style.module.scss"],"names":[],"mappings":"AAAA,qBACI,cAAA,CACA,OAAA,CACA,QAAA","file":"10.d9dd33c1.chunk.css","sourcesContent":[".loader {\n    position: fixed;\n    top: 50%;\n    left: 50%\n}"]}

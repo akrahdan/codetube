@@ -1,0 +1,23 @@
+@import "~styles/cc";
+
+.completedTextFooter {
+  color: $color-yellow;
+  font-family: $font-family-accent;
+  font-size: 1rem;
+}
+
+.progressText {
+  color: $color-hyper;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.serif {
+  color: $color-navy;
+  font-family: $font-family-accent;
+  font-size: px-rem(14);
+}

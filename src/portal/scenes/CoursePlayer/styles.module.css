@@ -1,0 +1,458 @@
+@import "styles/config.css";
+
+.next {
+  height: 100%;
+}
+.courseLayout {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  transition: all 0.25s linear;
+}
+
+.navCollapse {
+    width: calc(100% + var(--navWidth));
+}
+
+.coursePlayerLayout {
+  background-color: var(--psColorsBackgroundDark1);
+  flex: 1 1;
+  position: relative;
+}
+
+.navToggleButtonContainer {
+  z-index: var(--zIndexNavToggleBtn);
+  position: absolute;
+  top: 10px;
+  right: 0;
+  display: block;
+  text-align: right;
+}
+
+.playerWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.playerBackground {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+
+.navToggle {
+  position: relative;
+  display: inline-flex;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: middle;
+  letter-spacing: 0.01em;
+  padding: 10px 16px;
+  height: 40px;
+  background: none;
+  color: rgba(255, 255, 255, 0.7);
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: stretch;
+  align-items: stretch;
+  transition: background 200ms ease 0s, -webkit-transform 100ms ease 0s,
+    transform 100ms ease 0s;
+  margin-right: 5px;
+  background: linear-gradient(
+    rgba(24, 24, 24, 0.5),
+    rgba(24, 24, 24, 0.3)
+  ) !important;
+}
+
+.navToggle span {
+  display: inline-flex;
+  pointer-events: none;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.navToggleSvg {
+  fill: var(--psColorsTextIconHighOnDark);
+}
+
+.courseLayoutNav {
+  background-color: var(--psColorsBackgroundDark2);
+  position: relative;
+  flex: none;
+  width: var(--navWidth);
+  overflow: hidden;
+}
+
+.courseLayoutNavContent {
+  height: 100vh;
+}
+
+.navNavigation {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  background-color: var(--psColorsBackgroundDark2);
+}
+
+.navHeader {
+  flex: none;
+}
+.navContent {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.courseTitleSection {
+  padding: 15px;
+  width: 100%;
+  opacity: 1 !important;
+  line-height: 1.4;
+}
+
+.courseTitle {
+  color: var(--psColorsTextIconHighOnDark);
+  font-size: 22px;
+  letter-spacing: var(--letterSpacingFontSizeLarge);
+  font-weight: var(--psTypeFontWeightRegular);
+  margin-bottom: 0.6em;
+  line-height: 1.4;
+}
+
+.courseSubTitle {
+  color: var(--psColorsTextIconHighOnDark);
+  font-size: 16px;
+  letter-spacing: var(--letterSpacingFontSizeMedium);
+  font-weight: var(--psTypeFontWeightRegular);
+}
+
+.courseTitleLink {
+  color: var(--psColorsTextIconHighOnDark);
+  text-decoration: none;
+}
+
+.tabListHeader {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  height: 64px;
+  transform: translateX(0px);
+  transition: -webkit-transform 200ms ease-in-out 0s,
+    transform 200ms ease-in-out 0s;
+}
+
+.tabList {
+  position: relative;
+  width: 100%;
+  height: 64px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.navTab {
+  height: 100%;
+  background: none;
+  border: 0px;
+  cursor: pointer;
+  padding: 0px calc(16px);
+  text-decoration: none;
+  max-width: 300px;
+  color: rgba(255, 255, 255, 0.7);
+  flex-shrink: 0;
+  padding-left: 18px !important;
+  font-size: 16px;
+  letter-spacing: var(--letterSpacingFontSizeMedium);
+}
+
+.navTabItem {
+  font-size: 16px;
+  letter-spacing: var(--letterSpacingFontSizeMedium);
+}
+
+.navTabItem:first-child {
+  padding-left: 18px !important;
+}
+.navTabNotes {
+  height: 100%;
+  background: none;
+  border: 0px;
+  cursor: pointer;
+  padding: 0px calc(16px);
+  text-decoration: none;
+  max-width: 300px;
+  color: rgba(255, 255, 255, 0.7);
+  flex-shrink: 0;
+}
+
+.navTabItemCss {
+  position: relative;
+  display: flex;
+  height: 100%;
+  font-weight: 400;
+  padding: 0px 0px 4px;
+  -webkit-box-align: center;
+  align-items: center;
+  transition: color 100ms linear 0s;
+}
+.nestedCss {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  overflow: hidden;
+}
+
+.tableContentBackground {
+  background-color: rgb(0, 116, 171);
+  opacity: 1;
+  height: 4px;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 1px;
+  width: 100%;
+  display: block;
+  /* height: 0px;
+    opacity: 0; */
+  transition: height 300ms ease-in-out 0s, opacity 300ms ease-in-out 0s;
+}
+
+.notesBackground {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 1px;
+  width: 100%;
+  display: block;
+  height: 0px;
+  opacity: 0;
+  transition: height 300ms ease-in-out 0s, opacity 300ms ease-in-out 0s;
+}
+
+.navTabPanel {
+  height: 100%;
+}
+
+.navPanelItem:first-child {
+  border-top: none !important;
+}
+.navPanelItem:not(:first-child) {
+  border-top: 1px solid var(--psColorsBorderLowOnDark) !important;
+}
+
+.navPanelItemBackground {
+  position: relative;
+  padding-right: 54px;
+  cursor: pointer;
+  background: rgba(138, 153, 168, 0.25);
+  transition: background 300ms ease 0s;
+}
+.navPanelPadding {
+  padding-left: 0 !important;
+  margin-right: calc(-54px);
+
+  padding-right: 54px;
+}
+
+.navDisplay {
+  align-items: center;
+  display: flex;
+}
+
+.navDisplayCss {
+  position: absolute;
+  top: 0px;
+  right: 16px;
+  bottom: 0px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.progressContainer {
+  width: 63px;
+  min-width: 63px;
+  display: flex;
+  justify-content: center;
+}
+
+.svgProgress {
+  transform: rotate(-90deg);
+  height: 29px;
+  width: 29px;
+  min-width: 29px;
+  margin: 4px;
+}
+
+.svgProgressBackground {
+  fill: transparent !important;
+  stroke: var(--psColorsTextIconLowOnDark);
+}
+
+.svgProgressCircle {
+  fill: none;
+  stroke: var(--psColorsPrimaryActionTextDarkTheme);
+}
+.svgProgressText {
+  transform: rotate(90deg);
+  fill: var(--psColorsTextIconHighOnDark);
+  font-size: 13px;
+  letter-spacing: var(--letterSpacingFontSizeSmall);
+}
+
+.navItemContent {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 0!important;
+}
+.navItemHeader {
+    line-height: 1.4;
+    font-size: 16px;
+    letter-spacing: var(--letterSpacingFontSizeSmall);
+    font-weight: var(--psTypeFontWeightMedium);
+    padding: 0;
+    margin: 0;
+}
+
+.navItemSubTitle {
+    padding-left: 0!important;
+    color: var(--psColorsTextIconLowOnDark);
+    font-size: var(--psTypeFontSizeXSmall);
+    letter-spacing: var(--letterSpacingFontSizeXSmall);
+    align-items: center;
+    display: flex;
+}
+
+.svgDuration {
+    width: 12px;
+    height: 12px;
+    fill: var(--psColorsTextIconLowOnDark);
+    display: inline-block;
+    margin-right: 6px;
+    flex: none;
+}
+
+.screenReader {
+    position: absolute!important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px,1px,1px,1px);
+}
+
+.courseLectureBg {
+    background: rgb(24, 28, 32);
+    box-shadow: rgb(0 0 0 / 50%) 0px 1px 3px 0px inset;
+    transition: box-shadow 300ms ease 0s;
+    padding-left: 0!important;
+}
+
+.lectureDiv {
+    transition: height 300ms ease 0s;
+    padding-left: 0!important;
+}
+
+.lectureContent {
+    height: 41px;
+    width: 100%;
+    border: none;
+    margin: 0;
+    padding: 0 1.5rem 0 0;
+    cursor: pointer;
+    line-height: 1.7;
+    text-align: left;
+    background: var(--psColorsBackgroundDark2);
+    color: var(--psColorsPrimaryActionTextDarkTheme);
+    align-items: stretch;
+    display: flex;
+}
+
+.contentItemCircle {
+    width: 63px;
+    align-self: stretch;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.contentCircleThing {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    margin: 0 auto;
+    z-index: var(--zIndexContenItemCircle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #b3b3b3;
+    position: relative;
+    top: -1px;
+    background-color: var(--psColorsPrimaryActionTextDarkTheme)!important;
+}
+
+.contentCircleSvg {
+    fill: var(--psColorsBackgroundDark2);
+    width: 10px;
+    height: 10px;
+}
+
+
+
+
+.contentItemBody {
+    min-width: 0;
+    align-items: center;
+    flex: 1 1;
+    display: flex;
+}
+
+.contentBodyH3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: var(--psTypeFontSizeSmall);
+    letter-spacing: var(--letterSpacingFontSizeSmall);
+    font-weight: var(--psTypeFontWeightBook);
+    flex: 1 1;
+    margin: 0;
+}
+.contentCenter {
+    align-items: center;
+    display: flex;
+}
+
+.contentBodyH3 span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+ }
+
+ .contentItemDuration {
+    min-width: 3.7rem;
+    text-align: right;
+    font-size: var(--psTypeFontSizeXSmall);
+    letter-spacing: var(--letterSpacingFontSizeXSmall);
+    font-weight: var(--psTypeFontWeightBook);
+    flex: none;
+ }
+
+
+

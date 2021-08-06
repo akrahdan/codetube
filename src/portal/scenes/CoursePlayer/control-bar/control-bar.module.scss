@@ -1,0 +1,89 @@
+.controlBar {
+    color: var(--psColorsTextIconHighOnDark);
+    width: 100%;
+    z-index: var(--zIndexControls);
+    transition: width 200ms ease-out;
+  
+    & button {
+      padding: 0;
+    }
+  }
+  
+  /* hack to make hit state of progress bar bigger than it actually is */
+  .controlBar:before {
+    content: '';
+    display: block;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.85));
+  
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  
+    height: 49px;
+    opacity: 1;
+    transition: opacity var(--bar-speed) ease-out;
+    z-index: var(--zIndexControls);
+  
+    pointer-events: none;
+  }
+  
+  .controlBar.hidden:before {
+    opacity: 0;
+  }
+  
+  [layout='720p']:before {
+    height: 100px;
+  }
+  
+  [layout='480p']:before {
+    height: 80px;
+  }
+  
+  [layout='360p']:before {
+    height: 60px;
+  }
+  
+  [layout='240p']:before {
+    height: 60px;
+  }
+  
+  .controlBar.volumeSliderActive[layout='240p'] {
+    width: calc(100% + 50px);
+  }
+  
+  .layout {
+    position: relative;
+    z-index: var(--zIndexControls);
+    max-height: 50px;
+    transition: max-height var(--bar-speed) ease-out;
+    padding: 0 15px;
+  }
+  
+  .hidden .layout {
+    max-height: 0;
+    top: -5000px;
+  }
+  
+  .middle {
+    flex: 1;
+  }
+  
+  .layout720,
+  .layout480,
+  .layout360,
+  .layout240 {
+    display: flex;
+    align-items: center;
+  }
+  
+  .controlBarText {
+    position: relative;
+    top: -1px;
+    font-size: var(--psTypeFontSizeXSmall);
+    letter-spacing: var(--letterSpacingFontSizeXSmall);
+    text-align: center;
+    width: 100px;
+    cursor: default !important;
+  }
+  
