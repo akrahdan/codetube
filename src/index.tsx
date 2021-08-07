@@ -5,27 +5,30 @@ import Portal from './portal'
 import { store } from 'store'
 // import { Router } from 'react-router'
 
-import { BrowserRouter as Router} from 'react-router-dom'
-import {createBrowserHistory} from 'history'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 import { positions, transitions, Provider as AlertProvider } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
 import { Provider } from 'react-redux'
 import { AlertMessage } from 'portal/scenes/AlertMessage';
 import reportWebVitals from './reportWebVitals';
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 const history = createBrowserHistory()
 const options = {
   timeout: 5000,
   position: positions.TOP_CENTER,
   transition: transitions.FADE
-  
+
 };
 ReactDOM.render(
   <Router forceRefresh >
     <Provider store={store}>
-      <AlertProvider template={AlertMessage} {...options}>
-       <Portal />
-      </AlertProvider>
-     
+      <PayPalScriptProvider options={{ "client-id": "AUj_QTk083Xh7ncvSyMDik4La6zALHWM83BEM5SLLkR5ME2nhANowpy1Xm7xc5GUzLXy7b0Wg8NawuPm", "components": "buttons,funding-eligibility,marks" }}>
+        <AlertProvider template={AlertMessage} {...options}>
+          <Portal />
+        </AlertProvider>
+      </PayPalScriptProvider>
+
+
     </Provider>
   </Router>,
   document.getElementById('root')

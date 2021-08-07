@@ -39,12 +39,9 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   }
 
   const onClickWithContentful = () => {
-    const ctaUrl = cmsContext?.call_to_action_url;
-    if (useContentfulCTA && ctaUrl) {
-      window.location.assign(ctaUrl);
-      return;
-    }
     onClick();
+    
+   
   };
 
   const getText = () => {
@@ -64,10 +61,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
         target: isPaidLanding ? 'paid_trial_landing_upgradetopro' : 'start',
         content_ids: { path_id: pathId },
       }}
-      asButton={false}
-      href={'/'}
-      to={"/"}
-      target={''}
+     
       onClick={onClickWithContentful}
       {...otherProps}
     >

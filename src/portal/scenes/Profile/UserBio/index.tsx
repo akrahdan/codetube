@@ -3,6 +3,7 @@ import {IoCaretBack, MdEdit } from 'react-icons/all';
 import { useHistory } from 'react-router';
 import { Modal } from 'portal/scenes/Modal';
 import { UpdateModal } from '../UpdateModal';
+import { EditModal } from '../EditModal';
 import { useState } from 'react';
 import { useAuth, useAvatar } from 'store/useAuth';
 export const UserBio = () => {
@@ -51,8 +52,10 @@ export const UserBio = () => {
                </div>
            </div>
           </div>
-        { toggleEdit && <Modal >
-              <UpdateModal  onClose={() => setToggleEdit(!toggleEdit)}/>
+        
+
+          { toggleEdit && <Modal >
+              <EditModal onClose={() => setToggleEdit(!toggleEdit)} />
           </Modal>}
       </div>
     );

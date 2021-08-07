@@ -27,7 +27,7 @@ export const NonRouterTrackLink: FC<NonRouterTrackLinkProps> = ({
 
       trackUserClickCallback();
 
-      // onClick?.(e);
+      onClick?.(e);
 
       // uses href prop because
       // we ONLY want to do this if it is an anchor link

@@ -1,6 +1,8 @@
 import loadable from '@loadable/component'
 import { RouteMeta } from 'libs/location/routing'
+
 import * as routeActions from './state/location/actions';
+import * as sharedRouteActions from 'libs/location/sharedRouteActions';
 import * as paths from './state/location/paths';
 const Path = loadable(() => import('./scenes/Paths'));
 const Profile = loadable(() => import('./scenes/Profile'));
@@ -35,6 +37,10 @@ const ProjectLanding  = loadable(() => import('./scenes/Instructor/Projects/Land
 const ProjectPricing  = loadable(() => import('./scenes/Instructor/Projects/Pricing'))
 const ProjectTarget  = loadable(() => import('./scenes/Instructor/Projects/Target'))
 
+
+const Error404 = loadable(() => import('portal/scenes/Error404'));
+// const Error500 = loadable(() => import('portal/scenes/Error500'));
+
 export const routesMap = {
     [`${routeActions.path}`]: '/',
     [`${routeActions.profile}`]: '/profiles/:id',
@@ -45,6 +51,7 @@ export const routesMap = {
     [`${routeActions.projectManage}`]: '/instructor/project/:id/manage/:slug',
     [`${routeActions.tutorDashboard}`]: '/instructor/courses',
     [`${routeActions.dashboardItems}`]: '/instructor/:dashboard/:slug',
+    [`${sharedRouteActions.error404}`]: '/errors/404',
    
    
 
@@ -92,6 +99,10 @@ export const routesMeta: Record<string, RouteMeta> = {
     [`${routeActions.dashboardItems}`]: {
         scene: Dashboard,
         pageName: undefined,
+    },
+    [`${sharedRouteActions.error404}`]: {
+        scene: Error404,
+        pageName: 'error_404',
     },
 
     

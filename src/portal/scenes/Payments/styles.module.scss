@@ -1,0 +1,31 @@
+.cardLogo {
+  height: 17px;
+}
+.orderBtn {
+  width: 100%;
+}
+
+.orderSecurity {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 10px;
+}
+
+.orderSecurity svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  margin-top: -2px;
+}
+
+.orderSecurity p {
+  width: 50%;
+  flex: none;
+  text-align: center;
+  color: rgba(77, 87, 104, 0.5);
+  line-height: 1.4;
+}
+
+.orderSecurity path {
+  fill: rgba(77, 87, 104, 0.5);
+}

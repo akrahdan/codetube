@@ -122,7 +122,6 @@ export const freeHeaderItems = (
     myHome,
     projectCatalog,
     courseCatalog,
-    resourcesDropdown,
     liveClasses,
   ];
 
@@ -156,7 +155,6 @@ export const freeMobileHeaderItems = (
     myHome,
     projectCatalog,
     courseCatalog,
-    resourcesDropdown,
     liveClasses,
     freeProfile(user, true),
   ];
@@ -183,7 +181,6 @@ export const proHeaderItems = (
     myHome,
     projectCatalog,
     courseCatalog,
-    resourcesDropdown,
     liveClasses,
   ];
 
@@ -222,7 +219,6 @@ export const proMobileHeaderItems = (
     myHome,
     projectCatalog,
     courseCatalog,
-    resourcesDropdown,
     liveClasses,
     proProfile(user, true),
   ];

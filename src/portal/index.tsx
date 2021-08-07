@@ -39,6 +39,7 @@ export const PortalRouter: React.FC<PortalProps> = ({
    const { scene: Scene, pageName } = getRouteMetaForLocation(
        routesMeta,
        locationType,
+       statusCode
    )
 
     return(

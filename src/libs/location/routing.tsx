@@ -19,16 +19,16 @@ export type RouteMeta = {
 export const getRouteMetaForLocation = (
   routesMeta: Record<string, RouteMeta>,
   locationType: string,
- 
+  statusCode?: number
 ) => {
   const route = (() => {
-    // switch (statusCode) {
-    //   case 404:
-    //     return routesMeta[`${sharedRouteActions.error404}`];
+    switch (statusCode) {
+      case 404:
+        return routesMeta[`${sharedRouteActions.error404}`];
 
-    //   case 500:
-    //     return routesMeta[`${sharedRouteActions.error500}`];
-    // }
+      case 500:
+        return routesMeta[`${sharedRouteActions.error500}`];
+    }
 
     return routesMeta[locationType];
   })();

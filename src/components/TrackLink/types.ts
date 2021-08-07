@@ -6,9 +6,9 @@ export interface BaseTrackLinkProps {
 
     }
     onClick?: HTMLProps<HTMLButtonElement>['onClick'];
-    href: string;
-    target: string;
-    asButton: boolean;
+    href?: string;
+    target?: string;
+    asButton?: boolean;
     className?: string;
 }
 

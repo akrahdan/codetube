@@ -21,15 +21,13 @@ export const TrackLink: React.FC<TrackLinkProps> = (props) => {
     !underline && styles.noUnderline
   );
 
-  // const trackUserClickCallback = useCallback(() => trackUserClick(data), [
-  //   data,
-  // ]);
+ 
 
   return passThroughProps.to ? (
     <Link
       {...passThroughProps}
       to={passThroughProps.to}
-      onClick={() => console.log()}
+    
       className={className}
     />
   ) : (
