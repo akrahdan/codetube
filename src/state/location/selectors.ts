@@ -6,3 +6,5 @@ export const selectLocationPathName = (state: RootState) =>
 
 export const selectLocationPayload = (state: RootState) =>
   state.location.payload;
+export const selectLocationQuery = (state: RootState) =>
+  state.location.query;

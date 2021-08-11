@@ -9,7 +9,6 @@ import { Header } from './Header';
 import { Supporting } from './Supporting';
 import { Projects } from './Projects';
 import { Syllabus } from './Syllabus';
-import ProUpsell from './ProUpsell';
 import { CTASection } from './CTASection';
 import { Recommendations } from './Recommendations';
 import { SignupSection } from 'portal/scenes/SignupSection';
@@ -19,9 +18,8 @@ import { Payment } from 'portal/scenes/Payments'
 import { Modal } from 'portal/scenes/Modal';
 import { selectModal } from 'state/modals/modalSlice';
 import { useAppSelector } from 'store/hooks';
-import { TrackContent } from './Syllabus/sample';
-import { useFetchProjectsQuery } from 'services/projects';
-import { UpdateModal } from 'portal/scenes/Profile/UpdateModal';
+import { useFetchProjectsQuery, useCartUpdateMutation, Cart } from 'services/projects';
+
 
 export type PageProps = {
   fetchPathAndTrackData?: () => void;
@@ -42,11 +40,18 @@ export const PathMarketingPage: React.FC<PageProps> = ({
   const modal = useAppSelector(selectModal)
   const [pay, setPay] = useState(false);
   const { data: projects } = useFetchProjectsQuery()
-
+  const [ cartUpdate ] = useCartUpdateMutation()
   const leadProject = projects && projects.find(element => element.lead == true)
 
   const ctaCallback = () => {
-    setPay(!pay)
+    cartUpdate({
+      project_id: leadProject.id
+    }).then((res: { data: Cart}) => {
+      if(res.data && res.data.detail == "added") {
+        setPay(!pay)
+      }
+    })
+    
   };
   const completionTime = "24hrs"
   if (!leadProject) return null
@@ -84,7 +89,7 @@ export const PathMarketingPage: React.FC<PageProps> = ({
         <Projects courses={leadProject.courses} />
 
         <Syllabus
-          pathId={leadProject.id}
+          pathId={`${leadProject.id}`}
           tracks={leadProject.syllabuses}
           ctaCallback={ctaCallback}
           isPaidLanding={isPaidLanding}
@@ -93,11 +98,11 @@ export const PathMarketingPage: React.FC<PageProps> = ({
         />
 
         <CTASection
-          pathId={leadProject.id}
+          pathId={`${leadProject.id}`}
           ctaCallback={ctaCallback}
 
         />
-        <Recommendations related={leadProject.related} pathId={leadProject.id} />
+        <Recommendations related={leadProject.related} pathId={`${leadProject.id}`} />
 
 
       </main>

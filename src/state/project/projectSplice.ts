@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "store";
+import { ContainerProgress } from "portal/scenes/Dashboard/ProgressBar";
 import type {
   TitleDescription,
   HeaderDescription,
   ProjectEntityResponse,
+  ProjectEntityRequest,
   Pricing,
 } from "services/projects";
 import { projectApi } from "services/projects";
@@ -13,6 +15,7 @@ interface submitProps {
 }
 type ProjectState = {
   project: ProjectEntityResponse | null;
+  instructorProject: ProjectEntityRequest | null;
   projects: ProjectEntityResponse[] | null;
   saveProps: submitProps | null;
   pricing: Pricing | null;
@@ -54,6 +57,12 @@ const projectSplice = createSlice({
       )
       .addMatcher(
         projectApi.endpoints.fetchProjects.matchFulfilled,
+        (state, { payload }) => {
+          state.projects = payload;
+        }
+      )
+      .addMatcher(
+        projectApi.endpoints.fetchInstructorProjects.matchFulfilled,
         (state, { payload }) => {
           state.projects = payload;
         }
@@ -107,15 +116,25 @@ const projectSplice = createSlice({
         }
       )
       .addMatcher(
-        projectApi.endpoints.fetchSyllabus.matchFulfilled,
+        projectApi.endpoints.deleteOutcome.matchFulfilled,
         (state, { payload }) => {
-          state.syllabuses = payload;
+          state.outcomes = state.outcomes.filter(
+            (out) => out.id !== payload.id
+          );
         }
       )
       .addMatcher(
         projectApi.endpoints.fetchSyllabus.matchFulfilled,
         (state, { payload }) => {
           state.syllabuses = payload;
+        }
+      )
+      .addMatcher(
+        projectApi.endpoints.deleteSyllabus.matchFulfilled,
+        (state, { payload }) => {
+          state.syllabuses = state.syllabuses.filter(
+            (sylla) => sylla.id !== payload.id
+          );
         }
       )
       .addMatcher(
@@ -127,6 +146,15 @@ const projectSplice = createSlice({
             }
             return included;
           });
+          state.included = included;
+        }
+      )
+      .addMatcher(
+        projectApi.endpoints.deleteIncluded.matchFulfilled,
+        (state, { payload }) => {
+          const included = state.included.filter(
+            (inc) => inc.id !== payload.id
+          );
           state.included = included;
         }
       )
@@ -168,6 +196,8 @@ export const { saveProject } = projectSplice.actions;
 export default projectSplice.reducer;
 
 export const selectProject = (state: RootState) => state.project.project;
+export const selectInstructorProject = (state: RootState) =>
+  state.project.project;
 export const selectProjects = (state: RootState) => state.project.projects;
 export const selectOutcomes = (state: RootState) => state.project.outcomes;
 export const selectSyllabuses = (state: RootState) => state.project.syllabuses;

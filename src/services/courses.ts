@@ -19,6 +19,24 @@ export interface CourseResponse {
   headline: string;
   level: string;
   tags: string[];
+  url: string;
+  subcategory: number;
+  price: number;
+  state: string;
+}
+
+export interface CoursePlayerResponse {
+  title: string;
+  id: number;
+  category: number;
+  description: string;
+  cover_image: string;
+  video_url: string;
+  headline: string;
+  level: string;
+  sections: Section[];
+  tags: string[];
+  url: string;
   subcategory: number;
   price: number;
   state: string;
@@ -96,6 +114,7 @@ export interface Section {
   title: string;
   id: number;
   course: number;
+  duration: number;
   instructor: number;
   description: string;
   order: number;
@@ -159,6 +178,7 @@ export interface Lecture {
   id: number;
   position: string;
   neighbor: number;
+  duration: number
   description: string;
   video: MediaResponse;
   resources: number[];
@@ -171,6 +191,14 @@ export interface Lecture {
 export interface Review {
   id: number;
   state: string
+}
+
+export interface Views {
+  id: number
+}
+
+export interface ViewsResponse {
+  object_id: number
 }
 
 
@@ -220,6 +248,32 @@ export const coursesApi = createApi({
       }),
     }),
 
+    fetchPlayerCourse: build.query<CoursePlayerResponse, number>({
+      query: (id) => ({
+        url: `/courses/${id}`,
+        method: "GET",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+    trackViews: build.mutation<ViewsResponse[], Views>({
+      query: ({id, ...body}) => ({
+        url: `/courses/lecture/${id}/views/`,
+        method: "POST",
+        body,
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+    fetchViews: build.query<ViewsResponse[], void>({
+      query: () => ({
+        url: `/courses/lecture/views/`,
+        method: "GET",
+       
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+
     fetchInstructorCourses: build.query<CourseResponse[], void>({
       query: (id) => ({
         url: `/instructors/courses/`,
@@ -252,6 +306,8 @@ export const coursesApi = createApi({
         responseHandler: (response) => response.json(),
       }),
     }),
+
+    
 
     fetchCourseLevel: build.query<Options[], void>({
       query: () => ({
@@ -585,5 +641,9 @@ export const {
   useSubmitReviewMutation,
   useFetchInstructorCoursesQuery,
   useEditInstructorInfoMutation,
-  useFetchInstructorInfoQuery
+  useFetchInstructorInfoQuery,
+  useFetchPlayerCourseQuery,
+  useTrackViewsMutation,
+  useFetchViewsQuery
+  
 } = coursesApi;

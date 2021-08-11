@@ -14,6 +14,7 @@ import { Items, ProjectItems } from './sample';
 import { HalfCircle } from './icons/HalfCircle';
 import styles from './styles.module.scss';
 import type { Course } from 'services/projects';
+import { CourseResponse } from 'services/courses';
 
 type ContentItemTypes = VideoContentItem | ProjectContentItem;
 
@@ -28,7 +29,7 @@ interface Video {
 
 
 export type ProjectProps = {
-  courses: Course[]
+  courses: CourseResponse[]
 }
 
 const byProject = (item: ContentItemTypes): item is ProjectContentItem =>
@@ -85,7 +86,7 @@ export const Projects = ({
 
   const renderProjects = () =>
       courses
-      .map((course: Course, index: number) => (
+      .map((course: CourseResponse, index: number) => (
         <ProjectCard
           project={course}
           index={index}

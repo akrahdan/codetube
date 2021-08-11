@@ -39,30 +39,30 @@ const Profile = () => {
                     <LayoutGrid gap={32} >
 
                         <Column size={{ _: 12, sm: 12, md: 12 }} alignContent="center">
-                            <UserBio
-                             
-                            />
+                            {user && <UserBio />}
+
+
                         </Column>
 
-                        {isAllEmptyAndNotCurrentUser ? (
+                        {!user ? (
                             <Column
                                 size={{ _: 12, sm: 12, md: 12 }}
                                 data-testid="empty-section"
                             >
-                             
+
                                 <EmptySection
                                     stretchDirection="right"
                                     illustration={Hills}
                                     innerBGColor={backgroundColor}
                                     headingText="There's not much here yet"
-                                    bodyText="Visit our forums to connect with active learners"
+                                    bodyText="Please sign up to to explore some of the projects"
                                 >
-                                    <FillButton href={''}>Visit Forums</FillButton>
+                                    <FillButton href={''}>Signup</FillButton>
                                 </EmptySection>
                             </Column>
 
                         ) : (
-                            <Column offset={{_: 2, sm: 1, md: 1}} size={{ _: 8, sm: 10, md: 10 }} alignItems="center" alignContent='center'>
+                            <Column offset={{ _: 2, sm: 1, md: 1 }} size={{ _: 8, sm: 10, md: 10 }} alignItems="center" alignContent='center'>
                                 <CoursesSection
                                     enrollments={enrollment}
                                     isCurrentUser={true}
@@ -73,7 +73,7 @@ const Profile = () => {
                     </LayoutGrid>
                 </Box>
             </StyledContentContainer>
-        
+
         </PortalContainer>
     );
 }

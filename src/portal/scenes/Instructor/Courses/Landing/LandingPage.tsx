@@ -1,6 +1,6 @@
 import { useFetchCourseQuery, useFetchCourseLevelQuery, useFetchCategoriesQuery, useSearchTagsQuery, useUpdateCourseMutation } from "services/courses";
 import { selectLocationPayload, selectLocationType } from "state/location/selectors";
-import { useAppSelector } from "store/hooks";
+import { useAppSelector, useAppDispatch } from "store/hooks";
 import { selectSave } from "state/course/courseSplice";
 import { useState, useEffect } from "react";
 import * as client from 'filestack-js';
@@ -15,6 +15,8 @@ import { UploadProgress } from "./UploadProgress";
 import { RTEditor } from 'portal/scenes/Instructor/Editor';
 import classNames from "classnames";
 import { usePrompt } from "../userPrompt";
+import { saveCourse } from "state/course/courseSplice";
+import { selectCourse } from "state/course/courseSplice";
 import { useAlert } from "react-alert";
 import type { CategoryResponse } from "services/courses";
 import styles from './style.module.scss'
@@ -37,17 +39,18 @@ export const LandingPage = () => {
     const suggestions = results.hits.map(hit => {
       return hit
     })
-   
+
     const courseSuggestions = [...suggestions, { isAddNew: true }]
     return courseSuggestions
   }
 
 
-
+  const dispatch = useAppDispatch()
   const locationPayload = useAppSelector(selectLocationPayload);
   const locationPath = useAppSelector(selectLocationType);
   const selectedSave = useAppSelector(selectSave);
-  const { data: course, isLoading } = useFetchCourseQuery(locationPayload.id)
+  const course = useAppSelector(selectCourse)
+  const { data: courseQuery, isLoading } = useFetchCourseQuery(locationPayload.id)
   const [updateCourse] = useUpdateCourseMutation()
   const { data: levels } = useFetchCourseLevelQuery()
   const { data: categories } = useFetchCategoriesQuery()
@@ -153,9 +156,15 @@ export const LandingPage = () => {
       updateCourse({
         ...courseUpdate,
         tags
-      }).then(data => {
-        console.log(data)
-        alert.show("Your changes have been saved successfully")
+      }).then((res: { data: CourseResponse }) => {
+        if (res.data.title) {
+          dispatch(saveCourse({
+            submit: false,
+            locationPath: null
+          }))
+          alert.show("Your changes have been saved successfully")
+        }
+
       }).catch(err => {
         console.log(err)
       })
@@ -286,7 +295,7 @@ export const LandingPage = () => {
             <label htmlFor="description" className="control-label">
               Course description
             </label>
-            <RTEditor editorValue={courseUpdate ? courseUpdate.description: ''} handleChange={(value) =>
+            <RTEditor editorValue={courseUpdate ? courseUpdate.description : ''} handleChange={(value) =>
               setCourseUpdate(
                 {
                   ...courseUpdate,
@@ -383,7 +392,7 @@ export const LandingPage = () => {
                       {tags && tags.map(tag => (
                         <>
                           <span
-                           key={tag}
+                            key={tag}
                             className="course-labels--course-label--1Vi_C label label-default"
                           >
                             <span>{tag}</span>

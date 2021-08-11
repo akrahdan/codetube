@@ -7,7 +7,7 @@ import { LoadingBox } from 'components/LoadingBox';
 
 
 
-interface ContainerProgress {
+export interface ContainerProgress {
     percent_complete: number
 }
 const PercentageBox = styled(Box)`

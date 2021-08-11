@@ -1,5 +1,5 @@
 import "./course.scss";
-import { useFetchCategoriesQuery } from "services/courses";
+import { useFetchProjectCategoriesQuery } from "services/projects";
 import { ProjectEntityResponse } from "services/projects";
 import React from "react";
 
@@ -13,7 +13,7 @@ export const ProjectCategory: React.FC<CategoryProps> = ({
   project,
   updateProject,
 }) => {
-  const { data: categories } = useFetchCategoriesQuery();
+  const { data: categories } = useFetchProjectCategoriesQuery();
   if (!categories) return null;
   return (
     <div className="full-page-takeover--content-wrapper--3Vzz1">

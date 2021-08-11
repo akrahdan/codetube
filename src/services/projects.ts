@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { head } from "lodash";
 import cookie from "react-cookies";
 import { RootState } from "store";
-
+import { CategoryResponse, CourseResponse } from "./courses";
 export interface TitleDescription {
   id: number;
   title: string;
@@ -29,16 +29,33 @@ export interface Review {
 }
 
 export interface Course {
-  id: string;
+  id: number;
   title: string;
   description: string;
   url: string;
   tags: string[];
 }
 
+export interface Cart {
+  project_id: number;
+  detail: string;
+}
+
+export interface Order {
+  orderID: string;
+}
+
+export interface Wave {
+  txRef: string;
+}
+
+export interface OrderResponse {
+  project: ProjectEntityResponse
+}
+
 
 export interface ProjectEntityResponse {
-  id: string;
+  id: number;
   title: string;
   lead: Boolean;
   description: string;
@@ -49,7 +66,7 @@ export interface ProjectEntityResponse {
   category: number;
   thumbnail_url: string;
   experience: string;
-  courses: Course[];
+  courses: CourseResponse[];
   completion_time: string;
   related: ProjectEntityResponse[];
   header: HeaderDescription;
@@ -64,6 +81,31 @@ export interface ProjectEntityResponse {
   outcomes: TitleDescription[];
   included: TitleDescription[];
   syllabuses: TitleDescription[];
+}
+
+export interface ProjectEntityRequest {
+  id: number;
+  title: string;
+  lead: Boolean;
+  description: string;
+  slug: string;
+  goal: string;
+  level: string;
+  hero: string;
+  category: number;
+  thumbnail_url: string;
+  experience: string;
+  courses: number[];
+  completion_time: string;
+  header_primary_color: string;
+  header_secondary_color: string;
+  video_headline: string;
+  difficulty: string;
+  progress: string;
+  tags: string[];
+  state: string;
+  price: Number;
+
 }
 
 export const projectApi = createApi({
@@ -98,6 +140,24 @@ export const projectApi = createApi({
       }),
     }),
 
+    fetchInstructorProjects: build.query<ProjectEntityResponse[], void>({
+      query: (id) => ({
+        url: `/instructors/projects/`,
+        method: "GET",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+
+    fetchProjectCategories: build.query<CategoryResponse[], void>({
+      query: () => ({
+        url: "/api/project_categories",
+        method: "GET",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+
     fetchProject: build.query<ProjectEntityResponse, number>({
       query: (id) => ({
         url: `/projects/${id}`,
@@ -118,8 +178,8 @@ export const projectApi = createApi({
     }),
 
     updateProject: build.mutation<
-      ProjectEntityResponse,
-      Partial<ProjectEntityResponse>
+    ProjectEntityResponse,
+      Partial<ProjectEntityRequest>
     >({
       query: (data) => {
         const { id, ...body } = data;
@@ -135,6 +195,33 @@ export const projectApi = createApi({
     createPricing: build.mutation<Pricing[], Partial<Pricing>>({
       query: (body) => ({
         url: "/projects/pricing/create/",
+        body,
+        method: "POST",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+    cartUpdate: build.mutation<Cart, Partial<Cart>>({
+      query: (body) => ({
+        url: "/cart/update/",
+        body,
+        method: "POST",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+    checkout: build.mutation<Object, Partial<Order>>({
+      query: (body) => ({
+        url: "/cart/checkout/",
+        body,
+        method: "POST",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+    checkoutWave: build.mutation<Object, Partial<Wave>>({
+      query: (body) => ({
+        url: "/cart/checkout_wave/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
@@ -265,6 +352,14 @@ export const projectApi = createApi({
       },
     }),
 
+    getMyProjects: build.query<OrderResponse[], void>({
+      query: () => ({
+        url: "/orders/my_projects",
+        method: "GET",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
     deleteSyllabus: build.mutation<TitleDescription, Partial<number>>({
       query: (id) => {
         return {
@@ -328,4 +423,10 @@ export const {
   useUpdateProjectMutation,
   useSubmitReviewMutation,
   useFetchProjectQuery,
+  useCartUpdateMutation,
+  useCheckoutMutation,
+  useCheckoutWaveMutation,
+  useGetMyProjectsQuery,
+  useFetchInstructorProjectsQuery,
+  useFetchProjectCategoriesQuery
 } = projectApi;

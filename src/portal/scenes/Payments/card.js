@@ -1,26 +1,27 @@
 import classNames from "classnames";
 import styles from "./styles.module.scss";
+import logo from "static/images/brand/logo/code.png";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
+import { useCheckoutWaveMutation } from "services/projects";
 export const CardPayment = ({ active, handleClose }) => {
+  const [checkoutWave] = useCheckoutWaveMutation();
   const config = {
-    public_key: "FLWPUBK-8f228cc2364efed1ea2a4cd1afa77028-X",
+    public_key: "FLWPUBK_TEST-4b961393b29fe0236bb5a0e76351a99b-X",
     tx_ref: Date.now(),
-    amount: 100,
-    currency: "GHS",
+    amount: 10,
+    currency: "USD",
     payment_options: "card,mobilemoney",
     customer: {
-      email: "user@gmail.com",
-      phonenumber: "07064586146",
-      name: "joel ugwumadu",
+      email: "akrahdan@gmail.com",
+      phonenumber: "+12183910841",
+      name: "Sam Akrah",
     },
     customizations: {
-      title: "Codefluent Project",
+      title: "Codefluent Payment",
       description: "Payment for items in cart",
-      logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+      logo,
     },
   };
-
-  
 
   const handleFlutterPayment = useFlutterwave(config);
   return (
@@ -47,11 +48,16 @@ export const CardPayment = ({ active, handleClose }) => {
           <div className={styles.orderBtn}>
             <button
               onClick={() => {
-                handleClose()
+                handleClose();
                 handleFlutterPayment({
                   callback: (response) => {
                     console.log(response);
-                    closePaymentModal(); // this will close the modal programmatically
+                    checkoutWave({
+                      txRef: response.tx_ref,
+                    }).then((res) => {
+                      closePaymentModal();
+                    });
+                    // this will close the modal programmatically
                   },
                   onClose: () => {},
                 });

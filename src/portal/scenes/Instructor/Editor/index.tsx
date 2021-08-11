@@ -57,7 +57,7 @@ export const RTEditor = ({ handleChange, editorValue }) => {
           className="ProseMirror"
           renderElement={renderElement}
           renderLeaf={renderLeaf}
-          placeholder="Insert description here"
+          placeholder="Description goes here"
           spellCheck
           autoFocus
           onKeyDown={event => {

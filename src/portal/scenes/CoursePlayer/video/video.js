@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+
 import {play, pause, setVolume, setDuration,setTime, ready, seekEnd, seekStart,
      registerPlayer, setBufferedTime,setMediaType, setOverlay, setBuffering, setFullscreen, setLoading, setAutoplay, setPlaying, setCurrentResolution, setPreferredResolutions, setSupportedResolutions } from 'state/player/playerSlice';
 import css from './video.module.css'
@@ -64,11 +65,14 @@ export class Video extends Component {
       closedCaptioningEnabled,
       closedCaptioningLanguage,
       mediaType,
+      currentResolution,
       userAutoplaySetting,
       setClipProgress,
     } = this.props
     this.throttledSetClipProgress = throttle(setClipProgress, 1000)
     const src = this.getSrc(this.props)
+
+   
 
     if (muted || volume !== null) {
       volume && this.setVolume(muted ? 0 : volume)
@@ -86,7 +90,7 @@ export class Video extends Component {
       this.toggleCaptions(closedCaptioningLanguage)
     }
 
-    if (src) {
+    if ( src) {
       this.maybeStartHls(src, mediaType)
     }
     this.onMediaTypeChange(mediaType)
@@ -324,7 +328,7 @@ export class Video extends Component {
       const { current: player } = this.element
 
       if (player) {
-        const promise = player.play(Truncate)
+        const promise = player.play()
 
         // adobeHeartbeat && adobeHeartbeat.trackPlay()
 
@@ -559,9 +563,9 @@ export class Video extends Component {
     // this.updateTracks(videoElement)
   }
 
-  getSrc = ({ currentUrlIndex, urls }) => {
+  getSrc = ({ currentUrlIndex, currentUrl }) => {
     // return currentUrlIndex !== null && urls && urls.length > 0 ? urls[currentUrlIndex].url : null
-    let source = "https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4";
+    let source = currentUrl
     return source;
   }
 
@@ -640,6 +644,7 @@ export class Video extends Component {
         src={source}
         preload="auto"
         playsInline
+        autoPlay
         controls={false}
         loop={false}
         onLoadedMetadata={this.onLoadedMetadata}
@@ -673,6 +678,7 @@ const mapStateToProps = state => ({
     loading: state.player.loading,
     muted: state.player.muted,
     time: state.player.time,
+    currentUrl: state.player.currentUrl,
     mediaType: state.player.mediaType,
     overlay: state.player.overlay,
     currentResolution: state.player.currentResolution,

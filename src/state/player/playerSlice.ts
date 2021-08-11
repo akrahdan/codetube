@@ -13,6 +13,8 @@ import { buildClipProgress } from "portal/scenes/CoursePlayer/utilities/sync-cli
 import { calculateAspectRatio } from "portal/scenes/CoursePlayer/utilities/aspect-ratio";
 import { findBreakpoint } from "portal/scenes/CoursePlayer/utilities/find-breakpoint";
 import { selectVideoFormat } from "portal/scenes/CoursePlayer/utilities/video-format-support";
+import { CoursePlayerResponse, CourseResponse, coursesApi } from "services/courses";
+import { Url } from "url";
 
 const validModes = Object.values(InteractionModes);
 const mediaType = selectVideoFormat()
@@ -23,6 +25,9 @@ function includes(modes, mode) {
 
 export interface PlayerState {
   playing: boolean;
+  currentUrl: string;
+  currentUrlIndex: number;
+  course: CoursePlayerResponse
   playbackSpeed: number;
   activeMenu: string;
   volumeSliderActive: boolean;
@@ -83,8 +88,10 @@ export const initialState: PlayerState = {
   playbackSpeed: 1.0,
   activeMenu: null,
   volumeSliderActive: false,
- 
+  course: null,
   muted: false,
+  currentUrl: null,
+  currentUrlIndex: 0,
   previousVolume: null,
 
   time: 0,
@@ -139,6 +146,14 @@ export const playerSlice = createSlice({
     setPlaybackSpeed: (state, action: PayloadAction<number>) => {
       state.playbackSpeed = action.payload;
     },
+
+    setCurrentUrl: (state, action: PayloadAction<string>) => {
+     state.currentUrl = action.payload
+    },
+
+    setCurrentUrlIndex: (state, action: PayloadAction<number>) => {
+      state.currentUrlIndex = action.payload
+     },
 
     setPlaying: (state, action: PayloadAction<boolean>) => {
         state.playing = action.payload;
@@ -339,6 +354,17 @@ export const playerSlice = createSlice({
       }
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(
+        coursesApi.endpoints.fetchPlayerCourse.matchFulfilled,
+        (state, { payload }) => {
+          state.course = payload;
+        }
+      )
+      
+  },
+
 });
 
 export const selectPlayer = (state: RootState) => state.player;
@@ -378,7 +404,9 @@ export const {
   setPreferredResolutions,
   setSupportedResolutions,
   setMediaType,
-  syncSettings
+  syncSettings,
+  setCurrentUrl,
+  setCurrentUrlIndex
 } = playerSlice.actions;
 
 export const togglePlayPause = (): AppThunk => (dispatch, getState) => {
@@ -391,3 +419,5 @@ export const togglePlayPause = (): AppThunk => (dispatch, getState) => {
 };
 
 export default playerSlice.reducer;
+
+export const selectPlayerCourse = (state: RootState) => state.player.course

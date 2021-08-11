@@ -7,6 +7,7 @@ import {
   coursesApi,
   MediaResponse,
   Pricing,
+  ViewsResponse,
 } from "services/courses";
 
 interface submitProps {
@@ -15,6 +16,7 @@ interface submitProps {
 }
 type CourseState = {
   course: CourseResponse | null;
+  views: ViewsResponse[] | null,
   courses: CourseResponse[] | [];
   resources: MediaResponse[] | [];
   saveProps: submitProps | null;
@@ -42,6 +44,24 @@ const courseSlice = createSlice({
         coursesApi.endpoints.createCourse.matchFulfilled,
         (state, { payload }) => {
           state.course = payload;
+        }
+      )
+      .addMatcher(
+        coursesApi.endpoints.fetchCourse.matchFulfilled,
+        (state, { payload }) => {
+          state.course = payload;
+        }
+      )
+      .addMatcher(
+        coursesApi.endpoints.trackViews.matchFulfilled,
+        (state, { payload }) => {
+          state.views = payload;
+        }
+      )
+      .addMatcher(
+        coursesApi.endpoints.fetchViews.matchFulfilled,
+        (state, { payload }) => {
+          state.views = payload;
         }
       )
       .addMatcher(
@@ -85,3 +105,4 @@ export const selectCourses = (state: RootState) => state.course.courses;
 export const selectResources = (state: RootState) => state.course.resources;
 export const selectPricing = (state: RootState) => state.course.pricing;
 export const selectSave = (state: RootState) => state.course.saveProps;
+export const selectViews = (state: RootState) => state.course.views;

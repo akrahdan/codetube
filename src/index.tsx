@@ -20,7 +20,7 @@ const options = {
 
 };
 ReactDOM.render(
-  <Router forceRefresh >
+  <Router  >
     <Provider store={store}>
       <PayPalScriptProvider options={{ "client-id": "AUj_QTk083Xh7ncvSyMDik4La6zALHWM83BEM5SLLkR5ME2nhANowpy1Xm7xc5GUzLXy7b0Wg8NawuPm", "components": "buttons,funding-eligibility,marks" }}>
         <AlertProvider template={AlertMessage} {...options}>

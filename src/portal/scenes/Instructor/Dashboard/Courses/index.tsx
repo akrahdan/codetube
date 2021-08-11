@@ -1,19 +1,24 @@
 import { useHistory } from "react-router";
 import { selectLocationType, selectLocationPayload } from "state/location/selectors";
 import { selectCourses } from "state/course/courseSplice";
+import { selectProjects } from "state/project/projectSplice";
 import { useFetchInstructorCoursesQuery } from "services/courses";
+import { ProjectEntityResponse, useFetchInstructorProjectsQuery } from "services/projects";
 import type { CourseResponse } from "services/courses";
 import { useAppSelector, useAppDispatch } from "store/hooks";
 import { useEffect, useState } from "react";
+import projectLogo from "static/images/instructor/engaging-course.jpeg"
 
 import { Course } from "./Course";
+import { Project } from "./Project";
 export const Courses = ({ sideNavToggle, perfNavToggle }) => {
   const { push } = useHistory();
   const { data: coursesQuery } = useFetchInstructorCoursesQuery()
-
+  const { data: projectQuery } = useFetchInstructorProjectsQuery()
   const selectedCourses = useAppSelector(selectCourses)
-
+  const selectedProjects = useAppSelector(selectProjects)
   const [courses, setCourses] = useState<CourseResponse[]>(selectedCourses)
+  const [ projects, setProjects] = useState<ProjectEntityResponse[]>(selectedProjects)
 
   useEffect(() => {
     sideNavToggle(false);
@@ -23,8 +28,156 @@ export const Courses = ({ sideNavToggle, perfNavToggle }) => {
   useEffect(() => {
     setCourses(selectedCourses)
   }, [selectedCourses])
+
+  useEffect(()=> {
+    setProjects(selectedProjects)
+  }, [selectedProjects])
   return (
     <div className="responsive_container">
+      <div className="courses--header--38vYX">
+        <h1 className="udlite-heading-serif-xxl">Projects</h1>
+        <button
+          data-purpose="header-new-course"
+          type="button"
+          className="visible-xxs visible-xs btn btn-primary"
+        >
+          New project
+        </button>
+      </div>
+      <div className="instructor-alerts--instructor-alerts--2pNRM" />
+      <div className="courses--form-header--2ig8K">
+        <form
+          data-purpose="search-my-courses"
+          className="courses--search-form-wrapper--3ZLNh"
+        >
+          <div className="courses--search-wrapper--1n0Ss">
+            <span className="courses--search--27eDm input-group">
+              <input
+                placeholder="Search your courses"
+                type="text"
+                id="query"
+                className="form-control"
+              />
+              <span className="input-group-btn">
+                <button
+                  id="search-taught-courses"
+                  type="submit"
+                  aria-label="Search"
+                  className="btn btn-secondary"
+                >
+                  <span className="cfi cfi-search" />
+                </button>
+              </span>
+            </span>
+          </div>
+          <div className="dropdown btn-group btn-group-quaternary">
+            <button
+              aria-label="Change the ordering of the courses"
+              id="sortOrder"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              type="button"
+              className="dropdown-toggle btn btn-quaternary"
+              style={{ paddingRight: "26px" }}
+            >
+              Newest
+              <span style={{ position: "absolute", right: "12px" }}>
+                <span className="dropdown-caret cfi cfi-angle-down" />
+              </span>
+            </button>
+            <ul
+              role="menu"
+              className="dropdown-menu"
+              aria-labelledby="sortOrder"
+            >
+              <li role="presentation" className="active">
+                <a
+                  data-key="-created"
+                  id="ordering-0"
+                  role="menuitem"
+                  tabIndex={-1}
+                  href="javascript:void(0)"
+                >
+                  Newest
+                </a>
+              </li>
+              <li role="presentation" >
+                <a
+                  data-key="created"
+                  id="ordering-1"
+                  role="menuitem"
+                  tabIndex={-1}
+                  href="javascript:void(0)"
+                >
+                  Oldest
+                </a>
+              </li>
+              <li role="presentation" >
+                <a
+                  data-key="title"
+                  id="ordering-2"
+                  role="menuitem"
+                  tabIndex={-1}
+                  href="javascript:void(0)"
+                >
+                  A-Z
+                </a>
+              </li>
+              <li role="presentation" >
+                <a
+                  data-key="-title"
+                  id="ordering-3"
+                  role="menuitem"
+                  tabIndex={-1}
+                  href="javascript:void(0)"
+                >
+                  Z-A
+                </a>
+              </li>
+              <li role="presentation" >
+                <a
+                  data-key="is_published,-admin_rating,-published_time,-created"
+                  id="ordering-4"
+                  role="menuitem"
+                  tabIndex={-1}
+                  href="javascript:void(0)"
+                >
+                  Published first
+                </a>
+              </li>
+              <li role="presentation" >
+                <a
+                  data-key="-is_published,admin_rating,published_time,created"
+                  id="ordering-5"
+                  role="menuitem"
+                  tabIndex={-1}
+                  href="javascript:void(0)"
+                >
+                  Unpublished first
+                </a>
+              </li>
+            </ul>
+          </div>
+        </form>
+        <div className="hidden-xxs hidden-xs courses--header-button-wrapper--2TXW4">
+          <button
+            onClick={() => {
+              push('/project/create')
+            }}
+            type="button"
+            className="btn btn-primary"
+          >
+            New project
+          </button>
+        </div>
+      </div>
+      <div>
+        <div className="view-type-light courses--courses-list--1lGPH">
+         {projects && projects.map(project => <Project key={project.id} project={project} />)}
+        </div>
+      </div>
+
       <div className="courses--header--38vYX">
         <h1 className="udlite-heading-serif-xxl">Courses</h1>
         <button
@@ -188,13 +341,13 @@ export const Courses = ({ sideNavToggle, perfNavToggle }) => {
                         width={300}
                         height={300}
                         className="instructor-dashboard--resource-image--2vPP8"
-                        src="https://s.udemycdn.com/instructor/dashboard/engaging-course.jpg"
-                        srcSet="https://s.udemycdn.com/instructor/dashboard/engaging-course.jpg 1x, https://s.udemycdn.com/instructor/dashboard/engaging-course-2x.jpg 2x"
+                        src={projectLogo}
+                        
                       />
                     </div>
                     <div className="col-md-7 p0 instructor-dashboard--resource-description-col--2wfGo">
                       <div className="h2 instructor-dashboard--resource-title--16nub">
-                        Create an Engaging Course
+                        Create an Engaging Project
                       </div>
                       <p className="instructor-dashboard--resource-text--3objL">
                         Whether you've been teaching for years or are teaching
@@ -223,86 +376,7 @@ export const Courses = ({ sideNavToggle, perfNavToggle }) => {
             </div>
           </div>
         </div>
-        <div>
-          <h2 className="instructor-dashboard--dashboard-resources-title--2bK8N">
-            Have questions? Here are our most popular instructor resources.
-          </h2>
-          <div className="instructor-dashboard--resource-list--hV49F">
-            <div className=" instructor-dashboard--resource-list--resources--3AFwk row">
-              <div className="col-xs-6 col-sm-4 col-md-2 instructor-dashboard--resource-col--kqmwT">
-                <a href="#" target="_blank" rel="noopener noreferrer">
-                  <span className="cfi-medium cfi cfi-video-design" />
-                  <div className="h4 mb20 udlite-link-underline instructor-dashboard--resource-unit-title--1bw7g">
-                    Test Video
-                  </div>
-                  <small>Send us a sample video and get expert feedback.</small>
-                </a>
-              </div>
-              <div className="col-xs-6 col-sm-4 col-md-2 instructor-dashboard--resource-col--kqmwT">
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="cfi-medium cfi cfi-social-media-marketing" />
-                  <div className="h4 mb20 udlite-link-underline instructor-dashboard--resource-unit-title--1bw7g">
-                    Instructor Community
-                  </div>
-                  <small>
-                    Connect with experienced instructors. Ask questions, browse
-                    discussions, and more.
-                  </small>
-                </a>
-              </div>
-              <div className="col-xs-6 col-sm-4 col-md-2 instructor-dashboard--resource-col--kqmwT">
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="cfi-medium cfi cfi-teaching-tools" />
-                  <div className="h4 mb20 udlite-link-underline instructor-dashboard--resource-unit-title--1bw7g">
-                    Teaching Center
-                  </div>
-                  <small>
-                    Learn about best practices for teaching on Udemy.
-                  </small>
-                </a>
-              </div>
-              <div className="col-xs-6 col-sm-4 col-md-2 instructor-dashboard--resource-col--kqmwT">
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="cfi-medium cfi cfi-business" />
-                  <div className="h4 mb20 udlite-link-underline instructor-dashboard--resource-unit-title--1bw7g">
-                    Marketplace Insights
-                  </div>
-                  <small>
-                    Validate your course topic by exploring our marketplace
-                    supply and demand.
-                  </small>
-                </a>
-              </div>
-              <div className="col-xs-6 col-sm-4 col-md-2 instructor-dashboard--resource-col--kqmwT">
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="cfi-medium cfi cfi-happiness" />
-                  <div className="h4 mb20 udlite-link-underline instructor-dashboard--resource-unit-title--1bw7g">
-                    Help and Support
-                  </div>
-                  <small>
-                    Browse our Help Center or contact our support team.
-                  </small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
   );

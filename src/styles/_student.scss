@@ -5,17 +5,293 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 @import 'modal';
-@import 'modalbase';
+// @import 'modalbase';
 
-html {
-    font-family: sans-serif;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%
+
+
+
+
+
+:root {
+    --cf-scale-0: 0em;
+    --cf-scale-1: 0.4em;
+    --cf-scale-2: 0.8em;
+    --cf-scale-3: 1.2em;
+    --cf-scale-4: 1.6em;
+    --cf-scale-5: 1.8em;
+    --cf-scale-6: 2em;
+    --cf-scale-7: 2.2em;
+    --cf-scale-8: 2.4em;
+    --cf-scale-9: 3.8em;
+    --cf-scale-10: 5.2em;
+    --cf-scale-11: 6.6em;
+    --cf-scale-12: 8em;
+    --cf-scale-3-5: 1.4em;
+}
+:root,.cf-theme-dark {
+    color: var(--cf-theme-text);
+    --cf-theme-background: #000;
+    --cf-theme-text: #fff;
+    --cf-theme-text-hr-span-after: rgba(255, 255, 255, 0.3);
+    --cf-theme-separator: rgba(255, 255, 255, 0.3);
+    --cf-theme-border-contrast: rgba(255, 255, 255, 0.5);
+    --cf-theme-border-contrast-hover: #fff;
+    --cf-theme-applepay-border: none;
+    --cf-theme-badge-bg: #fff;
+    --cf-theme-badge-text: #000;
+    --cf-theme-badge-dim-bg: #272c33;
+    --cf-theme-badge-dim-text: #fff;
+    --cf-theme-carousel-dot: #596170;
+    --cf-theme-carousel-dot-active: #fff;
+    --cf-theme-dropdown-backdrop: rgba(0, 0, 0, 0.9);
+    --cf-theme-dropdown-border: #272c33;
+    --cf-theme-dropdown-bg: #191c21;
+    --cf-theme-dropdown-shadow: #000;
+    --cf-theme-dropdown-hover-bg: #272c33;
+    --cf-theme-tooltip-bg: #272c33;
+    --cf-theme-tooltip-border: #596170;
+    --cf-theme-tooltip-arrow: #596170;
+    --cf-theme-tooltip-arrow-after: #272c33;
+    --cf-theme-checkbox-bg: #191c21;
+    --cf-theme-checkbox-border: #272c33;
+    --cf-theme-checkbox-checked: #fff;
+    --cf-theme-checkbox-active-border: #596170;
+    --cf-theme-checkbox-dis-bg: #f3f3f3;
+    --cf-theme-checkbox-dis-border: #dbdde1;
+    --cf-theme-checkbox-dis-active-border: #272c33;
+    --cf-theme-form-bg: #191c21;
+    --cf-theme-form-border: #272c33;
+    --cf-theme-form-elem-color: #fff;
+    --cf-theme-form-elem-placehold-color: rgba(255, 255, 255, 0.5);
+    --cf-theme-form-dis-bg: #272c33;
+    --cf-theme-form-dis-border: none;
+    --cf-theme-form-dis-active: none;
+    --cf-theme-form-dis-elem: rgba(255, 255, 255, 0.5);
+    --cf-theme-form-append: rgba(255, 255, 255, 0.3);
+    --cf-theme-radio-bg: #191c21;
+    --cf-theme-radio-border: #272c33;
+    --cf-theme-radio-checked: #fff;
+    --cf-theme-radio-dis-bg: var(--cf-theme-radio-bg);
+    --cf-theme-radio-dis-border: none;
+    --cf-theme-select-menu-bg: #191c21;
+    --cf-theme-select-menu-border: #272c33;
+    --cf-theme-select-option-bg: #272c33
 }
 
-body {
-    margin: 0
+.cf-theme-light,.cf-invert {
+    color: var(--cf-theme-text);
+    --cf-theme-background: #fff;
+    --cf-theme-text: #000;
+    --cf-theme-text-hr-span-after: rgba(0, 0, 0, 0.3);
+    --cf-theme-separator: rgba(0, 0, 0, 0.3);
+    --cf-theme-border-contrast: rgba(0, 0, 0, 0.5);
+    --cf-theme-border-contrast-hover: #000;
+    --cf-theme-applepay-border: inset 0 0 0 1px #000;
+    --cf-theme-badge-bg: #272c33;
+    --cf-theme-badge-text: #fff;
+    --cf-theme-badge-dim-bg: #dbdde1;
+    --cf-theme-badge-dim-text: #000;
+    --cf-theme-carousel-dot: rgba(0, 0, 0, 0.6);
+    --cf-theme-carousel-dot-active: #000;
+    --cf-theme-dropdown-border: #f3f3f3;
+    --cf-theme-dropdown-bg: #fff;
+    --cf-theme-dropdown-hover-bg: #f3f3f3;
+    --cf-theme-tooltip-bg: #fff;
+    --cf-theme-tooltip-border: #f3f3f3;
+    --cf-theme-tooltip-arrow: #f3f3f3;
+    --cf-theme-tooltip-arrow-after: #fff;
+    --cf-theme-checkbox-bg: #fff;
+    --cf-theme-checkbox-border: #949aa4;
+    --cf-theme-checkbox-checked: #272c33;
+    --cf-theme-checkbox-active-border: #596170;
+    --cf-theme-checkbox-dis-bg: #f3f3f3;
+    --cf-theme-checkbox-dis-border: #dbdde1;
+    --cf-theme-checkbox-dis-active-border: #dbdde1;
+    --cf-theme-form-bg: #fff;
+    --cf-theme-form-border: #949aa4;
+    --cf-theme-form-elem-color: #000;
+    --cf-theme-form-elem-placehold-color: rgba(0, 0, 0, 0.3);
+    --cf-theme-form-dis-bg: #f3f3f3;
+    --cf-theme-form-dis-border: inset 0 0 0 1px #dbdde1;
+    --cf-theme-form-dis-active: #dbdde1;
+    --cf-theme-form-dis-elem: rgba(0, 0, 0, 0.3);
+    --cf-theme-form-append: rgba(0, 0, 0, 0.3);
+    --cf-theme-radio-bg: #fff;
+    --cf-theme-radio-border: #949aa4;
+    --cf-theme-radio-checked: #000;
+    --cf-theme-radio-dis-bg: #f3f3f3;
+    --cf-theme-radio-dis-border: inset 0 0 0 1px #dbdde1;
+    --cf-theme-select-menu-bg: #fff;
+    --cf-theme-select-menu-border: #f3f3f3;
+    --cf-theme-select-option-bg: #f3f3f3
 }
+
+.cf-mb-1 {
+    margin-bottom: var(--cf-scale-1);
+}
+
+.cf-text--uppercase {
+    letter-spacing: 0.06em;
+    text-transform: uppercase !important;
+}
+
+.cf-text-d3, .cf-text-d2, .cf-text-d1, .cf-text-h1, .cf-text-h2, .cf-text-h3, .cf-text-h4, .cf-text-h5, .cf-text-h6, .cf-text-h7, .cf-text-h8 {
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: 0.03em;
+}
+
+.cf-text-h7 {
+    font-size: var(--cf-scale-2);
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+}
+.no-gutters {
+    margin: 0;
+}
+
+.cf-text--italic {
+    font-style: italic !important;
+}
+
+.cf-text-small {
+    font-size: var(--cf-scale-2);
+    line-height: 1.45;
+    letter-spacing: 0.01em;
+}
+
+.cf-opacity--hinted {
+    opacity: 0.8 !important;
+}
+
+.cf-text-small {
+    font-size: var(--cf-scale-2);
+    line-height: 1.45;
+    letter-spacing: 0.01em;
+}
+
+.cf-text-d3 {
+    font-size: var(--cf-scale-12)
+}
+
+.cf-text-d2 {
+    font-size: var(--cf-scale-11)
+}
+
+.cf-text-d1 {
+    font-size: var(--cf-scale-10)
+}
+
+.cf-text-h1 {
+    font-size: var(--cf-scale-9)
+}
+
+.cf-text-h2 {
+    font-size: var(--cf-scale-8)
+}
+
+.cf-text-h3 {
+    font-size: var(--cf-scale-7)
+}
+
+.cf-text-h4 {
+    font-size: var(--cf-scale-6)
+}
+
+.cf-text-h5 {
+    font-size: var(--cf-scale-5)
+}
+
+.cf-text-h6 {
+    font-size: var(--cf-scale-2-5)
+}
+
+
+
+.cf-text-h8 {
+    font-size: var(--cf-scale-3)
+}
+
+.cf-text-d3,.cf-text-d2,.cf-text-d1,.cf-text-h1,.cf-text-h2,.cf-text-h3,.cf-text-h4,.cf-text-h5,.cf-text-h6,.cf-text-h7,.cf-text-h8 {
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: 0.03em
+}
+
+.cf-text-large {
+    font-size: var(--cf-scale-5);
+    line-height: 1.6;
+    letter-spacing: 0.01em
+}
+
+.cf-text-medium {
+    font-size: var(--cf-scale-4);
+    line-height: 1.5;
+    letter-spacing: 0.01em
+}
+
+
+
+.cf-text-x-small {
+    font-size: var(--cf-scale-2);
+    line-height: 1.45;
+    letter-spacing: 0.01em
+}
+
+.c-button:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.c-button--primary {
+    background-color: #f24462;
+}
+
+
+.c-button--full-width {
+    width: 100%;
+}
+.c-button {
+    padding: var(--cf-scale-2) var(--cf-scale-5);
+    font-size: var(--cf-scale-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 500;
+    line-height: 2;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: var(--cf-scale-2);
+    transition: background 250ms ease, box-shadow 250ms ease, opacity 250ms ease;
+    vertical-align: middle;
+    border: 0;
+    font-family: "Sohne", "Helvetica", "Arial", sans-serif;
+}
+
+.c-button--tertiary {
+    background: none;
+    box-shadow: inset 0 0 0 1px var(--cf-theme-border-contrast);
+    color: var(--cf-theme-text);
+}
+
+.c-button--facebook {
+    background-color: #3c5a99;
+}
+
+.cf-opacity--silenced {
+    opacity: 0.3 !important;
+}
+@media (min-width: 0) {
+    .cf-text--center {
+        text-align: center !important;
+    }
+}
+.cf-mb-2 {
+    margin-bottom: var(--cf-scale-2);
+}
+
+
 
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {
     display: block
@@ -280,10 +556,7 @@ td,th {
     box-sizing: border-box
 }
 
-html {
-    font-size: 10px;
-    -webkit-tap-highlight-color: transparent
-}
+
 
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

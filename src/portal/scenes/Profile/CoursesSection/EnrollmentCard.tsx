@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import { capitalize } from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ContainerProgressBar } from 'portal/scenes/Dashboard/ProgressBar';
+import { ContainerProgressBar, ContainerProgress } from 'portal/scenes/Dashboard/ProgressBar';
 
 const StyledContainerProgressBar = styled(ContainerProgressBar)`
   padding-right: ${pxRem(24)};
@@ -28,11 +28,15 @@ const StyledArrowChevronRightIcon = styled(ArrowChevronRightIcon)`
 
 export type EnrollmentCardProps = {
     id: string;
+    title: string,
+    containerProgress: ContainerProgress
     onEnrollmentClick?: (enrollmentSlug: string) => void;
   };
 
 export const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
     id,
+    title,
+    containerProgress,
     onEnrollmentClick
 }) => {
    
@@ -41,6 +45,7 @@ export const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   return (
     <Anchor
       href={"/"}
+      id={id}
       variant="interface"
       aria-label={`${courseTypeDisplayText}`}
       onClick={() => onEnrollmentClick?.('')}
@@ -60,11 +65,11 @@ export const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
               </Text>
             </FlexBox>
             <Text as="h3" fontSize={16} pt={4} lineHeight="base">
-              {"How to build netflix from Scratch"}
+              {title}
             </Text>
           </FlexBox>
 
-          {/* <StyledContainerProgressBar containerProgress={containerProgress} /> */}
+          <StyledContainerProgressBar containerProgress={containerProgress} />
         </FlexBox>
         <FlexBox
           alignItems="center"

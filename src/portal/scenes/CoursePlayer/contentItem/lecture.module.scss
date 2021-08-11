@@ -12,12 +12,12 @@
   cursor: pointer;
   transition: background 300ms ease 0s;
   &.active {
-    background: rgba(138, 153, 168, 0.25);
+    background: rgba(138, 153, 168, 0.25) !important;
   }
 }
 
 .lectureSubContainer:hover, .lectureSubContainer:focus {
-    background: rgba(138, 153, 168, 0.25);
+    background: rgba(138, 153, 168, 0.25) !important; 
 }
 
 .lectureDiv {
@@ -31,6 +31,7 @@
   min-width: 63px;
   display: flex;
   justify-content: center;
+  
 }
 
 
@@ -40,11 +41,13 @@
   width: 29px;
   min-width: 29px;
   margin: 4px;
+  
 }
 
-.svgCircleBackgroud {
+.svgCircleBackground {
   fill: transparent;
   stroke: var(--psColorsTextIconLowOnDark);
+  
 }
 
 .svgProgressText {
@@ -57,6 +60,9 @@
 .svgProgressCircle {
     fill: none;
     stroke: var(--psColorsTextIconHighOnDark);
+    &.current {
+      stroke: var(--psColorsPrimaryActionTextDarkTheme);
+    }
 }
 
 
@@ -69,7 +75,12 @@
 }
 
 .heightTransition {
-  max-height: 1000px;
-  transition: max-height 300ms ease 0s;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1s ease 0s;
+  &.visible {
+    max-height: 2000px;
+    transition: max-height 2s ease 0s;
+  }
   
 }

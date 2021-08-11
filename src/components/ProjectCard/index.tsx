@@ -16,13 +16,14 @@ import { ProjectContentItem } from 'typings/entities';
 
 import styles from './styles.module.scss';
 import { Course } from 'services/projects';
+import { CourseResponse } from 'services/courses';
 
 export type ProjectCardProps = {
   className?: string;
   hoverShadow?: boolean;
   index: number;
   onClick?: React.MouseEventHandler;
-  project: Course;
+  project: CourseResponse;
   trackingData: UserClickData;
 };
 
