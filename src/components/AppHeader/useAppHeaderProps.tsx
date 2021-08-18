@@ -68,7 +68,7 @@ export const useAppHeaderProps = () => {
 
     if (item.id === "instructor") {
       if (currentUser && currentUser.email) {
-        push('/course/create/')
+        window.location.replace('/course/create/')
       } else {
         store.dispatch(showModal('login'))
       }
@@ -134,7 +134,7 @@ export const useAppHeaderProps = () => {
         </AnimatePresence>
       )}
       {isMobileNotificationsOpen && (
-        <Box display={{ _: 'block', md: 'none' }}>
+        <Box display={{ _: 'block', md: 'none' }} >
           <AnimatePresence>
             <motion.div
               key="mobile notifications"

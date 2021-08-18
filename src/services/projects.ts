@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { head } from "lodash";
 import cookie from "react-cookies";
 import { RootState } from "store";
-import { CategoryResponse, CourseResponse } from "./courses";
+import { CategoryResponse, CourseResponse, CoursePlayerResponse, Instructor, InstructorResponse } from "./courses";
 export interface TitleDescription {
   id: number;
   title: string;
@@ -27,6 +27,8 @@ export interface Review {
   id: number;
   state: string;
 }
+
+
 
 export interface Course {
   id: number;
@@ -63,10 +65,11 @@ export interface ProjectEntityResponse {
   goal: string;
   level: string;
   hero: string;
+  instructor: InstructorResponse;
   category: number;
   thumbnail_url: string;
   experience: string;
-  courses: CourseResponse[];
+  courses: CoursePlayerResponse[];
   completion_time: string;
   related: ProjectEntityResponse[];
   header: HeaderDescription;
@@ -135,6 +138,14 @@ export const projectApi = createApi({
     fetchProjects: build.query<ProjectEntityResponse[], void>({
       query: () => ({
         url: "api/projects/",
+        method: "GET",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+    fetchDetailProject: build.query<ProjectEntityResponse, string>({
+      query: (slug) => ({
+        url: `project/${slug}/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -428,5 +439,6 @@ export const {
   useCheckoutWaveMutation,
   useGetMyProjectsQuery,
   useFetchInstructorProjectsQuery,
-  useFetchProjectCategoriesQuery
+  useFetchProjectCategoriesQuery,
+  useFetchDetailProjectQuery
 } = projectApi;

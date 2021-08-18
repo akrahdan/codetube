@@ -1,10 +1,13 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import classNames from "classnames";
 import styles from "../styles.module.css";
+import { selectAnalytics } from "state/course/courseSplice";
+
 import css from "./lecture.module.scss";
 import { CaretIcon } from "./caretIcon/caretIcon";
 import { LectureItem } from "./lectureItem";
 import { Section } from "services/courses";
+
 
 type SectionProps = {
   section: Section,
@@ -16,15 +19,39 @@ export const Lecture: React.FC<SectionProps> = ({ section, position, views }) =>
   const [current, setCurrent] = useState(0)
   const [active, setActive] = useState(0)
   const [offset, setOffset] = useState(0)
+  const navRef = useRef<HTMLDivElement>()
   const [heightDom, setHeightDom] = useState(null)
   const callbackRef = useCallback(node => {
-    if(node) {
-     setHeightDom(node.getBoundingClientRect().height)
+    if (node) {
+      setHeightDom(node.getBoundingClientRect().height)
     }
   }, [])
-  console.log(heightDom)
+  // const height = visible ? "auto" : "0px";
   const visibility = visible ? "visible" : "hidden";
-  const height = visible ? 'auto' : "0px";
+  const collapse = (navigation) => {
+    const height = navigation.scrollHeight
+    const transition = navigation.style.transition
+    navigation.style.transition = ''
+    requestAnimationFrame(() => {
+      navigation.style.height = height + 'px'
+      navigation.style.transition = transition
+      requestAnimationFrame(() => {
+        navigation.style.height = 0 + "px"
+      });
+    });
+  }
+
+
+  const expand = (navigation) => {
+    const height = navigation.scrollHeight
+    navigation.style.height = height + 'px'
+    navigation.addEventListener('transitionend', function (e) {
+      navigation.removeEventListener('transitionend', (ev) => {
+
+      })
+      
+    })
+  }
 
   useEffect(() => {
     if (views && section) {
@@ -35,6 +62,8 @@ export const Lecture: React.FC<SectionProps> = ({ section, position, views }) =>
 
     }
   }, [views])
+
+  
 
   return (
     <div
@@ -48,7 +77,16 @@ export const Lecture: React.FC<SectionProps> = ({ section, position, views }) =>
       >
         <div className={styles.lectureDiv}
           onClick={() => {
-            setVisible(!visible);
+            const navigation = navRef.current
+            
+            if (!visible) {
+              expand(navigation)
+              setVisible(!visible);
+            } else {
+              collapse(navigation)
+              setVisible(!visible);
+            }
+
           }}
         >
 
@@ -86,7 +124,7 @@ export const Lecture: React.FC<SectionProps> = ({ section, position, views }) =>
                   strokeDasharray="69.11503837897544 69.11503837897544"
                   strokeDashoffset={active == section.id ? (69.11503837897544 - offset) : 69.11503837897544}
                   className={classNames(css.svgProgressCircle, {
-                    [css.current] : active == section.id
+                    [css.current]: active == section.id
                   })}
                 />
               </svg>
@@ -114,17 +152,16 @@ export const Lecture: React.FC<SectionProps> = ({ section, position, views }) =>
       </div>
       <div className={css.lectureItemContainer}>
         <div
-          className={classNames(css.heightTransition, {
-            [css.visible]: visible
-          })}
+          ref={navRef}
+          className={classNames(css.heightTransition)}
           style={{
-            height: height,
+            height: "0px",
             overflow: visibility,
             visibility: visibility,
 
           }}
         >
-          <div ref={callbackRef}>
+          <div >
             {section.lectures && section.lectures.map(lecture =>
               <LectureItem
                 handleActive={() => setActive(section.id)}

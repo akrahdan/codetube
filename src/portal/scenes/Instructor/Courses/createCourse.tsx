@@ -64,7 +64,7 @@ export const CreateCourse = (props) => {
       const result = await createCourse(courseRequest).unwrap()
       if (result) {
         setCourseId(result.id)
-        push(`/instructor/course/${result.id}/manage/goals`)
+        window.location.replace(`/instructor/course/${result.id}/manage/goals`)
       }
       console.log('Course: ', result)
     }
@@ -102,7 +102,7 @@ export const CreateCourse = (props) => {
             <div className="full-page-takeover--header-buttons--1lu2t">
               <button
                 onClick={() => {
-                  push('/')
+                  window.location.replace('/')
                 }}
                 type="button"
                 className="btn btn-tertiary"

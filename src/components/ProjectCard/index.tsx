@@ -1,9 +1,9 @@
 import { Box, CardShell } from '@codecademy/gamut';
-import { ProLogo } from '@codecademy/gamut-labs';
+import { ProLogo } from '../gamut-overrides';
 import { UserClickData } from '@codecademy/tracking';
 import cx from 'classnames';
 import React from 'react';
-
+import parse from 'html-react-parser'
 import {
   CardDescription,
   CardTag,
@@ -12,19 +12,18 @@ import {
 } from 'components/CardElements';
 import { LOADING_COLORS, LoadingScreen } from 'components/LoadingScreen';
 import { TrackLink } from 'components/TrackLink';
-import { ProjectContentItem } from 'typings/entities';
 
 import styles from './styles.module.scss';
-import { Course } from 'services/projects';
-import { CourseResponse } from 'services/courses';
+import { Course, ProjectEntityResponse } from 'services/projects';
+
 
 export type ProjectCardProps = {
   className?: string;
   hoverShadow?: boolean;
   index: number;
   onClick?: React.MouseEventHandler;
-  project: CourseResponse;
-  trackingData: UserClickData;
+  project: ProjectEntityResponse;
+  trackingData?: UserClickData;
 };
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -39,7 +38,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     title,
     tags = [],
     id,
-    url: img,
+    thumbnail_url: img,
     description,
  
   } = project;
@@ -76,7 +75,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               {title}
             </CardTitle>
             <CardDescription className={styles.description} truncateLine={2}>
-              {description}
+              {parse(description)}
             </CardDescription>
             <CardTagList>
               {tags.map((t) => (

@@ -6,9 +6,9 @@ import {
   FormattedMobileAppHeaderItems,
 } from '../AppHeader/types';
 import {
-  communityDropdown,
+
   courseCatalog,
-  forBusiness,
+
   freeProfile,
   login,
   instructor,
@@ -16,10 +16,10 @@ import {
   logo,
   myHome,
   notifications,
-  pricingDropdown,
+
   proLogo,
   proProfile,
-  resourcesDropdown,
+
   signUp,
   tryProForFree,
   unpausePro,
@@ -38,8 +38,6 @@ const anonHeaderItems = (
     logo,
     projectCatalog,
     courseCatalog,
-    resourcesDropdown,
-    liveClasses,
   ];
 
   const rightItems: AppHeaderItem[] = [];
@@ -68,8 +66,6 @@ const anonMobileHeaderItems = (
   const mainMenuItems: AppHeaderItem[] = [
     projectCatalog,
     courseCatalog,
-    resourcesDropdown,
-    liveClasses,
     signUp,
     login,
   ];
@@ -122,7 +118,7 @@ export const freeHeaderItems = (
     myHome,
     projectCatalog,
     courseCatalog,
-    liveClasses,
+   
   ];
 
   const rightItems: AppHeaderItem[] = [];
@@ -155,7 +151,7 @@ export const freeMobileHeaderItems = (
     myHome,
     projectCatalog,
     courseCatalog,
-    liveClasses,
+   
     freeProfile(user, true),
   ];
 
@@ -181,7 +177,7 @@ export const proHeaderItems = (
     myHome,
     projectCatalog,
     courseCatalog,
-    liveClasses,
+   
   ];
 
   const rightItems: AppHeaderItem[] = [];
@@ -219,7 +215,7 @@ export const proMobileHeaderItems = (
     myHome,
     projectCatalog,
     courseCatalog,
-    liveClasses,
+  
     proProfile(user, true),
   ];
 

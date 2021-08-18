@@ -1,12 +1,12 @@
 import React, { SVGProps } from 'react';
 
-import { CodecademyLogo } from './CodecademyLogo';
-import { CodecademyPremiumLogo } from './CodecademyPremiumLogo';
-import { CodecademyProAltLogo } from './CodecademyProAltLogo';
-import { CodecademyProgramLogo } from './CodecademyProgramLogo';
-import { CodecademyProLockupLogo } from './CodecademyProLockupLogo';
-import { CodecademyProLogo } from './CodecademyProLogo';
-import { CodecademyProMonoLogo } from './CodecademyProMonoLogo';
+import { CodefluentLogo } from './CodefluentLogo';
+import { CodefluentPremiumLogo } from './CodefluentPremiumLogo';
+import { CodefluentProAltLogo } from './CodefluentProAltLogo';
+import { CodefluentProgramLogo } from './CodefluentProgramLogo';
+import { CodefluentProLockupLogo } from './CodefluentProLockupLogo';
+import { CodefluentProLogo } from './CodefluentProLogo';
+import { CodefluentProMonoLogo } from './CodefluentProMonoLogo';
 
 const defaultProps: LogoProps = {
   height: 32,
@@ -14,13 +14,13 @@ const defaultProps: LogoProps = {
 };
 
 const logos = {
-  pro: CodecademyProLogo,
-  proAlt: CodecademyProAltLogo,
-  proLockup: CodecademyProLockupLogo,
-  proMono: CodecademyProMonoLogo,
-  program: CodecademyProgramLogo,
-  premium: CodecademyPremiumLogo,
-  default: CodecademyLogo,
+  pro: CodefluentProLogo,
+  proAlt: CodefluentProAltLogo,
+  proLockup: CodefluentProLockupLogo,
+  proMono: CodefluentProMonoLogo,
+  program: CodefluentProgramLogo,
+  premium: CodefluentPremiumLogo,
+  default: CodefluentLogo,
 };
 
 export type LogoType =
@@ -39,7 +39,7 @@ export type LogoProps = SVGProps<SVGSVGElement> & {
 };
 
 export function Logo({ type, ...props }: LogoProps) {
-  const LogoTag = logos[type] || CodecademyLogo;
+  const LogoTag = logos[type] || CodefluentLogo;
   return <LogoTag {...props} />;
 }
 

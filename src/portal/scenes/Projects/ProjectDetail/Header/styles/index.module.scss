@@ -1,0 +1,78 @@
+
+$bp-desktop-large: 1376px;
+
+.header {
+  overflow: hidden;
+  position: relative;
+}
+
+.wave {
+  height: 422px;
+  left: 0;
+  position: absolute;
+  transform: scale(0.85);
+  transform-origin: top left;
+  top: 0;
+  width: 621px;
+
+ 
+}
+
+@media screen and (min-width: 1376px) {
+  .wave {
+      transform:scale(1)
+  }
+}
+
+@media screen and (max-width: 736px) {
+  .wave {
+      display:none
+  }
+}
+
+
+.waveTall {
+  bottom: -5px;
+  position: absolute;
+  transform: scale(1.2);
+  transform-origin: left bottom;
+
+}
+
+@media screen and (min-width: 736px) {
+  .waveTall{
+      display:none
+  }
+}
+
+.hero {
+  position: absolute;
+  top: 0;
+  right: 0;
+  user-select: none;
+  
+}
+
+@media screen and (max-width: 736px) {
+  .hero {
+      display:none
+  }
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 2.25rem 2rem 3rem;
+  position: relative;
+
+}
+
+@media screen and (min-width: 960px) {
+  .content {
+      flex-direction:row-reverse;
+      justify-content: flex-end;
+      padding: 4rem 5%
+  }
+}

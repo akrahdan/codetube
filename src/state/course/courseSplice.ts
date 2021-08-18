@@ -7,6 +7,7 @@ import {
   coursesApi,
   MediaResponse,
   Pricing,
+  VideoAnalytics,
   ViewsResponse,
 } from "services/courses";
 
@@ -18,6 +19,7 @@ type CourseState = {
   course: CourseResponse | null;
   views: ViewsResponse[] | null,
   courses: CourseResponse[] | [];
+  analytics: VideoAnalytics[] | [];
   resources: MediaResponse[] | [];
   saveProps: submitProps | null;
   pricing: Pricing | null;
@@ -63,6 +65,30 @@ const courseSlice = createSlice({
         (state, { payload }) => {
           state.views = payload;
         }
+      ).addMatcher(
+        coursesApi.endpoints.fetchCourseViews.matchFulfilled,
+        (state, { payload }) => {
+          state.analytics = payload;
+        }
+      )
+      .addMatcher(
+        coursesApi.endpoints.fetchVideoViews.matchFulfilled,
+        (state, { payload }) => {
+          state.analytics = payload;
+        }
+      )
+      .addMatcher(
+        coursesApi.endpoints.updateVideoViews.matchFulfilled,
+        (state, { payload }) => {
+          const analytics = state.analytics?.map((view: VideoAnalytics) => {
+            if(payload.lecture === view.lecture) {
+              return payload
+
+            }
+            return view;
+          })
+         state.analytics = analytics;
+        }
       )
       .addMatcher(
         coursesApi.endpoints.updateCourse.matchFulfilled,
@@ -106,3 +132,4 @@ export const selectResources = (state: RootState) => state.course.resources;
 export const selectPricing = (state: RootState) => state.course.pricing;
 export const selectSave = (state: RootState) => state.course.saveProps;
 export const selectViews = (state: RootState) => state.course.views;
+export const selectAnalytics = (state: RootState) => state.course.analytics;

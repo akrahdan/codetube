@@ -33,7 +33,6 @@ const playbackStatesMap = {
     state => ({
       overlay: state.player.overlay,
     }),
-    store => {}
   )(ActionOverlay)
   
   

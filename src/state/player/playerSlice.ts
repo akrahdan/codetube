@@ -7,27 +7,44 @@ import {
   InteractionModes,
   Defaults,
   FullscreenState,
-  DefaultResolutions
+  DefaultResolutions,
 } from "portal/scenes/CoursePlayer/constants";
 import { buildClipProgress } from "portal/scenes/CoursePlayer/utilities/sync-clip-progress";
 import { calculateAspectRatio } from "portal/scenes/CoursePlayer/utilities/aspect-ratio";
 import { findBreakpoint } from "portal/scenes/CoursePlayer/utilities/find-breakpoint";
 import { selectVideoFormat } from "portal/scenes/CoursePlayer/utilities/video-format-support";
-import { CoursePlayerResponse, CourseResponse, coursesApi } from "services/courses";
+import { getClipProgressById, getClipProgressFromLocalStorage } from 'portal/scenes/CoursePlayer/utilities/sync-clip-progress'
+import {
+  CoursePlayerResponse,
+  CourseResponse,
+  coursesApi,
+  Lecture,
+  VideoAnalytics,
+} from "services/courses";
 import { Url } from "url";
 
 const validModes = Object.values(InteractionModes);
-const mediaType = selectVideoFormat()
-console.log("VideoFormat: ", DefaultResolutions[mediaType][0])
+const mediaType = selectVideoFormat();
+
 function includes(modes, mode) {
   return !!~modes.indexOf(mode);
+}
+
+export interface Progress {
+  clipId: string;
+  videoSecondsWatched: number
 }
 
 export interface PlayerState {
   playing: boolean;
   currentUrl: string;
+  views: VideoAnalytics[];
+  clipId: string;
+  title: string;
+  subtitle: string;
   currentUrlIndex: number;
-  course: CoursePlayerResponse
+  currentLecture: Lecture;
+  course: CoursePlayerResponse;
   playbackSpeed: number;
   activeMenu: string;
   volumeSliderActive: boolean;
@@ -46,7 +63,7 @@ export interface PlayerState {
   seekingEvent: Event;
   visible: boolean;
   fullscreenState: string;
-  clipProgress: number;
+  clipProgress: Progress[];
   buffering: boolean;
   containerSize: ContainerSize;
   breakpoint: ContainerSize;
@@ -56,9 +73,9 @@ export interface PlayerState {
   userAutoplaySetting: boolean;
   preferredResolutions: any;
   currentResolution: any;
-  supportedResolutions: Resolution[],
-  mediaType: string,
-  settings: any
+  supportedResolutions: Resolution[];
+  mediaType: string;
+  settings: any;
 }
 
 export interface Overlay {
@@ -78,21 +95,25 @@ interface ResolutionH {
   index: number;
 }
 interface Resolution {
-    width?: string;
-    height: string;
-    index: number;
-  }
+  width?: string;
+  height: string;
+  index: number;
+}
 
 export const initialState: PlayerState = {
   playing: false,
+  views: null,
   playbackSpeed: 1.0,
   activeMenu: null,
+  currentLecture: null,
   volumeSliderActive: false,
   course: null,
   muted: false,
   currentUrl: null,
   currentUrlIndex: 0,
   previousVolume: null,
+  title: null,
+  subtitle: null,
 
   time: 0,
   duration: 0,
@@ -103,10 +124,11 @@ export const initialState: PlayerState = {
   seekedEvent: null,
   seekingEvent: null,
 
-  clipProgress: 0,
+  clipProgress: [],
   buffering: false,
   containerSize: null,
   breakpoint: null,
+  clipId: null,
   playerSize: null,
   layout: null,
   loading: false,
@@ -115,7 +137,7 @@ export const initialState: PlayerState = {
   currentResolution: DefaultResolutions[mediaType][0],
   supportedResolutions: null,
   mediaType,
-  settings: null
+  settings: null,
 };
 export const playerSlice = createSlice({
   name: "player",
@@ -126,7 +148,7 @@ export const playerSlice = createSlice({
 
       if (action.payload) {
         state.overlay = { icon, key: Math.random(), fade: true };
-        console.log("Play: ", state.overlay)
+        // console.log("Play: ", state.overlay);
       }
       state.playing = true;
       state.playheadStart = state.time;
@@ -137,7 +159,7 @@ export const playerSlice = createSlice({
 
       if (action.payload) {
         state.overlay = { icon, key: Math.random(), fade: true };
-        console.log("Pause: ", state.overlay)
+        
       }
       state.playing = false;
       state.playheadStart = state.time;
@@ -148,15 +170,30 @@ export const playerSlice = createSlice({
     },
 
     setCurrentUrl: (state, action: PayloadAction<string>) => {
-     state.currentUrl = action.payload
+      state.currentUrl = action.payload;
+    },
+
+    setCurrentLecture: (state, action: PayloadAction<Lecture>) => {
+      state.currentLecture = action.payload;
+    },
+
+    setCurrentViews: (state, action: PayloadAction<VideoAnalytics[]>) => {
+      state.views = action.payload;
     },
 
     setCurrentUrlIndex: (state, action: PayloadAction<number>) => {
-      state.currentUrlIndex = action.payload
-     },
+      state.currentUrlIndex = action.payload;
+    },
 
     setPlaying: (state, action: PayloadAction<boolean>) => {
-        state.playing = action.payload;
+      state.playing = action.payload;
+    },
+    setTitle: (state, action: PayloadAction<string>) => {
+      state.title = action.payload;
+    },
+
+    setSubtitle: (state, action: PayloadAction<string>) => {
+      state.subtitle = action.payload;
     },
 
     syncSettings: (state, action: PayloadAction<any>) => {
@@ -165,22 +202,27 @@ export const playerSlice = createSlice({
 
     setMediaType: (state, action: PayloadAction<string>) => {
       state.mediaType = action.payload;
-  },
+    },
 
     setPreferredResolutions: (state, action: PayloadAction<any>) => {
-        state.preferredResolutions = action.payload;
+      state.preferredResolutions = action.payload;
     },
 
     setCurrentResolution: (state, action: PayloadAction<any>) => {
-        state.currentResolution = action.payload;
+      state.currentResolution = action.payload;
     },
 
     setSupportedResolutions: (state, action: PayloadAction<Resolution[]>) => {
-        state.supportedResolutions = action.payload;
+      state.supportedResolutions = action.payload;
     },
 
     setActiveMenu: (state, action: PayloadAction<string>) => {
       state.activeMenu = action.payload;
+    },
+    setClipId: (state, action: PayloadAction<string>) => {
+      const lastProgressTimeFromLocalStorage = getClipProgressById(state.clipProgress, action.payload)
+      state.time = lastProgressTimeFromLocalStorage ||  0
+      state.clipId = action.payload;
     },
     setVolumeSliderActive: (state, action: PayloadAction<boolean>) => {
       state.volumeSliderActive = action.payload;
@@ -230,7 +272,7 @@ export const playerSlice = createSlice({
 
     setContainerSize: (state, action: PayloadAction<ContainerSize>) => {
       var containerSize = action.payload;
-      console.log("Container: ", containerSize)
+      console.log("Container: ", containerSize);
       if (
         containerSize.width === 0 &&
         containerSize.height === 0 &&
@@ -239,7 +281,7 @@ export const playerSlice = createSlice({
         containerSize = state.containerSize;
       }
       const breakpoint = findBreakpoint(containerSize);
-      state.breakpoint = breakpoint
+      state.breakpoint = breakpoint;
       state.playerSize = calculateAspectRatio(containerSize);
       state.containerSize = containerSize;
       state.layout = `${breakpoint.height}p`;
@@ -284,14 +326,14 @@ export const playerSlice = createSlice({
     },
 
     setLoading: (state, action: PayloadAction<boolean>) => {
-        state.loading = action.payload;
+      state.loading = action.payload;
     },
 
     setAutoplay: (state, action: PayloadAction<boolean>) => {
-        state.userAutoplaySetting = action.payload;
+      state.userAutoplaySetting = action.payload;
     },
 
-    setClipProgress: (state, action: PayloadAction<number>) => {
+    setClipProgress: (state, action: PayloadAction<Progress>) => {
       state.clipProgress = buildClipProgress(
         state.clipProgress,
         action.payload,
@@ -355,16 +397,13 @@ export const playerSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addMatcher(
-        coursesApi.endpoints.fetchPlayerCourse.matchFulfilled,
-        (state, { payload }) => {
-          state.course = payload;
-        }
-      )
-      
+    builder.addMatcher(
+      coursesApi.endpoints.fetchPlayerCourse.matchFulfilled,
+      (state, { payload }) => {
+        state.course = payload;
+      }
+    );
   },
-
 });
 
 export const selectPlayer = (state: RootState) => state.player;
@@ -406,7 +445,12 @@ export const {
   setMediaType,
   syncSettings,
   setCurrentUrl,
-  setCurrentUrlIndex
+  setCurrentUrlIndex,
+  setSubtitle,
+  setTitle,
+  setClipId,
+  setCurrentLecture,
+  setCurrentViews
 } = playerSlice.actions;
 
 export const togglePlayPause = (): AppThunk => (dispatch, getState) => {
@@ -420,4 +464,5 @@ export const togglePlayPause = (): AppThunk => (dispatch, getState) => {
 
 export default playerSlice.reducer;
 
-export const selectPlayerCourse = (state: RootState) => state.player.course
+export const selectPlayerCourse = (state: RootState) => state.player.course;
+export const selectDuration = (state: RootState) => state.player.duration;

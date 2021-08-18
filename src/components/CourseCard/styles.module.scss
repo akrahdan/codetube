@@ -1,0 +1,40 @@
+@import "~styles/cc";
+
+.description {
+  color: $color-black;
+}
+
+.title {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.img {
+  width: 100%;
+  height: 15rem;
+  background-size: cover;
+}
+
+.container {
+  position: relative;
+  // so the loading component isn't too short
+  min-height: px-rem(388px);
+}
+
+.trackLink {
+  text-align: left;
+  width: 100%;
+}
+
+.card {
+  cursor: pointer;
+}
+
+.noShadow {
+  box-shadow: none;
+}

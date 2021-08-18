@@ -3435,6 +3435,7 @@ input[size].form-control {
     cursor: pointer;
     display: inline-flex;
     min-width: 8rem;
+    border-radius: 1.2rem;
     padding: 0 1.2rem;
     justify-content: center;
     user-select: none;
@@ -3560,11 +3561,11 @@ input[size].form-control {
 }
 
 .udlite-btn-brand:active,.udlite-btn-brand:hover {
-    background-color: #8710d8
+    background-color: #f24462
 }
 
 .udlite-btn-brand,.udlite-btn-brand.udlite-btn-disabled {
-    background-color: #a435f0
+    background-color: #f24462;
 }
 
 .udlite-btn.udlite-btn-disabled {
@@ -3763,13 +3764,14 @@ input[size].form-control {
     vertical-align: middle;
     touch-action: manipulation;
     cursor: pointer;
+    border-radius: 1.2rem;
     background-image: none;
     border: 1px solid transparent;
     white-space: nowrap;
     padding: 11px 12px;
     font-size: 15px;
     line-height: 1.35135;
-    border-radius: 0;
+    
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -3886,7 +3888,8 @@ input[type=submit].btn-block,input[type=reset].btn-block,input[type=button].btn-
 
 .btn-primary {
     color: #fff;
-    background-color: #a435f0;
+    background-color: #f24462;
+    border-radius: 1.2rem;
     border: 1px solid transparent
 }
 
@@ -3914,7 +3917,7 @@ input[type=submit].btn-block,input[type=reset].btn-block,input[type=button].btn-
 
 .btn-primary:focus,.btn-primary.focus {
     color: #fff;
-    background-color: #a435f0
+    background-color: #f24462
 }
 
 body.keyboard-navigation-in-use .btn-primary:focus,body.keyboard-navigation-in-use .btn-primary.focus {
@@ -20798,4 +20801,19 @@ tbody.collapse.in {
     .hidden-print {
         display: none!important
     }
+}
+
+.udlite-heading-md {
+    font-family: sf pro display,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.02rem;
+    font-size: 1.6rem;
+}
+
+.udlite-text-sm {
+    font-family: sf pro text,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    font-weight: 400;
+    line-height: 1.4;
+    font-size: 1.4rem;
 }

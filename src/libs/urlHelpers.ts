@@ -1,40 +1,40 @@
-import pluralize from 'pluralize';
+import pluralize from "pluralize";
 
-import { userAttributes } from 'libs/userAttributes';
-import { ContentItem, ContentItemType } from 'typings/entities';
-import { BusinessTransactionType, Currency } from 'typings/payment';
+import { userAttributes } from "libs/userAttributes";
+import { ContentItem, ContentItemType } from "typings/entities";
+import { BusinessTransactionType, Currency } from "typings/payment";
 
 import {
   isCareerPathPageRedirect,
   isProMembershipRedirect,
   isSkillPathPageRedirect,
-} from './redirectHelpers';
+} from "./redirectHelpers";
 
 const withLECourseRedirect = (path: string, redirectSlug?: string) => {
   if (!redirectSlug) return path;
   return `${path}?course_redirect=${redirectSlug}`;
 };
 
-export const homePath = '/';
+export const homePath = "/";
 
-export const loginPath = '/login';
+export const loginPath = "/login";
 
-export const logoutPath = '/logout';
+export const logoutPath = "/logout";
 
-export const onboardingPath = '/welcome/find-a-course';
+export const onboardingPath = "/welcome/find-a-course";
 export const onboardingFromSignupPath = `${onboardingPath}?fromSignUpPage=true`;
 
 export const logoutPathWithRedirectParams = (redirectPath: string) =>
   `${logoutPath}?redirect=${encodeURIComponent(redirectPath)}`;
 
-export const registerPath = '/register';
+export const registerPath = "/register";
 
 export const eventPath = (slug: string) => `/events/${slug}`;
 export const eventFromSignupPath = (slug: string) =>
   `${eventPath(slug)}?fromSignUpPage=true`;
 
-export const workerSupportApplicationPath = '/worker-support/apply';
-export const workerSupportThankYouPath = '/worker-support/thank-you';
+export const workerSupportApplicationPath = "/worker-support/apply";
+export const workerSupportThankYouPath = "/worker-support/thank-you";
 
 export const profilesPath = (profileIdOrUsername: string) =>
   `/profiles/${profileIdOrUsername}`;
@@ -48,10 +48,10 @@ export const certificatesPath = (username: string, containerId: string) =>
 export const achievementsPath = (username: string) =>
   `/users/${username}/achievements`;
 
-export const prodBasePath = 'https://codecademy.com';
+export const prodBasePath = "https://codecademy.com";
 
 const getContentItemTypeRoutePart = (type?: ContentItemType) => {
-  return type ? pluralize(`${type}`, 2) : '';
+  return type ? pluralize(`${type}`, 2) : "";
 };
 
 export const contentItemResumePath = (
@@ -62,9 +62,9 @@ export const contentItemResumePath = (
 ) => {
   if (!contentItem) return `/courses/${courseSlug}`;
 
-  const resumePath = anon ? '' : '/resume';
+  const resumePath = anon ? "" : "/resume";
 
-  if (contentItem.type === 'lesson') {
+  if (contentItem.type === "lesson") {
     return withLECourseRedirect(
       `/courses/${courseSlug}/lessons/${contentItem.slug}${resumePath}`,
       redirectSlug
@@ -91,7 +91,7 @@ export const exerciseResumePath = (
   );
 
 export const pathResumePath = (pathSlug: string | undefined) => {
-  if (!pathSlug) return '/learn/paths';
+  if (!pathSlug) return "/learn/paths";
 
   return createPathResumePath({
     pathSlug,
@@ -181,13 +181,13 @@ export const cheatsheetPath = ({
 
 export const smartPracticePath = (
   slug: string,
-  contentType: 'path' | 'track'
+  contentType: "path" | "track"
 ) => `/smart-practice/${contentType}s/${slug}`;
 
 export const reviewCardPath = (id: string) =>
   `https://author.codecademy.com/review-cards/${id}`;
 
-export const learnPath = () => '/learn';
+export const learnPath = () => "/learn";
 
 export const cohortPath = (pathSlug: string) => `/cohorts/${pathSlug}`;
 
@@ -206,7 +206,13 @@ export const pathPracticePath = (
 export const challengeProjectPath = (slug: string | undefined) =>
   `/practice/projects/${slug}`;
 
-export const catalogPath = '/catalog';
+export const projectCoursePath = (slug: string | undefined) =>
+  `/courses/${slug}`;
+
+export const projectDetailPath = (slug: string | undefined) =>
+  `/projects/${slug}`;
+
+export const catalogPath = "/catalog";
 export const catalogCategoryPath = (section: string, category: string) =>
   `/catalog/${section}/${category}`;
 
@@ -222,9 +228,9 @@ const getTrialModalParams = (
     !isTrialPlan &&
     !isSignUpPage;
 
-  if (isAlternativeEntryFromCheckoutFlow || isTrialPlan) return '';
+  if (isAlternativeEntryFromCheckoutFlow || isTrialPlan) return "";
 
-  return 'modal=pro-trial-welcome';
+  return "modal=pro-trial-welcome";
 };
 
 type PostCheckoutLandingPathParams = {
@@ -279,12 +285,12 @@ export const getOnboardingPath = (
       : onboardingPath;
   }
 
-  const redirectUrlArr = redirectUrl.split('?');
+  const redirectUrlArr = redirectUrl.split("?");
   const queryParams =
-    redirectUrlArr.length >= 2 ? redirectUrlArr[1].split('&') : [];
+    redirectUrlArr.length >= 2 ? redirectUrlArr[1].split("&") : [];
   const additionalParams = queryParams
-    .filter((elem) => elem !== 'modal=pro-trial-welcome')
-    .join('&');
+    .filter((elem) => elem !== "modal=pro-trial-welcome")
+    .join("&");
   const fullRedirectUrl = additionalParams
     ? `${redirectUrlArr[0]}?${additionalParams}`
     : redirectUrlArr[0];
@@ -295,11 +301,11 @@ export const getOnboardingPath = (
 
 export const searchPath = (query?: string, page?: number) => {
   if (!query) {
-    return '/search';
+    return "/search";
   }
 
   const encodedQuery = encodeURIComponent(query);
-  return `/search?query=${encodedQuery}${page ? `&page=${page}` : ''}`;
+  return `/search?query=${encodedQuery}${page ? `&page=${page}` : ""}`;
 };
 
 export const programResumePath = (program: string) => `/programs/${program}`;
@@ -308,15 +314,15 @@ export const programContentPath = (program: string, content: string) =>
   `/programs/${program}/items/${content}`;
 
 export const resetProgressPath = (
-  type: 'courses' | 'modules' | 'paths',
+  type: "courses" | "modules" | "paths",
   id: string
 ) => `/reset-progress/${type}/${id}`;
 
-export const pathsBasePath = '/learn/paths';
+export const pathsBasePath = "/learn/paths";
 export const pathSelectorPath = `${pathsBasePath}/new`;
-export const skillPathSelectorPath = '/learn/skill-paths/new';
+export const skillPathSelectorPath = "/learn/skill-paths/new";
 export const choosePathPagePath = (goal: string) =>
-  goal === 'skill' ? skillPathSelectorPath : pathSelectorPath;
+  goal === "skill" ? skillPathSelectorPath : pathSelectorPath;
 
 export const pathPagePath = (pathSlug: string) =>
   `${pathsBasePath}/${pathSlug}`;
@@ -339,13 +345,13 @@ export const proPaymentCompletePath = ({
   currency,
 }: ProPaymentCompletePathRequest) => {
   let uri = `/subscriptions/${planId}/paid?couponCode=${couponCode}&redirect_url=${redirectUrl}&currency=${currency}`;
-  if (fromSignUpPage) uri += '&fromSignUpPage=true';
-  if (referralErrors) uri += '&referral_errors=true';
+  if (fromSignUpPage) uri += "&fromSignUpPage=true";
+  if (referralErrors) uri += "&referral_errors=true";
   return uri;
 };
 
 export const proCheckoutPath = ({
-  planId ,
+  planId,
   redirectUrl,
   fromSignUpPage,
   discountCode,
@@ -374,8 +380,6 @@ export const proCheckoutPath = ({
   return url;
 };
 
-
-
 export const upsellBackPath = ({
   isTrialPlan,
   redirectUrl,
@@ -389,16 +393,16 @@ export const upsellBackPath = ({
     ? redirectUrl
     : getOnboardingPath(redirectUrl, isTrialPlan, true);
 
-export const accountPath = () => '/account';
+export const accountPath = () => "/account";
 
-export const billingPath = () => '/account/billing';
+export const billingPath = () => "/account/billing";
 
-export const goalSettingsPath = () => '/account/goals_settings';
+export const goalSettingsPath = () => "/account/goals_settings";
 
-export const passwordBreachPath = '/account/password?pib=true';
+export const passwordBreachPath = "/account/password?pib=true";
 
 export const emailConfirmationPath = (status?: string) =>
-  status ? `/confirm?${status}=true` : '/confirm';
+  status ? `/confirm?${status}=true` : "/confirm";
 
 export const emailConfirmationPathWithToken = (token: string) =>
   `/confirm?confirmation_token=${token}`;
@@ -407,87 +411,87 @@ export const linkAccountPath = (provider: string) => `/users/auth/${provider}`;
 
 // oauth urls
 export const githubAuthenticationUrl = () =>
-  '/users/auth/github?scope=public_repo,user:email';
+  "/users/auth/github?scope=public_repo,user:email";
 
 export const googleAuthenticationUrl = () =>
-  '/users/auth/google_oauth2?signin=true';
+  "/users/auth/google_oauth2?signin=true";
 
 export const facebookAuthenticationUrl = () =>
-  '/users/auth/facebook?signin=true';
+  "/users/auth/facebook?signin=true";
 
-export const twitterAuthenticationUrl = () => '/users/auth/twitter?signin=true';
+export const twitterAuthenticationUrl = () => "/users/auth/twitter?signin=true";
 
 export const linkedinAuthenticationUrl = () =>
-  '/users/auth/linkedin?signin=true';
+  "/users/auth/linkedin?signin=true";
 // other authentication urls
 
-export const forgotPasswordUrl = () => '/secret/new';
+export const forgotPasswordUrl = () => "/secret/new";
 
 export const resetPasswordUrl = (token: string) =>
   `/secret/edit?reset_password_token=${token}`;
 
-export const proLandingPath = '/pro/membership';
+export const proLandingPath = "/pro/membership";
 
-export const studentLandingPath = '/student-center';
+export const studentLandingPath = "/student-center";
 
-export const mobileLandingPagePath = '/mobile-app-download';
+export const mobileLandingPagePath = "/mobile-app-download";
 
 // Explore
 
-export const exploreSortingQuizPath = '/explore/sorting-quiz';
+export const exploreSortingQuizPath = "/explore/sorting-quiz";
 
 // Footer
 
 export const proPauseHelpPageUrl =
-  'https://help.codecademy.com/hc/en-us/sections/360002034793-Pause';
+  "https://help.codecademy.com/hc/en-us/sections/360002034793-Pause";
 
 export const codecademyGoAppleUrl =
-  'https://itunes.apple.com/us/app/codecademy-go/id1376029326?mt=8';
+  "https://itunes.apple.com/us/app/codecademy-go/id1376029326?mt=8";
 
 export const codecademyGoGoogleUrl =
-  'https://play.google.com/store/apps/details?id=com.ryzac.codecademygo';
+  "https://play.google.com/store/apps/details?id=com.ryzac.codecademygo";
 
-export const forumsUrl = 'https://discuss.codecademy.com/';
+export const forumsUrl = "https://discuss.codecademy.com/";
 
 export const forumAnswerUrl = (questionId: string, answerId: string) =>
   `/forum_questions/${questionId}#${answerId}`;
 
-export const chaptersUrl = 'https://community.codecademy.com/chapters';
+export const chaptersUrl = "https://community.codecademy.com/chapters";
 
 // other urls
 
-export const currentUserUrl = '/current-user';
+export const currentUserUrl = "/current-user";
 
-export const timedChallengeEnrollmentUrl = '/timed-challenge-enrollment';
+export const timedChallengeEnrollmentUrl = "/timed-challenge-enrollment";
 export const timedChallengeEnrollmentEnrollUrl =
-  '/timed-challenge-enrollment/enroll';
+  "/timed-challenge-enrollment/enroll";
 
-export const businessContactPath = '/business/contact';
+export const businessContactPath = "/business/contact";
 
-export const teamsQuotePath = 'https://pro.codecademy.com/teams-quote/';
+export const teamsQuotePath = "https://pro.codecademy.com/teams-quote/";
 
-export const articlesPath = '/articles';
+export const articlesPath = "/articles";
 
 export const articlePath = (slug: string) => `${articlesPath}/${slug}`;
 
 export const shareArticlePath = (slug: string) =>
   `${prodBasePath + articlePath(slug)}`;
 
-export const cheatsheetHomePath = '/resources/cheatsheets';
+export const cheatsheetHomePath = "/resources/cheatsheets";
 
-export const cheatsheetsIndexPath = '/resources/cheatsheets/all';
+export const cheatsheetsIndexPath = "/resources/cheatsheets/all";
 
 export const subscriptionPausePageUrl = (subscriptionId: string) =>
   `/subscriptions/${subscriptionId}/pause`;
 
-export const helpPath = '/help';
+export const helpPath = "/help";
 
 export const subscriptionUpgradePageUrl = `/subscriptions/upgrade`;
 
 export const challengeProjectList =
-  'https://discuss.codecademy.com/t/list-of-challenge-projects/505231';
+  "https://discuss.codecademy.com/t/list-of-challenge-projects/505231";
 
-export const whatsNextProUrl = articlePath('whats-next-general');
+export const whatsNextProUrl = articlePath("whats-next-general");
 
 export const workspacesPath = (username: string) =>
   `/users/${username}/workspaces`;
@@ -522,8 +526,8 @@ export const paginationUrl = (
   return `${path}?${urlParams.toString()}`;
 };
 export const createTrialBusinessPlanUrl = `/business/trial`;
-export const businessPlansUrl = '/business/plans';
-export const fetchBusinessPlansUrl = '/business/plans/fetch_plans';
+export const businessPlansUrl = "/business/plans";
+export const fetchBusinessPlansUrl = "/business/plans/fetch_plans";
 export const businessPlanUrl = (planId: string) => `/business/plans/${planId}`;
 export const businessTrialSignUpUrl = (source: string) =>
   `/business/trial/sign_up?source=${source}`;
@@ -592,20 +596,20 @@ export const appendQueryParamsToUrl = (
   const queryParamEntries = Object.entries(queryParams);
   if (!queryParamEntries.length) return url;
 
-  const hashIndex = url.indexOf('#');
-  const hash = hashIndex !== -1 ? url.substr(hashIndex) : '';
+  const hashIndex = url.indexOf("#");
+  const hash = hashIndex !== -1 ? url.substr(hashIndex) : "";
   const urlMinusHash = hashIndex !== -1 ? url.substr(0, hashIndex) : url;
-  const alreadyHasQueryParams = url.indexOf('?') !== -1;
+  const alreadyHasQueryParams = url.indexOf("?") !== -1;
 
   const newQueryParams = queryParamEntries
     .map(
       ([key, value]) =>
         `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
     )
-    .join('&');
+    .join("&");
 
   return (
-    urlMinusHash + (alreadyHasQueryParams ? '&' : '?') + newQueryParams + hash
+    urlMinusHash + (alreadyHasQueryParams ? "&" : "?") + newQueryParams + hash
   );
 };
 
@@ -613,26 +617,26 @@ export const removeQueryParamsFromUrl = (
   url: string,
   queryParamKeysToRemove: string[]
 ) => {
-  const queryParamStart = url.indexOf('?');
+  const queryParamStart = url.indexOf("?");
   if (queryParamStart === -1) return url;
 
-  const hashIndex = url.indexOf('#');
-  const hash = hashIndex !== -1 ? url.substr(hashIndex) : '';
+  const hashIndex = url.indexOf("#");
+  const hash = hashIndex !== -1 ? url.substr(hashIndex) : "";
   const urlMinusHash = hashIndex !== -1 ? url.substr(0, hashIndex) : url;
 
   const urlBeforeQueryParams = url.substr(0, queryParamStart);
   const queryParamsFromUrl = urlMinusHash.substr(queryParamStart + 1);
 
   const filteredQueryParams = queryParamsFromUrl
-    .split('&')
-    .map((keyValuePairAsString) => keyValuePairAsString.split('='))
+    .split("&")
+    .map((keyValuePairAsString) => keyValuePairAsString.split("="))
     .filter(([key]) => !queryParamKeysToRemove.includes(key))
     .map(([key, value]) => (key && value ? `${key}=${value}` : key || value))
-    .join('&');
+    .join("&");
 
   return (
     urlBeforeQueryParams +
-    (filteredQueryParams.length > 0 ? `?${filteredQueryParams}` : '') +
+    (filteredQueryParams.length > 0 ? `?${filteredQueryParams}` : "") +
     hash
   );
 };

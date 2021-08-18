@@ -163,7 +163,7 @@ export const Courses = ({ sideNavToggle, perfNavToggle }) => {
         <div className="hidden-xxs hidden-xs courses--header-button-wrapper--2TXW4">
           <button
             onClick={() => {
-              push('/project/create')
+              window.location.replace('/project/create')
             }}
             type="button"
             className="btn btn-primary"
@@ -307,7 +307,7 @@ export const Courses = ({ sideNavToggle, perfNavToggle }) => {
         <div className="hidden-xxs hidden-xs courses--header-button-wrapper--2TXW4">
           <button
             onClick={() => {
-              push('/course/create')
+              window.location.replace('/course/create')
             }}
             type="button"
             className="btn btn-primary"

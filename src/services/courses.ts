@@ -3,6 +3,7 @@ import algoliasearch from "algoliasearch/lite";
 
 import { RootState } from "store";
 import cookie from "react-cookies";
+import { DateTime } from "schema-dts";
 
 const searchClient = algoliasearch(
   process.env.REACT_APP_ALGOLIA_APP_ID,
@@ -19,7 +20,7 @@ export interface CourseResponse {
   headline: string;
   level: string;
   tags: string[];
-  url: string;
+
   subcategory: number;
   price: number;
   state: string;
@@ -28,16 +29,21 @@ export interface CourseResponse {
 export interface CoursePlayerResponse {
   title: string;
   id: number;
-  category: number;
+  category: CategoryResponse;
   description: string;
   cover_image: string;
+  slug: string;
   video_url: string;
   headline: string;
   level: string;
   sections: Section[];
   tags: string[];
   url: string;
+  instructor: InstructorResponse
   subcategory: number;
+  goals: Goal[];
+  experiences: Experience[];
+  requirements: Requirement[];
   price: number;
   state: string;
 }
@@ -59,6 +65,7 @@ export interface InstructorResponse {
   first_name: string;
   last_name: string;
   email: string;
+  courses: CourseResponse[];
   avatar: string
   user: User;
   description: string;
@@ -201,10 +208,21 @@ export interface ViewsResponse {
   object_id: number
 }
 
+export interface VideoAnalytics {
+  id: number;
+  thumbnail: string;
+  lecture: number;
+  progress: number;
+  updated: string,
+  complete: boolean;
+
+}
+
 
 
 export interface CategoryResponse {
   title: string;
+  parent: CategoryResponse
   id: number;
   children: CategoryResponse[];
 }
@@ -255,6 +273,13 @@ export const coursesApi = createApi({
         responseHandler: (response) => response.json(),
       }),
     }),
+    fetchCourseDetail: build.query<CoursePlayerResponse, string>({
+      query: (slug) => ({
+        url: `/course/${slug}`,
+        method: "GET",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
     trackViews: build.mutation<ViewsResponse[], Views>({
       query: ({id, ...body}) => ({
         url: `/courses/lecture/${id}/views/`,
@@ -269,6 +294,32 @@ export const coursesApi = createApi({
         url: `/courses/lecture/views/`,
         method: "GET",
        
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+    fetchVideoViews: build.query<VideoAnalytics[], Partial<number>>({
+      query: (id) => ({
+        url: `/analytics/${id}/`,
+        method: "GET",
+       
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+    updateVideoViews: build.mutation<VideoAnalytics, Partial<VideoAnalytics>>({
+      query: ({ id, ...body}) => ({
+        url: `/analytics/${id}/edit/`,
+        method: "PUT",
+        body,
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+    fetchCourseViews: build.query<VideoAnalytics[], void>({
+      query: () => ({
+        url: `/analytics/views/`,
+        method: "GET",
         responseHandler: (response) => response.json(),
       }),
     }),
@@ -644,6 +695,13 @@ export const {
   useFetchInstructorInfoQuery,
   useFetchPlayerCourseQuery,
   useTrackViewsMutation,
-  useFetchViewsQuery
+  useFetchViewsQuery,
+  useFetchVideoViewsQuery,
+  useUpdateVideoViewsMutation,
+  useFetchCourseViewsQuery,
+  useFetchCourseDetailQuery
+  
   
 } = coursesApi;
+
+export const { updateVideoViews } = coursesApi.endpoints

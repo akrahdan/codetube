@@ -1,0 +1,19 @@
+@import "~styles/cc";
+
+.container {
+  margin-top: 4rem;
+  margin-bottom: px-rem(80px);
+}
+
+.heading {
+  margin: 3rem 3rem 0;
+  text-align: center;
+  font-size: 2.2rem;
+}
+
+.recommendationTypeLink {
+  margin-bottom: 1rem;
+  color: $brand-purple;
+  font-weight: bold;
+  display: block;
+}

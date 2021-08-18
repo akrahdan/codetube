@@ -66,7 +66,7 @@ export const CreateProject = (props) => {
       const result = await createProject(projectRequest).unwrap()
       if (result) {
         setProjectId(result.id)
-        push(`/instructor/project/${result.id}/manage/goals`)
+        window.location.replace(`/instructor/project/${result.id}/manage/goals`)
       }
       console.log('Project: ', result)
     }

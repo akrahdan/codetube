@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch } from "store/hooks";
 import { useHistory } from "react-router";
-import { setCurrentUrl, setCurrentUrlIndex } from "state/player/playerSlice";
-import { useTrackViewsMutation } from "services/courses";
+import { setCurrentUrl, setCurrentUrlIndex, setSubtitle, setClipId, setCurrentLecture } from "state/player/playerSlice";
+import { useTrackViewsMutation, useFetchVideoViewsQuery, useUpdateVideoViewsMutation, VideoAnalytics } from "services/courses";
+
+import { usePlayer } from "store/usePlayer";
 import classNames from "classnames";
 import { Lecture } from "services/courses";
 import styles from "./style.module.scss";
@@ -19,29 +21,55 @@ export const LectureItem: React.FC<LectureProps> = ({ lecture, isCurrent, handle
   const [seconds, setSeconds] = useState(0)
   const [minutes, setMinutes] = useState(0)
   const [trackViews] = useTrackViewsMutation()
+  const [ updateVideoViews ] = useUpdateVideoViewsMutation()
+  const { data: viewsQuery } = useFetchVideoViewsQuery(lecture.id)
   const dispatch = useAppDispatch()
   const { push } = useHistory()
+  const { player } = usePlayer()
+  const [views, setViews] = useState<VideoAnalytics[]>()
 
+  useEffect(() => {
+    if(viewsQuery) {
+      setViews(viewsQuery)
+    }
+  }, [viewsQuery])
   useEffect(() => {
     if (lecture) {
       const minutes = Math.floor(lecture.duration / 60)
       const seconds = Math.round(lecture.duration - minutes * 60)
       setMinutes(minutes)
       setSeconds(seconds)
+      dispatch(setSubtitle(lecture.title))
     }
 
   }, [lecture])
+
+ 
+
   return (
     <button onClick={() => {
       handleCurrent();
       dispatch(setCurrentUrl(lecture.video_url))
+      dispatch(setCurrentLecture(lecture))
       trackViews({
         id: lecture.id
       })
+      const view = views?.find(v => v.lecture == lecture.id )
+      if(view) {
+        updateVideoViews({
+          progress: player.time,
+          lecture: lecture.id,
+          id: view.id
+        })
+      }
+
+     
       handleActive()
       push({
         search: "?" + new URLSearchParams({ clipid: lecture.video.key })
       })
+      dispatch(setSubtitle(lecture.title))
+      dispatch(setClipId(lecture.video?.key))
 
     }} className={classNames(styles.lectureItemContainer, {
       [styles.isCurrent]: isCurrent
@@ -50,8 +78,8 @@ export const LectureItem: React.FC<LectureProps> = ({ lecture, isCurrent, handle
         {
           (complete && !isCurrent) ? (<div className={styles.iconPosition}>
             <svg aria-label="completed" className={styles.svgIcon}
-            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M2.6 12.3l-1.4 1.4a1 1 0 000 1.5l6.1 6.2c.4.4 1 .4 1.4 0L23 6.9c.4-.4.4-1 0-1.4L21.6 4A1 1 0 0020 4l-12 12.3-4-4a1 1 0 00-1.5 0z" /> 
+              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M2.6 12.3l-1.4 1.4a1 1 0 000 1.5l6.1 6.2c.4.4 1 .4 1.4 0L23 6.9c.4-.4.4-1 0-1.4L21.6 4A1 1 0 0020 4l-12 12.3-4-4a1 1 0 00-1.5 0z" />
             </svg>
           </div>) : (<div className={classNames(styles.iconPosition, {
             [styles.isCurrent]: isCurrent

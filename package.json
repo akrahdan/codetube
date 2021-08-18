@@ -99,6 +99,7 @@
     "hey-listen": "^1.0.8",
     "history": "^5.0.0",
     "hoist-non-react-statics": "^3.3.2",
+    "html-react-parser": "^1.2.8",
     "html-to-react": "^1.4.5",
     "i": "^0.3.6",
     "invariant": "^2.2.4",

@@ -1,0 +1,114 @@
+$bp-desktop-large: 1376px;
+
+.text {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  max-width: 620px;
+}
+
+
+@media screen and (max-width: 75rem) {
+  .text {
+      margin-left:2rem
+  }
+}
+
+@media screen and (max-width: 48rem) {
+  .text {
+      margin:0
+  }
+}
+
+@media screen and (min-width: 75rem) {
+  .text  {
+      margin-left:6rem;
+      margin-top: 1rem
+  }
+}
+
+.title {
+  color: #fff;
+  font-size: px-rem(48);
+ 
+}
+
+
+@media screen and (min-width: 1376px) {
+  .title {
+      font-size:4rem
+  }
+}
+
+.goalHeader {
+  display: block;
+  font-family:  Apercu,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+
+.goalFooterText {
+ 
+  
+}
+
+
+@media screen and (min-width: 1376px) {
+  .goalFooterText {
+      font-size:1.25rem
+  }
+}
+
+.goalFooter {
+  text-transform: capitalize;
+}
+
+.description {
+  font-size: px-rem(16);
+  margin-bottom: 2rem;
+  max-width: px-rem(420px);
+
+}
+
+
+@media screen and (min-width: 1376px) {
+  .description {
+      font-size:1.25rem;
+      max-width: calc(100% - 1rem)
+  }
+}
+
+.cta {
+  margin-bottom: 4rem;
+  width: 12.5rem;
+ 
+}
+
+@media screen and (max-width: 960px) {
+  .cta {
+      align-self:center
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

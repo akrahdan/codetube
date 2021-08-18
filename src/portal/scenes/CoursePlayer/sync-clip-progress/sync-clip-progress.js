@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 // import { connect } from 'unistore/react'
 import { setClipProgress } from '../utilities/sync-clip-progress'
 
@@ -23,10 +24,10 @@ export class SyncClipProgress extends React.Component {
     return null
   }
 }
-export default SyncClipProgress;
-// export default connect(
-//   state => ({
-//     clipProgress: state.clipProgress
-//   }),
-//   store => ({})
-// )(SyncClipProgress)
+
+export default connect(
+  state => ({
+    clipProgress: state.player.clipProgress
+  }),
+ 
+)(SyncClipProgress)

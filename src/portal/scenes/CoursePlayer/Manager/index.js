@@ -164,8 +164,8 @@ export class Manager extends Component {
 
 export default connect(
   (state) => ({
-    clipId: state.clipId,
-    title: state.title,
+    clipId: state.player.clipId,
+    title: state.player.title,
     playing: state.player.playing,
     activeMenu: state.player.activeMenu,
     interactionMode: state.player.interactionMode,

@@ -75,12 +75,8 @@
 }
 
 .heightTransition {
-  max-height: 0;
   overflow: hidden;
-  transition: max-height 1s ease 0s;
-  &.visible {
-    max-height: 2000px;
-    transition: max-height 2s ease 0s;
-  }
+  height: 'auto';
+  transition: height 300ms ease 0s;
   
 }

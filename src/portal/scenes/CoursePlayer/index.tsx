@@ -20,41 +20,57 @@ import { Lecture } from "./contentItem/lecture";
 import { selectLocationPayload, selectLocationQuery } from "state/location/selectors";
 import { useAppSelector } from "store/hooks";
 import _ from 'lodash';
-import { selectPlayerCourse, setCurrentUrl } from "state/player/playerSlice";
-import { CoursePlayerResponse, useFetchPlayerCourseQuery, useFetchViewsQuery } from "services/courses";
-import { selectViews } from "state/course/courseSplice";
+import { selectPlayerCourse, setCurrentUrl, setTitle, setClipId, setCurrentLecture, setCurrentViews } from "state/player/playerSlice";
+import { selectAnalytics } from "state/course/courseSplice";
+import { usePlayer } from "store/usePlayer";
+import { CoursePlayerResponse, useFetchPlayerCourseQuery, useFetchViewsQuery, useFetchCourseViewsQuery, VideoAnalytics } from "services/courses";
+
 const CoursePlayer = () => {
   const [toggle, setToggle] = useState(false);
   const locationPayload = useAppSelector(selectLocationPayload)
   const dispatch = useAppDispatch()
   const locationQuery = useAppSelector(selectLocationQuery)
-  const selectedViews = useAppSelector(selectViews)
+  const selectedViews = useAppSelector(selectAnalytics)
   const selectedCourse = useAppSelector(selectPlayerCourse)
-  const { data: courseQuery} = useFetchPlayerCourseQuery(locationPayload.id)
-  const { data: viewsQuery } = useFetchViewsQuery()
-  const [course, setCourse ] = useState<CoursePlayerResponse>();
-  const [views, setViews] = useState(selectedViews ? selectedViews.map(view => view.object_id): [])
+  const { data: courseQuery } = useFetchPlayerCourseQuery(locationPayload.id)
+  const { data: viewsQuery } = useFetchCourseViewsQuery()
+  const { player } = usePlayer()
+  const [course, setCourse] = useState<CoursePlayerResponse>();
+  const [views, setViews] = useState(selectedViews ? selectedViews.map((view: VideoAnalytics) => view.lecture) : [])
 
   useEffect(() => {
-    setCourse(selectedCourse)
+    if (selectedCourse) {
+      setCourse(selectedCourse)
+      dispatch(setTitle(selectedCourse.title))
+      const lectures = selectedCourse.sections?.flatMap(sec => sec.lectures)
+      if(lectures) {
+        const currentLecture = lectures?.find(lec => lec.video?.key == locationQuery?.clipid)
+        if(currentLecture) dispatch(setCurrentLecture(currentLecture))
+      }
+    }
+
   }, [selectedCourse])
 
   useEffect(() => {
-    if(selectedViews) {
-      const views = _.uniq(selectedViews.map(view => view.object_id))
+    if (selectedViews) {
+      const views = _.uniq(selectedViews.map((view: VideoAnalytics) => view.lecture))
+      dispatch(setCurrentViews(selectedViews))
+    
       setViews(views)
     }
-   
+
   }, [selectedViews])
+
   useEffect(() => {
     if (locationQuery) {
       const baseUrl = `https://cdn.filestackcontent.com/${locationQuery.clipid}`;
-      
+
       dispatch(setCurrentUrl(baseUrl))
+      dispatch(setClipId(locationQuery.clipid))
     }
   }, [locationQuery])
 
-  if(!course) return null;
+  if (!course) return null;
 
   return (
     <div className={styles.next}>
@@ -121,11 +137,11 @@ const CoursePlayer = () => {
                 <div className={styles.courseTitleSection}>
                   <h1 className={styles.courseTitle}>
                     <a className={styles.courseTitleLink}>
-                      { course.title}
+                      {course.title}
                     </a>
                   </h1>
                   <h2 className={styles.courseSubTitle}>
-                   {course.headline}
+                    {course.headline}
                   </h2>
                 </div>
                 <div>
@@ -160,10 +176,10 @@ const CoursePlayer = () => {
               </div>
               <div className={styles.navContent}>
                 <div role={"tabpanel"} className={styles.navTabPanel}>
-                  
-                  { course.sections && course.sections.map((section, index) =>
-                   <Lecture key={section.id} position={index} section = {section} views={views}/>)}
-                  
+
+                  {course.sections && course.sections.map((section, index) =>
+                    <Lecture key={section.id} position={index} section={section} views={views} />)}
+
                 </div>
               </div>
             </div>

@@ -116,6 +116,7 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = (props) => {
 
   const headerClasses = cx(
     styles.stickyHeader,
+    props.className,
     isInHeaderRegion && styles.transitionFadeOut
   );
 

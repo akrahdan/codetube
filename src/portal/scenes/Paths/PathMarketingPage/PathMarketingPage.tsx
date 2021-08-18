@@ -4,10 +4,11 @@ import { useSelector } from 'react-redux';
 import { helmetJsonLdProp } from 'react-schemaorg';
 import { Course } from 'schema-dts';
 import styles from './styles/index.module.scss';
-
+import { projectCoursePath } from 'libs/urlHelpers';
 import { Header } from './Header';
 import { Supporting } from './Supporting';
 import { Projects } from './Projects';
+
 import { Syllabus } from './Syllabus';
 import { CTASection } from './CTASection';
 import { Recommendations } from './Recommendations';
@@ -16,8 +17,10 @@ import { SiginSection } from 'portal/scenes/SignupSection/SigninSection';
 import { SignupModal } from 'portal/scenes/Modal/SignupModal';
 import { Payment } from 'portal/scenes/Payments'
 import { Modal } from 'portal/scenes/Modal';
-import { selectModal } from 'state/modals/modalSlice';
-import { useAppSelector } from 'store/hooks';
+import { CardGrid } from 'portal/components/CardGrid';
+import { selectModal, showModal } from 'state/modals/modalSlice';
+import { useAuth } from 'store/useAuth';
+import { useAppSelector, useAppDispatch } from 'store/hooks';
 import { useFetchProjectsQuery, useCartUpdateMutation, Cart } from 'services/projects';
 
 
@@ -38,19 +41,27 @@ export const PathMarketingPage: React.FC<PageProps> = ({
 }) => {
 
   const modal = useAppSelector(selectModal)
+  const dispatch = useAppDispatch()
   const [pay, setPay] = useState(false);
   const { data: projects } = useFetchProjectsQuery()
   const [ cartUpdate ] = useCartUpdateMutation()
+  const { user} = useAuth();
   const leadProject = projects && projects.find(element => element.lead == true)
 
   const ctaCallback = () => {
-    cartUpdate({
-      project_id: leadProject.id
-    }).then((res: { data: Cart}) => {
-      if(res.data && res.data.detail == "added") {
-        setPay(!pay)
-      }
-    })
+    if(user && user.email) {
+      cartUpdate({
+        project_id: leadProject.id
+      }).then((res: { data: Cart}) => {
+        if(res.data && res.data.detail == "added") {
+          setPay(!pay)
+        }
+      })
+    }
+    else {
+      dispatch(showModal('login'))
+    }
+   
     
   };
   const completionTime = "24hrs"
@@ -86,7 +97,12 @@ export const PathMarketingPage: React.FC<PageProps> = ({
           isAnonymous={isAnonymous}
         />
         <Supporting project={leadProject} />
-        <Projects courses={leadProject.courses} />
+
+        <Projects 
+          courses={leadProject.courses}
+          linkCallback={(course) => projectCoursePath(course?.slug)}
+
+        />
 
         <Syllabus
           pathId={`${leadProject.id}`}

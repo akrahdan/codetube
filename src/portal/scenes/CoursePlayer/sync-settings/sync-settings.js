@@ -34,7 +34,7 @@ export class SyncSettings extends React.Component {
   }
 
   set localSettings(settings) {
-   // this.props.syncSettings(settings)
+   this.props.syncSettings(settings)
   }
 
   get storageSettings() {

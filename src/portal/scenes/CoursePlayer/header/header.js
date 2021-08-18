@@ -22,8 +22,8 @@ export function Header({ title = 'Build & Manage Stuff', subtitle, visible, full
 
 export default connect(
   state => ({
-    title: state.title,
-    subtitle: state.subtitle,
+    title: state.player.title,
+    subtitle: state.player.subtitle,
     visible: state.player.visible,
     fullscreenState: state.player.fullscreenState,
   }),

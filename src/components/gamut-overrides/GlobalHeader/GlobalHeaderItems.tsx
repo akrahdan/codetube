@@ -46,7 +46,7 @@ export const myHome: AppHeaderLinkItem = {
   dataTestId: 'header-home',
   icon: HouseEntranceIcon,
   id: 'my-home',
-  text: 'My Home',
+  text: 'My Progress',
   href: '/learn',
   trackingTarget: 'topnav_home',
   type: 'link',
@@ -381,32 +381,32 @@ export const unpausePro: AppHeaderFillButtonItem = {
   type: 'fill-button',
 };
 
-export const login: AppHeaderTextButtonItem = {
+export const login: AppHeaderLinkItem = {
   dataTestId: 'header-sign-in',
   id: 'login',
   text: 'Log In',
   trackingTarget: 'topnav_login',
-  type: 'text-button',
+  type: 'link',
   redirect: true,
 };
 
 
-export const instructor: AppHeaderTextButtonItem = {
+export const instructor: AppHeaderLinkItem = {
   dataTestId: 'header-become-instructor',
   id: 'instructor',
   text: 'Teach on Codefluent',
   trackingTarget: 'topnav_instructor',
-  type: 'text-button',
+  type: 'link',
   redirect: true,
 };
 
-export const instructorDashboard: AppHeaderTextButtonItem = {
+export const instructorDashboard: AppHeaderLinkItem = {
   dataTestId: 'header-instructor-dashboard',
   id: 'instructor-dashboard',
   href: '/instructor/courses',
   text: 'Instructor',
   trackingTarget: 'topnav_instructor',
-  type: 'text-button',
+  type: 'link',
   redirect: true,
 };
 

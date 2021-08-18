@@ -1,0 +1,21 @@
+@import "~styles/cc";
+
+.cardGrid {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  grid-gap: 2rem;
+}
+
+.fourCol {
+  @include md-viewport {
+    grid-template-columns: repeat(4, minmax(18rem, 1fr));
+  }
+}
+
+.threeCol {
+  @include md-viewport {
+    grid-template-columns: repeat(3, minmax(18rem, 1fr));
+  }
+}
