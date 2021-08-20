@@ -208,14 +208,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "collect": "yarn build-rewire && yarn copy-buildfiles && yarn collectstatic",
-    "build-rewire": "node ./scripts/build-non-split.js",
-    "copy-buildfiles": "npm run copy-build-js && npm run copy-build-css && npm run copy-build-logo",
-    "copy-build-logo": "copyfiles -f 'build/static/media/*' '../static_local/images/'",
-    "copy-build-js": "copyfiles -f 'build/static/js/*.js' '../static_local/js/'",
-    "copy-build-css": "copyfiles -f 'build/static/css/*.css' '../static_local/css/'",
-    "collectstatic": "python ../manage.py collectstatic --no-input"
+    "eject": "react-scripts eject"
+   
   },
   "eslintConfig": {
     "extends": [
@@ -244,7 +238,6 @@
     "@types/redux-first-router-link": "^1.4.4",
     "@types/redux-promise": "^0.5.29",
     "copyfiles": "^2.4.1",
-    "renamer": "3.2.1",
     "rewire": "^5.0.0"
   }
 }
