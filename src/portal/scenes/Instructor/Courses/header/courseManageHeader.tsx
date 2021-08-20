@@ -1,8 +1,8 @@
 import { saveCourse } from "state/course/courseSplice";
-
+import { selectSections } from "state/curriculum/currriculumSplice";
 import { selectLocationType, selectLocationPayload } from "state/location/selectors";
 import { selectCourse } from "state/course/courseSplice";
-import { useFetchCourseQuery } from "services/courses";
+import { useFetchCourseQuery, useFetchSectionsQuery } from "services/courses";
 import type { CourseResponse } from "services/courses";
 import { useAppSelector, useAppDispatch } from "store/hooks";
 import { useEffect, useState } from "react";
@@ -13,10 +13,22 @@ export const CourseManageHeader = () => {
   const locationPath = useAppSelector(selectLocationType)
   const locationPayload = useAppSelector(selectLocationPayload)
   const course = useAppSelector(selectCourse)
+  const selectedSections = useAppSelector(selectSections)
   const [courseUpdate, setCourseUpdate] = useState<CourseResponse>(course)
   const { data: courseQuery } = useFetchCourseQuery(locationPayload.id)
+  const { data: sectionQuery } = useFetchSectionsQuery(locationPayload.id)
+  const [duration, setDuration ] = useState(0)
  
  
+  useEffect(() => {
+    const lectures = selectedSections?.flatMap(sec => sec?.lectures)
+    const result = lectures?.flatMap(lec => lec?.duration)
+    if(result) {
+      const re = result?.reduce((acc, current) => acc + current , 0)
+      setDuration(Math.round(re / 60))
+    }
+
+  }, [selectedSections])
   useEffect(() => {
 
     setCourseUpdate(course || courseQuery)
@@ -61,7 +73,7 @@ export const CourseManageHeader = () => {
                 <span className="udlite-heading-xs">{courseUpdate.state}</span>
               </span>
               <span>
-                <span>0min</span> of video content uploaded
+                <span>{duration || 0} min</span> of video content uploaded
               </span>
             </div>
             <div className="full-page-takeover-header--actions--2bLjN">

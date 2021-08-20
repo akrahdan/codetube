@@ -1,5 +1,5 @@
 import Select from 'react-select';
-import { CourseResponse, useFetchCourseLevelQuery, useFetchInstructorCoursesQuery } from "services/courses";
+import { CoursePlayerResponse, CourseResponse, useFetchCourseLevelQuery, useFetchInstructorCoursesQuery } from "services/courses";
 import { useFetchProjectCategoriesQuery } from "services/projects";
 import { useFetchProjectQuery, useUpdateProjectMutation, useEditHeadingMutation, useCreateHeadingMutation } from "services/projects";
 import type { HeaderDescription } from "services/projects";
@@ -64,7 +64,6 @@ export const LandingPage = () => {
   const { data: levels } = useFetchCourseLevelQuery()
   const { data: categories } = useFetchProjectCategoriesQuery()
   const [uploading, setUploading] = useState(false)
-  const [videoUploading, setVideoUploading] = useState(false)
   const [progress, setProgress] = useState(0)
 
   const [error, setError] = useState(null)
@@ -75,9 +74,9 @@ export const LandingPage = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionValue, setSuggestionValue] = useState('');
   const [projectUpdate, setProjectUpdate] = useState<ProjectEntityResponse>(selectedProject)
-  const [courses, setCourses] = useState<CourseResponse[]>(selectedCourses)
-  const [course, setCourse] = useState<CourseResponse>()
-  const [projectCourse, setProjectCourse] = useState<CourseResponse[]>(selectedProject ? selectedProject.courses : [])
+  const [courses, setCourses] = useState<CoursePlayerResponse[]>(selectedCourses)
+  const [course, setCourse] = useState<CoursePlayerResponse>()
+  const [projectCourse, setProjectCourse] = useState<CoursePlayerResponse[]>(selectedProject ? selectedProject.courses : [])
   const [tags, setTags] = useState<string[]>(selectedProject ? selectedProject.tags : []);
   const [header, setHeader] = useState<HeaderDescription>(selectedProject ? selectedProject.header : {
     heading: '',
@@ -110,7 +109,7 @@ export const LandingPage = () => {
   }
 
   useEffect(() => {
-     setProjectCourse(selectedProject.courses)
+     setProjectCourse(selectedProject?.courses)
   }, [selectedProject])
 
 
@@ -171,7 +170,12 @@ export const LandingPage = () => {
             updateProject({
               ...body,
               tags,
-              courses: projectCourse.map(item => Number(item.id))
+              syllabuses: body?.syllabuses?.map(item => item.id),
+              included: body.included?.map(item => item?.id),
+              outcomes: body.outcomes?.map(item => item?.id),
+              
+              courses: projectCourse.map(item => Number(item.id)),
+              
 
             }).then((res: { data: ProjectEntityResponse }) => {
               if (res.data && res.data.id) {
@@ -203,7 +207,9 @@ export const LandingPage = () => {
             updateProject({
               ...body,
               tags,
-
+              syllabuses: body?.syllabuses?.map(item => item.id),
+              included: body.included?.map(item => item?.id),
+              outcomes: body.outcomes?.map(item => item?.id),
               courses: projectCourse.map(item => Number(item.id))
             }).then((res: { data: ProjectEntityResponse }) => {
               if (res.data && res.data.id) {
@@ -447,7 +453,7 @@ export const LandingPage = () => {
                     closeMenuOnSelect={false}
                     onChange={value => {
                       console.log(value)
-                     value && setProjectCourse(value as CourseResponse[])
+                     value && setProjectCourse(value as CoursePlayerResponse[])
                     }}
                     value = {projectCourse}
                   
@@ -570,15 +576,7 @@ export const LandingPage = () => {
                     <div>
                       <p>
                         <span>
-                          Upload your project image here. It must meet our
-                          <a
-                            href="https://support.udemy.com/hc/en-us/articles/229232347"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            course image quality standards
-                          </a>
-                          to be accepted. Important guidelines: 750x422 pixels;
+                          Upload your project image here. Important guidelines: 750x422 pixels;
                           .jpg, .jpeg,. gif, or .png. no text on the image.
                         </span>
                       </p>

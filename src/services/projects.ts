@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { head } from "lodash";
 import cookie from "react-cookies";
 import { RootState } from "store";
-import { CategoryResponse, CourseResponse, CoursePlayerResponse, Instructor, InstructorResponse } from "./courses";
+import { CategoryResponse, CourseResponse, CoursePlayerResponse, Instructor, InstructorResponse, Options } from "./courses";
 export interface TitleDescription {
   id: number;
   title: string;
@@ -17,10 +17,10 @@ export interface HeaderDescription {
   projects: number[];
 }
 
-export interface Pricing {
+export interface ProjectPricing {
   amount: string;
   currency: string;
-  course: number;
+  project: number;
 }
 
 export interface Review {
@@ -108,6 +108,9 @@ export interface ProjectEntityRequest {
   tags: string[];
   state: string;
   price: Number;
+  outcomes: number[];
+  included: number[];
+  syllabuses: number[];
 
 }
 
@@ -137,7 +140,7 @@ export const projectApi = createApi({
   endpoints: (build) => ({
     fetchProjects: build.query<ProjectEntityResponse[], void>({
       query: () => ({
-        url: "api/projects/",
+        url: "/api/projects/",
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -145,7 +148,7 @@ export const projectApi = createApi({
 
     fetchDetailProject: build.query<ProjectEntityResponse, string>({
       query: (slug) => ({
-        url: `project/${slug}/`,
+        url: `/api/project/${slug}/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -153,7 +156,7 @@ export const projectApi = createApi({
 
     fetchInstructorProjects: build.query<ProjectEntityResponse[], void>({
       query: (id) => ({
-        url: `/instructors/projects/`,
+        url: `/api/instructor/projects/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -171,7 +174,7 @@ export const projectApi = createApi({
 
     fetchProject: build.query<ProjectEntityResponse, number>({
       query: (id) => ({
-        url: `/projects/${id}`,
+        url: `/api/projects/${id}`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -181,7 +184,7 @@ export const projectApi = createApi({
       Partial<ProjectEntityResponse>
     >({
       query: (body) => ({
-        url: "/projects/create/",
+        url: "/api/projects/create/",
         method: "POST",
         body,
         responseHandler: (response) => response.json(),
@@ -195,7 +198,7 @@ export const projectApi = createApi({
       query: (data) => {
         const { id, ...body } = data;
         return {
-          url: `/projects/${id}/edit/`,
+          url: `/api/projects/${id}/edit/`,
           method: "PUT",
           body,
           responseHandler: (response) => response.json(),
@@ -203,18 +206,54 @@ export const projectApi = createApi({
       },
     }),
 
-    createPricing: build.mutation<Pricing[], Partial<Pricing>>({
+    createProjectPricing: build.mutation<ProjectPricing, Partial<ProjectPricing>>({
       query: (body) => ({
-        url: "/projects/pricing/create/",
+        url: "/api/projects/pricing/project/create/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
       }),
     }),
 
+    updateProjectPricing: build.mutation<ProjectPricing, Partial<ProjectPricing>>({
+      query: (body) => {
+        const {project, ...rest } = body
+        return {
+          url: `/api/projects/${project}/pricing/`,
+          body,
+          method: "PUT",
+          responseHandler: (response) => response.json(),
+        };
+      },
+    }),
+
+    fetchProjectPricingTier: build.query<Options[], void>({
+      query: () => ({
+        url: "/api/projects/pricing/tier/",
+        method: "GET",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+    fetchProjectPricingCurrency: build.query<Options[], void>({
+      query: () => ({
+        url: "/api/projects/pricing/currency/",
+        method: "GET",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+    fetchProjectPricing: build.query<ProjectPricing, number>({
+      query: (id) => ({
+        url: `/api/projects/${id}/pricing/`,
+        method: "GET",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
     cartUpdate: build.mutation<Cart, Partial<Cart>>({
       query: (body) => ({
-        url: "/cart/update/",
+        url: "/api/cart/update/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
@@ -223,7 +262,7 @@ export const projectApi = createApi({
 
     checkout: build.mutation<Object, Partial<Order>>({
       query: (body) => ({
-        url: "/cart/checkout/",
+        url: "/api/cart/checkout/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
@@ -232,7 +271,7 @@ export const projectApi = createApi({
 
     checkoutWave: build.mutation<Object, Partial<Wave>>({
       query: (body) => ({
-        url: "/cart/checkout_wave/",
+        url: "/api/cart/checkout_wave/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
@@ -244,7 +283,7 @@ export const projectApi = createApi({
       Partial<TitleDescription>
     >({
       query: (body) => ({
-        url: "/projects/syllabus/create/",
+        url: "/api/projects/syllabus/create/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
@@ -256,7 +295,7 @@ export const projectApi = createApi({
       Partial<TitleDescription>
     >({
       query: (body) => ({
-        url: "/projects/included/create/",
+        url: "/api/projects/included/create/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
@@ -268,7 +307,7 @@ export const projectApi = createApi({
       Partial<TitleDescription>
     >({
       query: (body) => ({
-        url: "/projects/outcome/create/",
+        url: "/api/projects/outcome/create/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
@@ -280,7 +319,7 @@ export const projectApi = createApi({
       Partial<HeaderDescription>
     >({
       query: (body) => ({
-        url: "/projects/heading/create/",
+        url: "/api/projects/heading/create/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
@@ -289,7 +328,7 @@ export const projectApi = createApi({
 
     editSyllabus: build.mutation<TitleDescription, Partial<TitleDescription>>({
       query: ({ id, ...body }) => ({
-        url: `/projects/syllabus/${id}/`,
+        url: `/api/projects/syllabus/${id}/`,
         body,
         method: "PUT",
         responseHandler: (response) => response.json(),
@@ -298,7 +337,7 @@ export const projectApi = createApi({
 
     editIncluded: build.mutation<TitleDescription, Partial<TitleDescription>>({
       query: ({ id, ...body }) => ({
-        url: `/projects/included/${id}/`,
+        url: `/api/projects/included/${id}/`,
         body,
         method: "PUT",
         responseHandler: (response) => response.json(),
@@ -308,7 +347,7 @@ export const projectApi = createApi({
     editHeading: build.mutation<HeaderDescription, Partial<HeaderDescription>>({
       query: ({ id, ...body }) => {
         return {
-          url: `/projects/heading/${id}/`,
+          url: `/api/projects/heading/${id}/`,
           method: "PUT",
           body,
         };
@@ -319,8 +358,8 @@ export const projectApi = createApi({
       TitleDescription,
       Partial<TitleDescription>
     >({
-      query: (id, ...body) => ({
-        url: `/projects/outcome/${id}/`,
+      query: ({id, ...body}) => ({
+        url: `/api/projects/outcome/${id}/`,
         body,
         method: "PUT",
         responseHandler: (response) => response.json(),
@@ -331,7 +370,7 @@ export const projectApi = createApi({
       query: (data) => {
         const { id, ...body } = data;
         return {
-          url: `/projects/${id}/review/`,
+          url: `/api/projects/${id}/review/`,
           body,
           method: "PUT",
           responseHandler: (response) => response.json(),
@@ -341,7 +380,7 @@ export const projectApi = createApi({
 
     fetchOutcomes: build.query<TitleDescription[], number>({
       query: (pk) => ({
-        url: `/projects/${pk}/outcomes/`,
+        url: `/api/projects/${pk}/outcomes/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -349,7 +388,7 @@ export const projectApi = createApi({
 
     fetchIncluded: build.query<TitleDescription[], number>({
       query: (pk) => ({
-        url: `/projects/${pk}/included/`,
+        url: `/api/projects/${pk}/included/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -357,7 +396,7 @@ export const projectApi = createApi({
     fetchSyllabus: build.query<TitleDescription[], Partial<number>>({
       query: (id) => {
         return {
-          url: `/projects/${id}/syllabuses/`,
+          url: `/api/projects/${id}/syllabuses/`,
           method: "GET",
         };
       },
@@ -365,7 +404,7 @@ export const projectApi = createApi({
 
     getMyProjects: build.query<OrderResponse[], void>({
       query: () => ({
-        url: "/orders/my_projects",
+        url: "/api/orders/my_projects",
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -374,7 +413,7 @@ export const projectApi = createApi({
     deleteSyllabus: build.mutation<TitleDescription, Partial<number>>({
       query: (id) => {
         return {
-          url: `/projects/syllabus/${id}/`,
+          url: `/api/projects/syllabus/${id}/`,
           method: "DELETE",
         };
       },
@@ -383,7 +422,7 @@ export const projectApi = createApi({
     deleteHeading: build.mutation<TitleDescription, Partial<number>>({
       query: (id) => {
         return {
-          url: `/projects/heading/${id}/`,
+          url: `/api/projects/heading/${id}/`,
           method: "DELETE",
         };
       },
@@ -392,7 +431,7 @@ export const projectApi = createApi({
     deleteIncluded: build.mutation<TitleDescription, Partial<number>>({
       query: (id) => {
         return {
-          url: `/projects/included/${id}/`,
+          url: `/api/projects/included/${id}/`,
           method: "DELETE",
         };
       },
@@ -400,7 +439,7 @@ export const projectApi = createApi({
     deleteOutcome: build.mutation<TitleDescription, Partial<number>>({
       query: (id) => {
         return {
-          url: `/projects/outcome/${id}/`,
+          url: `/api/projects/outcome/${id}/`,
           method: "DELETE",
         };
       },
@@ -413,7 +452,7 @@ export const {
   useCreateHeadingMutation,
   useCreateIncludedMutation,
   useCreateLearningOutcomeMutation,
-  useCreatePricingMutation,
+  useCreateProjectPricingMutation,
   useCreateProjectMutation,
   useCreateSyllabusMutation,
   useDeleteHeadingMutation,
@@ -440,5 +479,10 @@ export const {
   useGetMyProjectsQuery,
   useFetchInstructorProjectsQuery,
   useFetchProjectCategoriesQuery,
-  useFetchDetailProjectQuery
+  useFetchDetailProjectQuery,
+  useFetchProjectPricingCurrencyQuery,
+  useFetchProjectPricingQuery,
+  useFetchProjectPricingTierQuery,
+  useUpdateProjectPricingMutation
+  
 } = projectApi;

@@ -113,7 +113,12 @@ export const ProjectDetail: React.FC<PageProps> = ({
 
         <Syllabus
           pathId={`${project.id}`}
-          tracks={project.syllabuses}
+          tracks={project.syllabuses?.map((sylla, index) => {
+            return {
+              ...sylla,
+              id: index + 1
+            }
+          })}
           ctaCallback={ctaCallback}
           isPaidLanding={isPaidLanding}
           showTrialCTA={false}

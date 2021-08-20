@@ -44,8 +44,7 @@ export class Tracks extends React.Component<TracksProps, TracksState> {
               <h2 className={styles.tracksTitle}>{title}</h2>
             </div>
             <div className={styles.tracksDetailLayout}>
-              {trackDetails
-                .slice(0, this.state.expanded ? Infinity : id)
+              {trackDetails?.slice(0, this.state.expanded ? Infinity : id)
                 .map((trackDetail, index) => (
                   <TrackDetail
                     key={trackDetail.title}

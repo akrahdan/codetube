@@ -35,9 +35,10 @@ export const Supporting = ({ project }: SupportProps) => {
     shapes_fill_color = '#66C4FF',
   } = useContext(CMSContext);
 
-  const { header_primary_color = "rgb(16, 22, 47)",
-  header_secondary_color = '#66C4FF', outcomes } = project
-
+  const {
+  outcomes } = project
+  const header_primary_color  = project.header_primary_color || "rgb(16, 22, 47)"
+  const header_secondary_color = project.header_secondary_color || '#66C4FF'
   // if (outcomes.length === 0 && !outcome_headline) return null;
 
   const renderedAsideContent = (

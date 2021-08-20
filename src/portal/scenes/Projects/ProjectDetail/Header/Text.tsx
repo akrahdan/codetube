@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react';
 import CMSContext from 'portal/scenes/Paths/ContentfulContext';
 import { CTAButton } from 'portal/scenes/Paths/PathMarketingPage/CTAButton';
 import { Payment } from 'portal/scenes/Payments';
+import parse from 'html-react-parser'
 import { Modal } from 'portal/scenes/Modal';
 import styles from './styles/Text.module.scss';
 import type { ProjectEntityResponse } from 'services/projects';
@@ -41,7 +42,7 @@ export const Text = ({
         {get(header, 'heading') || heading}
       </h1>
       <p className={styles.description} data-testid="path-text-description">
-        {get(header, 'description',) || description}
+        {parse(get(header, 'description',) || description)}
       </p>
       {isAnonymous && (
         <p

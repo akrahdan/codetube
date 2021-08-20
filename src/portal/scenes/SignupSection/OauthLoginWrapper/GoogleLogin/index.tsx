@@ -14,7 +14,7 @@ export const GoogleLogin: React.FC<GoogleLoginProps> = ({
     const btnCS = classNames(styles.buttonGoogle, styles.buttonFullwidth, className)
     return (
         <div className={styles.mb4}>
-            <a className={btnCS} href={`${process.env.REACT_APP_API_URL}/auth/google/url`}>
+            <a className={btnCS} onClick={onGoogleClick}>
                 <svg
                     width="2em"
                     height="2em"
@@ -53,3 +53,4 @@ export const GoogleLogin: React.FC<GoogleLoginProps> = ({
         </div>
     )
 }
+

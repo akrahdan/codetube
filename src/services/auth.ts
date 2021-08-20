@@ -33,6 +33,10 @@ export interface Token {
   key: string;
 }
 
+export interface Access {
+  access_token: string
+}
+
 export interface User {
   pk: number;
   email: string;
@@ -80,7 +84,7 @@ export const authApi = createApi({
   endpoints: (build) => ({
     login: build.mutation<UserResponse, Partial<LoginRequest>>({
       query: (body) => ({
-        url: "auth/login/",
+        url: "/api/auth/login/",
         method: "POST",
         body,
         responseHandler: (response) => response.json(),
@@ -88,7 +92,7 @@ export const authApi = createApi({
     }),
     signup: build.mutation<UserResponse, Partial<SignupRequest>>({
       query: (body) => ({
-        url: "auth/signup/",
+        url: "/api/auth/signup/",
         method: "POST",
         body,
         responseHandler: (response) => response.json(),
@@ -96,25 +100,27 @@ export const authApi = createApi({
     }),
     logout: build.mutation<LogoutResponse, void>({
       query: (body) => ({
-        url: "auth/logout/",
+        url: "/api/auth/logout/",
         method: "POST",
         body,
         responseHandler: (response) => response.json(),
       }),
     }),
-    facebookLogin: build.mutation<User, void>({
-      query: () => ({
-        url: "auth/facebook/",
+    facebookLogin: build.mutation<Token, Access>({
+      query: (body) => ({
+        url: "/api/auth/facebook/",
         method: "POST",
+        body,
 
         responseHandler: (response) => response.json(),
       }),
     }),
 
-    googleLogin: build.mutation<User, void>({
-      query: () => ({
-        url: "auth/google/",
+    googleLogin: build.mutation<Token, Access>({
+      query: (body) => ({
+        url: "/api/auth/google/",
         method: "POST",
+        body,
 
         responseHandler: (response) => response.json(),
       }),
@@ -122,7 +128,7 @@ export const authApi = createApi({
 
     googleLoginUrl: build.mutation<User, void>({
       query: () => ({
-        url: "auth/google/url",
+        url: "/api/auth/google/url",
         method: "POST",
 
         responseHandler: (response) => response.json(),
@@ -131,7 +137,7 @@ export const authApi = createApi({
 
     facebookLoginUrl: build.mutation<User, void>({
       query: () => ({
-        url: "auth/facebook/url",
+        url: "/api/auth/facebook/url",
         method: "POST",
 
         responseHandler: (response) => response.json(),
@@ -148,7 +154,7 @@ export const authApi = createApi({
     }),
     updateProfile: build.mutation<User, Partial<UserRequest>>({
       query: (body) => ({
-        url: "auth/update_profile/",
+        url: "/api/auth/update_profile/",
         method: "PUT",
         body,
         responseHandler: (response) => response.json(),
@@ -157,14 +163,14 @@ export const authApi = createApi({
 
     getProfile: build.query<UserResponse, void>({
       query: () => ({
-        url: "auth/profile/",
+        url: "/api/auth/profile/",
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
     }),
     updateAvatar: build.mutation<UserResponse, Partial<Avatar>>({
       query: (body) => ({
-        url: "auth/update_avatar/",
+        url: "/api/auth/update_avatar/",
         method: "PUT",
         body,
         responseHandler: (response) => response.json(),

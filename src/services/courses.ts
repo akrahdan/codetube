@@ -39,7 +39,7 @@ export interface CoursePlayerResponse {
   sections: Section[];
   tags: string[];
   url: string;
-  instructor: InstructorResponse
+  instructor: InstructorResponse;
   subcategory: number;
   goals: Goal[];
   experiences: Experience[];
@@ -55,8 +55,7 @@ export interface Instructor {
   last_name: string;
   email: string;
   description: string;
-  avatar: string
-
+  avatar: string;
 }
 
 export interface InstructorResponse {
@@ -66,17 +65,16 @@ export interface InstructorResponse {
   last_name: string;
   email: string;
   courses: CourseResponse[];
-  avatar: string
+  avatar: string;
   user: User;
   description: string;
-
 }
 
 export interface User {
   email: string;
   username: string;
   first_name: string;
-  last_name: string
+  last_name: string;
 }
 
 export interface MediaRequest {
@@ -128,7 +126,6 @@ export interface Section {
   resources: number[];
   lectures?: Lecture[];
 }
-
 
 export interface Experience {
   name: string;
@@ -185,7 +182,7 @@ export interface Lecture {
   id: number;
   position: string;
   neighbor: number;
-  duration: number
+  duration: number;
   description: string;
   video: MediaResponse;
   resources: number[];
@@ -197,15 +194,15 @@ export interface Lecture {
 
 export interface Review {
   id: number;
-  state: string
+  state: string;
 }
 
 export interface Views {
-  id: number
+  id: number;
 }
 
 export interface ViewsResponse {
-  object_id: number
+  object_id: number;
 }
 
 export interface VideoAnalytics {
@@ -213,16 +210,13 @@ export interface VideoAnalytics {
   thumbnail: string;
   lecture: number;
   progress: number;
-  updated: string,
+  updated: string;
   complete: boolean;
-
 }
-
-
 
 export interface CategoryResponse {
   title: string;
-  parent: CategoryResponse
+  parent: CategoryResponse;
   id: number;
   children: CategoryResponse[];
 }
@@ -256,33 +250,35 @@ export const coursesApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Review'],
+  tagTypes: ["Review"],
   endpoints: (build) => ({
     fetchCourse: build.query<CourseResponse, number>({
       query: (id) => ({
-        url: `/courses/${id}`,
+        url: `/api/instructor/courses/${id}`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
     }),
 
+   
+
     fetchPlayerCourse: build.query<CoursePlayerResponse, number>({
       query: (id) => ({
-        url: `/courses/${id}`,
+        url: `/api/courses/${id}`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
     }),
     fetchCourseDetail: build.query<CoursePlayerResponse, string>({
       query: (slug) => ({
-        url: `/course/${slug}`,
+        url: `/api/course/${slug}`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
     }),
     trackViews: build.mutation<ViewsResponse[], Views>({
-      query: ({id, ...body}) => ({
-        url: `/courses/lecture/${id}/views/`,
+      query: ({ id, ...body }) => ({
+        url: `/api/courses/lecture/${id}/views/`,
         method: "POST",
         body,
         responseHandler: (response) => response.json(),
@@ -291,25 +287,25 @@ export const coursesApi = createApi({
 
     fetchViews: build.query<ViewsResponse[], void>({
       query: () => ({
-        url: `/courses/lecture/views/`,
+        url: `/api/courses/lecture/views/`,
         method: "GET",
-       
+
         responseHandler: (response) => response.json(),
       }),
     }),
 
     fetchVideoViews: build.query<VideoAnalytics[], Partial<number>>({
       query: (id) => ({
-        url: `/analytics/${id}/`,
+        url: `/api/analytics/${id}/`,
         method: "GET",
-       
+
         responseHandler: (response) => response.json(),
       }),
     }),
 
     updateVideoViews: build.mutation<VideoAnalytics, Partial<VideoAnalytics>>({
-      query: ({ id, ...body}) => ({
-        url: `/analytics/${id}/edit/`,
+      query: ({ id, ...body }) => ({
+        url: `/api/analytics/${id}/edit/`,
         method: "PUT",
         body,
         responseHandler: (response) => response.json(),
@@ -318,33 +314,34 @@ export const coursesApi = createApi({
 
     fetchCourseViews: build.query<VideoAnalytics[], void>({
       query: () => ({
-        url: `/analytics/views/`,
+        url: `/api/analytics/views/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
     }),
 
-
-    fetchInstructorCourses: build.query<CourseResponse[], void>({
+    fetchInstructorCourses: build.query<CoursePlayerResponse[], void>({
       query: (id) => ({
-        url: `/instructors/courses/`,
+        url: `/api/instructor/courses/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
     }),
 
-    editInstructorInfo: build.mutation<InstructorResponse, Partial<Instructor>>({
-      query: (body) => ({
-        url: `/instructors/edit-info/`,
-        method: "POST",
-        body,
-        responseHandler: (response) => response.json(),
-      }),
-    }),
+    editInstructorInfo: build.mutation<InstructorResponse, Partial<Instructor>>(
+      {
+        query: (body) => ({
+          url: `/api/instructor/edit-info/`,
+          method: "POST",
+          body,
+          responseHandler: (response) => response.json(),
+        }),
+      }
+    ),
 
     fetchInstructorInfo: build.query<InstructorResponse, void>({
       query: () => ({
-        url: `/instructors/profile/`,
+        url: `/api/instructor/profile/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -358,11 +355,9 @@ export const coursesApi = createApi({
       }),
     }),
 
-    
-
     fetchCourseLevel: build.query<Options[], void>({
       query: () => ({
-        url: "/courses/level",
+        url: "/api/courses/level",
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -370,7 +365,7 @@ export const coursesApi = createApi({
 
     fetchPricingTier: build.query<Options[], void>({
       query: () => ({
-        url: "/courses/pricing/tier/",
+        url: "/api/courses/pricing/tier/",
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -378,7 +373,7 @@ export const coursesApi = createApi({
 
     fetchPricingCurrency: build.query<Options[], void>({
       query: () => ({
-        url: "/courses/pricing/currency/",
+        url: "/api/courses/pricing/currency/",
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -386,7 +381,7 @@ export const coursesApi = createApi({
 
     fetchPricing: build.query<Pricing, number>({
       query: (id) => ({
-        url: `/courses/${id}/pricing/`,
+        url: `/api/courses/${id}/pricing/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -394,7 +389,7 @@ export const coursesApi = createApi({
 
     fetchSections: build.query<Section[], number>({
       query: (pk) => ({
-        url: `/courses/${pk}/sections`,
+        url: `/api/courses/${pk}/sections`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -402,14 +397,14 @@ export const coursesApi = createApi({
 
     searchTags: build.query<SearchResponse[], string>({
       query: (q) => ({
-        url: `/courses/search?q=${q}`,
+        url: `/api/courses/search?q=${q}`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
     }),
     createCourse: build.mutation<CourseResponse, Partial<CourseRequest>>({
       query: (body) => ({
-        url: "/courses/create/",
+        url: "/api/courses/create/",
         method: "POST",
         body,
         responseHandler: (response) => response.json(),
@@ -418,9 +413,9 @@ export const coursesApi = createApi({
 
     updateCourse: build.mutation<CourseResponse, Partial<CourseRequest>>({
       query: (data) => {
-        const { id, ...body} = data
+        const { id, ...body } = data;
         return {
-          url: `/courses/${id}/edit/`,
+          url: `/api/courses/${id}/edit/`,
           method: "PUT",
           body,
           responseHandler: (response) => response.json(),
@@ -430,7 +425,7 @@ export const coursesApi = createApi({
 
     uploadLectureVideo: build.mutation<MediaResponse, Partial<MediaRequest>>({
       query: (body) => ({
-        url: "/courses/lecture/video_upload/",
+        url: "/api/courses/lecture/video_upload/",
         method: "POST",
         body,
         responseHandler: (response) => response.json(),
@@ -438,7 +433,7 @@ export const coursesApi = createApi({
     }),
     createSection: build.mutation<Section[], Partial<SectionRequest>>({
       query: (body) => ({
-        url: "/courses/section/create/",
+        url: "/api/courses/section/create/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
@@ -447,25 +442,37 @@ export const coursesApi = createApi({
 
     createGoal: build.mutation<Goal[], Partial<Goal>>({
       query: (body) => ({
-        url: "/courses/goal/create/",
+        url: "/api/courses/goal/create/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
       }),
     }),
 
-    createPricing: build.mutation<Pricing[], Partial<Pricing>>({
+    createPricing: build.mutation<Pricing, Partial<Pricing>>({
       query: (body) => ({
-        url: "/courses/pricing/create/",
+        url: "/api/courses/pricing/create/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
       }),
+    }),
+
+    updatePricing: build.mutation<Pricing, Partial<Pricing>>({
+      query: (body) => {
+        const {course, ...rest } = body
+        return {
+          url: `/api//courses/${course}/pricing/`,
+          body,
+          method: "PUT",
+          responseHandler: (response) => response.json(),
+        };
+      }
     }),
 
     createExperience: build.mutation<Experience[], Partial<Experience>>({
       query: (body) => ({
-        url: "/courses/experience/create/",
+        url: "/api/courses/experience/create/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
@@ -474,7 +481,7 @@ export const coursesApi = createApi({
 
     createRequirement: build.mutation<Requirement[], Partial<Requirement>>({
       query: (body) => ({
-        url: "/courses/requirement/create/",
+        url: "/api/courses/requirement/create/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
@@ -483,51 +490,55 @@ export const coursesApi = createApi({
 
     editRequirement: build.mutation<Requirement, Partial<Requirement>>({
       query: (data) => {
-       const { id, ...body } = data
-       return  {url: `/courses/requirements/${id}/`,
-        body,
-        method: "PUT",
-        responseHandler: (response) => response.json(),
-      }
+        const { id, ...body } = data;
+        return {
+          url: `/api//courses/requirements/${id}/`,
+          body,
+          method: "PUT",
+          responseHandler: (response) => response.json(),
+        };
       },
     }),
 
     editExperience: build.mutation<Experience, Partial<Experience>>({
       query: (data) => {
-       const { id, ...body } = data
-       return  {url: `/courses/experience/${id}/`,
-        body,
-        method: "PUT",
-        responseHandler: (response) => response.json(),
-      }
+        const { id, ...body } = data;
+        return {
+          url: `/api//courses/experience/${id}/`,
+          body,
+          method: "PUT",
+          responseHandler: (response) => response.json(),
+        };
       },
     }),
 
     editGoal: build.mutation<Goal, Partial<Goal>>({
       query: (data) => {
-       const { id, ...body } = data
-       return  {url: `/courses/goals/${id}/`,
-        body,
-        method: "PUT",
-        responseHandler: (response) => response.json(),
-      }
+        const { id, ...body } = data;
+        return {
+          url: `/api/courses/goals/${id}/`,
+          body,
+          method: "PUT",
+          responseHandler: (response) => response.json(),
+        };
       },
     }),
 
     submitReview: build.mutation<Review, Partial<Review>>({
       query: (data) => {
-       const { id, ...body } = data
-       return  {url: `/courses/${id}/review/`,
-        body,
-        method: "PUT",
-        responseHandler: (response) => response.json(),
-      }
-      }
+        const { id, ...body } = data;
+        return {
+          url: `/api/courses/${id}/review/`,
+          body,
+          method: "PUT",
+          responseHandler: (response) => response.json(),
+        };
+      },
     }),
 
     fetchExperience: build.query<Experience[], number>({
       query: (pk) => ({
-        url: `/courses/${pk}/experience`,
+        url: `/api/courses/${pk}/experience`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -535,7 +546,7 @@ export const coursesApi = createApi({
 
     fetchGoals: build.query<Goal[], number>({
       query: (pk) => ({
-        url: `/courses/${pk}/goals`,
+        url: `/api/courses/${pk}/goals`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -543,7 +554,7 @@ export const coursesApi = createApi({
 
     fetchRequirements: build.query<Requirement[], number>({
       query: (pk) => ({
-        url: `/courses/${pk}/requirements`,
+        url: `/api/courses/${pk}/requirements`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -551,7 +562,7 @@ export const coursesApi = createApi({
     deleteExperience: build.mutation<Experience, Partial<number>>({
       query: (id) => {
         return {
-          url: `/courses/experience/${id}/`,
+          url: `/api/courses/experience/${id}/`,
           method: "DELETE",
         };
       },
@@ -560,7 +571,7 @@ export const coursesApi = createApi({
     deleteGoal: build.mutation<Goal, Partial<number>>({
       query: (id) => {
         return {
-          url: `/courses/goals/${id}/`,
+          url: `/api/courses/goals/${id}/`,
           method: "DELETE",
         };
       },
@@ -569,19 +580,17 @@ export const coursesApi = createApi({
     deleteRequirement: build.mutation<Requirement, Partial<number>>({
       query: (id) => {
         return {
-          url: `/courses/requirements/${id}/`,
+          url: `/api/courses/requirements/${id}/`,
           method: "DELETE",
         };
       },
     }),
 
-
-
     editSection: build.mutation<Section, Partial<SectionRequest>>({
       query: (data) => {
         const { id, ...body } = data;
         return {
-          url: `/courses/sections/${id}/`,
+          url: `/api/courses/sections/${id}/`,
           body,
           method: "PUT",
         };
@@ -591,7 +600,7 @@ export const coursesApi = createApi({
     deleteSection: build.mutation<Section, Partial<number>>({
       query: (id) => {
         return {
-          url: `/courses/sections/${id}/`,
+          url: `/api/courses/sections/${id}/`,
           method: "DELETE",
         };
       },
@@ -599,7 +608,7 @@ export const coursesApi = createApi({
 
     createLecture: build.mutation<Lecture[], Partial<Lecture>>({
       query: (body) => ({
-        url: "/courses/lecture/create/",
+        url: "/api/courses/lecture/create/",
         body,
         method: "POST",
         responseHandler: (response) => response.json(),
@@ -607,7 +616,7 @@ export const coursesApi = createApi({
     }),
     fetchLectures: build.query<Lecture[], number>({
       query: (pk) => ({
-        url: `/courses/section/${pk}/lectures`,
+        url: `/api/courses/section/${pk}/lectures`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -615,7 +624,7 @@ export const coursesApi = createApi({
 
     fetchResources: build.query<MediaResponse[], number>({
       query: (pk) => ({
-        url: `/courses/${pk}/resources/`,
+        url: `/api/courses/${pk}/resources/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -625,7 +634,7 @@ export const coursesApi = createApi({
       query: (data) => {
         const { course, ...body } = data;
         return {
-          url: `/courses/${course}/resources/`,
+          url: `/api/courses/${course}/resources/`,
           method: "POST",
           body,
           responseHandler: (response) => response.json(),
@@ -637,7 +646,7 @@ export const coursesApi = createApi({
       query: (data) => {
         const { id, ...body } = data;
         return {
-          url: `/courses/section/lectures/${id}/`,
+          url: `/api/courses/section/lectures/${id}/`,
           body,
           method: "PUT",
         };
@@ -647,7 +656,7 @@ export const coursesApi = createApi({
     deleteLecture: build.mutation<Lecture, Partial<number>>({
       query: (id) => {
         return {
-          url: `/courses/section/lectures/${id}/`,
+          url: `/api/courses/section/lectures/${id}/`,
           method: "DELETE",
         };
       },
@@ -699,9 +708,8 @@ export const {
   useFetchVideoViewsQuery,
   useUpdateVideoViewsMutation,
   useFetchCourseViewsQuery,
-  useFetchCourseDetailQuery
-  
-  
+  useFetchCourseDetailQuery,
+  useUpdatePricingMutation,
 } = coursesApi;
 
-export const { updateVideoViews } = coursesApi.endpoints
+export const { updateVideoViews } = coursesApi.endpoints;

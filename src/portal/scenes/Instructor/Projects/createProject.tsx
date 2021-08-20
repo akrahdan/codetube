@@ -104,7 +104,7 @@ export const CreateProject = (props) => {
             <div className="full-page-takeover--header-buttons--1lu2t">
               <button
                 onClick={() => {
-                  push('/')
+                  window.location.replace('/')
                 }}
                 type="button"
                 className="btn btn-tertiary"

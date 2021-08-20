@@ -153,20 +153,31 @@ export const LandingPage = () => {
   useEffect(() => {
 
     if (selectedSave.locationPath == locationPath) {
+      
       updateCourse({
         ...courseUpdate,
+        category: courseUpdate.category,
         tags
       }).then((res: { data: CourseResponse }) => {
-        if (res.data.title) {
+        if (res?.data?.title) {
           dispatch(saveCourse({
             submit: false,
             locationPath: null
           }))
           alert.show("Your changes have been saved successfully")
+        } else {
+          
+            dispatch(saveCourse({
+              submit: false,
+              locationPath: null
+            }))
+            alert.error(res?.data)
+          
         }
 
       }).catch(err => {
         console.log(err)
+        alert.error(err)
       })
     }
   }, [selectedSave])
@@ -273,7 +284,7 @@ export const LandingPage = () => {
               <input
                 placeholder="Insert your course subtitle."
                 name="headline"
-                value={course.headline}
+                value={courseUpdate?.headline}
                 onChange={event => setCourseUpdate({
                   ...courseUpdate,
                   headline: event.target.value
@@ -286,7 +297,7 @@ export const LandingPage = () => {
                 className="form-control-counter"
                 data-purpose="form-control-counter"
               >
-                {courseUpdate.headline ? courseUpdate.headline.length : null}
+                {courseUpdate?.headline ? courseUpdate?.headline.length : null}
               </div>
             </div>
           </div>
@@ -406,7 +417,7 @@ export const LandingPage = () => {
                         </>
                       ))}
 
-                    </span>;
+                    </span>
                     <Autosuggest
                       suggestions={suggestions}
                       renderSuggestion={renderSuggestion}
@@ -460,15 +471,7 @@ export const LandingPage = () => {
                   <div>
                     <p>
                       <span>
-                        Upload your course image here. It must meet our{" "}
-                        <a
-                          href="https://support.udemy.com/hc/en-us/articles/229232347"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          course image quality standards
-                        </a>{" "}
-                        to be accepted. Important guidelines: 750x422 pixels;
+                        Upload your course image here.Important guidelines: 750x422 pixels;
                         .jpg, .jpeg,. gif, or .png. no text on the image.
                       </span>
                     </p>
@@ -527,17 +530,9 @@ export const LandingPage = () => {
                 <div className="video-upload-with-preview--tips--31TuE">
                   <div className="tip">
                     <p data-purpose="safely-set-inner-html:course-basics-form:promo-video-content-link">
-                      Students who watch a well-made promo video are{" "}
-                      <b>5X more likely to enroll</b> in your course. We've seen
-                      that statistic go up to 10X for exceptionally awesome
-                      videos.{" "}
-                      <a
-                        href="https://info.udemy.com/perfect-promo?utm_source=udemy-main&utm_medium=web&utm_content=inline-content&utm_campaign=promo-optimization"
-                        rel="noopener noreferrer"
-                        className="ext"
-                      >
-                        Learn how to make yours awesome!
-                      </a>
+                      Students who watch a well-made promo video are
+                      <b>5X more likely to enroll</b> 
+                      
                     </p>
                   </div>
                 </div>
@@ -574,7 +569,7 @@ export const LandingPage = () => {
           <div>
 
           </div>
-        </form>{" "}
+        </form>
       </div>
     </div>
   );

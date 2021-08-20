@@ -2,7 +2,8 @@
 
 import { selectLocationPathName, selectLocationPayload } from "state/location/selectors";
 import { selectCourse } from "state/course/courseSplice";
-import {useFetchCourseQuery, useFetchPricingQuery, useSubmitReviewMutation } from "services/courses";
+import { selectSections } from "state/curriculum/currriculumSplice";
+import {Section, useFetchCourseQuery, useFetchPricingQuery, useSubmitReviewMutation, useFetchSectionsQuery } from "services/courses";
 import type { Review } from "services/courses";
 import { useAlert } from "react-alert";
 import type { CourseResponse, Requirement, Experience, Goal } from "services/courses";
@@ -24,6 +25,7 @@ export const ManageSidebar = ({ courseId }) => {
 
   const [active, setActive] = useState(locationType);
   const course = useAppSelector(selectCourse)
+  const selectedSections = useAppSelector(selectSections)
   const pricing = useAppSelector(selectPricing)
   const alert = useAlert()
   const [courseUpdate, setCourseUpdate] = useState<CourseResponse>(course)
@@ -33,16 +35,35 @@ export const ManageSidebar = ({ courseId }) => {
   const [goals, setGoals] = useState<Goal[]>(selectedGoals)
   const [requirements, setRequirements] = useState<Requirement[]>(selectedRequirements)
   const { data: courseQuery } = useFetchCourseQuery(locationPayload.id)
+  const { data: sectionsQuery } = useFetchSectionsQuery(locationPayload.id)
   const { data: pricingQuery } = useFetchPricingQuery(locationPayload.id)
   const [submitReview] = useSubmitReviewMutation()
+  const [sections, setSections] = useState<Section[]>()
+  const [clips, setClips] = useState<String[]>()
+  const [duration, setDuration ] = useState(0)
 
   useEffect(() => {
-    console.log('location:', locationType)
+    
     setActive(locationType)
   }, [locationType])
   useEffect(() => {
     setCourseUpdate(course || courseQuery)
+
+    //setSections(course?.s)
   }, [course, courseQuery])
+
+  useEffect(() => {
+      setSections(selectedSections)
+      const  lectures = selectedSections?.flatMap(sec => sec?.lectures)
+      if(lectures && lectures?.length) {
+
+        const clips = lectures?.flatMap(lecture => lecture?.video_url)
+        
+        setClips(clips)
+
+      }
+
+  }, [selectedSections])
 
   useEffect(() => {
     setPrice(pricing)
@@ -95,7 +116,8 @@ export const ManageSidebar = ({ courseId }) => {
                 <div className="nav-container">
                   <ul className="nav">
                     <li role="presentation" className={classNames({
-                      'active': active == `/instructor/course/${courseId}/manage/curriculum`
+                      'active': active == `/instructor/course/${courseId}/manage/curriculum`,
+                      'checked': clips?.length > 4
                     })}>
                       <NavLink
 

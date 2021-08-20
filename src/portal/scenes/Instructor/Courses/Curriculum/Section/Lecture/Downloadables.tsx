@@ -10,9 +10,9 @@ export const Downloadables = ({ resources, deleteDownload }) => {
 
   useEffect(() => {
     if (resources) {
-      const results = resources.map(id => {
+      const results = resources?.map(id => {
         const appResources = selectedResources as MediaResponse[]
-        const resource = appResources.find(item => item.id == id)
+        const resource = appResources?.find(item => item.id == id)
         if (resource) {
           return resource
         }
@@ -22,7 +22,7 @@ export const Downloadables = ({ resources, deleteDownload }) => {
     }
   }, [selectedResources, resources])
 
-  if (!mediaResources || mediaResources.length == 0) return null
+  if (!mediaResources || mediaResources?.length == 0) return null
   return (
     <div className="a11 lecture-editor--edit-content__row--3z9s2">
       <div
@@ -32,7 +32,7 @@ export const Downloadables = ({ resources, deleteDownload }) => {
         <h4>
           <div className="a11"></div>
         </h4>
-        {mediaResources.map((media, index) => <DownloadItem key={index} media={media}
+        {mediaResources?.map((media, index) => <DownloadItem key={index} media={media}
           deleteDownload={deleteDownload} />)}
       </div>
 

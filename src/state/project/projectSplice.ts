@@ -6,7 +6,7 @@ import type {
   HeaderDescription,
   ProjectEntityResponse,
   ProjectEntityRequest,
-  Pricing,
+  ProjectPricing,
 } from "services/projects";
 import { projectApi } from "services/projects";
 interface submitProps {
@@ -18,7 +18,7 @@ type ProjectState = {
   instructorProject: ProjectEntityRequest | null;
   projects: ProjectEntityResponse[] | null;
   saveProps: submitProps | null;
-  pricing: Pricing | null;
+  pricing: ProjectPricing | null;
   outcomes: TitleDescription[] | null;
   header: HeaderDescription | null;
   included: TitleDescription[] | null;
@@ -116,6 +116,18 @@ const projectSplice = createSlice({
         }
       )
       .addMatcher(
+        projectApi.endpoints.fetchProjectPricing.matchFulfilled,
+        (state, { payload }) => {
+          state.pricing = payload;
+        }
+      )
+      .addMatcher(
+        projectApi.endpoints.updateProjectPricing.matchFulfilled,
+        (state, { payload }) => {
+          state.pricing = payload;
+        }
+      )
+      .addMatcher(
         projectApi.endpoints.deleteOutcome.matchFulfilled,
         (state, { payload }) => {
           state.outcomes = state.outcomes.filter(
@@ -202,5 +214,5 @@ export const selectProjects = (state: RootState) => state.project.projects;
 export const selectOutcomes = (state: RootState) => state.project.outcomes;
 export const selectSyllabuses = (state: RootState) => state.project.syllabuses;
 export const selectIncluded = (state: RootState) => state.project.included;
-export const selectPricing = (state: RootState) => state.course.pricing;
+export const selectPricing = (state: RootState) => state.project.pricing;
 export const selectSave = (state: RootState) => state.course.saveProps;

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { coursesApi, Lecture } from "services/courses";
+import { coursesApi, Lecture, Section} from "services/courses";
 import { AppThunk, RootState } from "store";
 import type { MediaResponse } from "services/courses";
 export interface CurriculumState {
@@ -8,13 +8,7 @@ export interface CurriculumState {
   resources: MediaResponse[]
 }
 
-export interface Section {
-  title: string;
-  id: number;
-  course: number;
-  description?: string;
-  order: number;
-}
+
 
 export const initialState: CurriculumState = {
   sections: null,

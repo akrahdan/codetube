@@ -20,7 +20,6 @@ export const Lecture = ({ lecture, index, editLecture, editMedia }) => {
 
   return (
     <div
-      data-purpose="lecture-editor"
       className="default-item-editor--item-editor--3GhNq"
     >
       {lectureEdit && (

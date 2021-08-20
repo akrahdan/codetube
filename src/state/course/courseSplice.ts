@@ -3,6 +3,7 @@ import { UserSubmitKey } from "components/Forms/RegistrationForm/dist/types";
 import type { User } from "services/auth";
 import type { RootState } from "store";
 import {
+  CoursePlayerResponse,
   CourseResponse,
   coursesApi,
   MediaResponse,
@@ -18,7 +19,7 @@ interface submitProps {
 type CourseState = {
   course: CourseResponse | null;
   views: ViewsResponse[] | null,
-  courses: CourseResponse[] | [];
+  courses: CoursePlayerResponse[] | [];
   analytics: VideoAnalytics[] | [];
   resources: MediaResponse[] | [];
   saveProps: submitProps | null;
@@ -104,6 +105,12 @@ const courseSlice = createSlice({
       )
       .addMatcher(
         coursesApi.endpoints.fetchPricing.matchFulfilled,
+        (state, { payload }) => {
+          state.pricing = payload;
+        }
+      )
+      .addMatcher(
+        coursesApi.endpoints.updatePricing.matchFulfilled,
         (state, { payload }) => {
           state.pricing = payload;
         }

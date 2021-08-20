@@ -33,8 +33,9 @@ export const Header = ({
   useContentfulCTA,
 }: HeaderProps) => {
 
- const { header_primary_color = "rgb(16, 22, 47)",
- header_secondary_color = '#66C4FF',}  = project
+
+ const header_primary_color = project.header_primary_color || "rgb(16, 22, 47)";
+ const header_secondary_color = project.header_secondary_color || "#66C4FF"
 
   return (
     <div
@@ -42,7 +43,7 @@ export const Header = ({
       style={{ background: header_primary_color }}
       data-testid="path-marketing-header"
     >
-      <Hero id={project.id} className={styles.hero} />
+      <Hero id={`${project.id}`} className={styles.hero} />
       <Wave className={styles.wave} fill={header_secondary_color} />
       <WaveTall className={styles.waveTall} fill={header_secondary_color} />
       <ContentContainer className={styles.content}>

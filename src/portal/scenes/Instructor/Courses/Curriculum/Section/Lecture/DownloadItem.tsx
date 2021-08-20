@@ -4,12 +4,12 @@ import { Modal } from "portal/scenes/Modal";
 export const DownloadItem = ({ media, deleteDownload }) => {
     const [toggleDelete, setToggleDelete] = useState(false)
     return (
-        <div key={media.id} className="fx-lc">
+        <div key={media?.id} className="fx-lc">
             <div className="fx ellipsis pt10 pb10">
                 <span className="mr5">
                     <span className="cfi cfi-download" />
                 </span>
-                {media.name}
+                {media?.name}
             </div>
             <div>
                 <button

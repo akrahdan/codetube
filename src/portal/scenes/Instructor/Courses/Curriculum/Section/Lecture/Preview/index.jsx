@@ -21,7 +21,7 @@ export const Preview = ({  setToggle, media, video_url }) => {
           ><Player url={video_url} light onDuration={getDuration} width={'110px'} height={'60px'}/></div>
           <div className="fx pl10">
             <div className="a4 ellipsis">
-             {media.name}
+             {media?.name}
             </div>
             <time className="db">{duration ? moment.utc(duration*1000).format('mm:ss'): '00.00'}</time>
             <a

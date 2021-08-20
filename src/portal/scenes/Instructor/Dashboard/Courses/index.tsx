@@ -2,7 +2,7 @@ import { useHistory } from "react-router";
 import { selectLocationType, selectLocationPayload } from "state/location/selectors";
 import { selectCourses } from "state/course/courseSplice";
 import { selectProjects } from "state/project/projectSplice";
-import { useFetchInstructorCoursesQuery } from "services/courses";
+import { CoursePlayerResponse, useFetchInstructorCoursesQuery } from "services/courses";
 import { ProjectEntityResponse, useFetchInstructorProjectsQuery } from "services/projects";
 import type { CourseResponse } from "services/courses";
 import { useAppSelector, useAppDispatch } from "store/hooks";
@@ -17,7 +17,7 @@ export const Courses = ({ sideNavToggle, perfNavToggle }) => {
   const { data: projectQuery } = useFetchInstructorProjectsQuery()
   const selectedCourses = useAppSelector(selectCourses)
   const selectedProjects = useAppSelector(selectProjects)
-  const [courses, setCourses] = useState<CourseResponse[]>(selectedCourses)
+  const [courses, setCourses] = useState<CoursePlayerResponse[]>(selectedCourses)
   const [ projects, setProjects] = useState<ProjectEntityResponse[]>(selectedProjects)
 
   useEffect(() => {

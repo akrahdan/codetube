@@ -1,17 +1,17 @@
 
-import type { CourseResponse } from "services/courses";
+import type { CoursePlayerResponse, CourseResponse } from "services/courses";
 import { useAppSelector, useAppDispatch } from "store/hooks";
 
 import { useEffect, useState } from "react";
 
 type CourseProps = {
- course: CourseResponse
+ course: CoursePlayerResponse
 }
 
 
 export const Course: React.FC<CourseProps> = ({ course}) => {
 
-  const [ courseResult, setCouseResult ] = useState<CourseResponse>(course)
+  const [ courseResult, setCouseResult ] = useState<CoursePlayerResponse>(course)
 
   useEffect(() => {
      setCouseResult(course)
