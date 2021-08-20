@@ -232,7 +232,7 @@ export const autoSearch = (query: string) => {
 export const coursesApi = createApi({
   reducerPath: "courseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "/",
+    baseUrl: `${process.env.REACT_APP_API_URL}/`,
     prepareHeaders: (headers, { getState }) => {
       const csrfToken = cookie.load("csrftoken");
 

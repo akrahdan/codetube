@@ -92,7 +92,7 @@ export const SiginSection: React.FC<SignUpSectionProps> = ({ redirectUrl }) => {
                       <h4 className={styles.loginTitle}>Log In</h4>
                       <GoogleLogin
                         buttonText="LOGIN WITH GOOGLE"
-                        clientId = "363718375398-hd120jth4bn229h0uta9jl691akg40f4.apps.googleusercontent.com"
+                        clientId = {process.env.REACT_APP_GOOGLE_CLIENT_ID}
                         onSuccess={handleGoogleLoginSuccess}
                         onFailure={handleGoogleLoginFailure}
                         render={props => (
@@ -102,7 +102,7 @@ export const SiginSection: React.FC<SignUpSectionProps> = ({ redirectUrl }) => {
                       />
                       
                       <FacebookLogin
-                        appId="605728263722567"
+                        appId={process.env.REACT_APP_FACEBOOK_APP_ID}
                         
                         render={props => (
                           <FacebookBtn onFacebookClick={props.onClick} className={styles.cButton}/>

@@ -84,7 +84,7 @@ export const Curriculum = () => {
   }
   return (
     <>
-      {pickerOpen && <PickerOverlay  apikey="AVBagqtWmRWyWVqWas0m9z"
+      {pickerOpen && <PickerOverlay  apikey={process.env.REACT_APP_FILESTACK_APP_KEY}
         onSuccess={onUploadSuccess}
         pickerOptions={{
           onClose,

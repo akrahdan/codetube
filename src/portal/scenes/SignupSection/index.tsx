@@ -96,7 +96,7 @@ export const SignupSection: React.FC<SignUpSectionProps> = ({
                 
                       <GoogleLogin
                         buttonText="LOGIN WITH GOOGLE"
-                        clientId="363718375398-hd120jth4bn229h0uta9jl691akg40f4.apps.googleusercontent.com"
+                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                         onSuccess={handleGoogleLoginSuccess}
                         onFailure={handleGoogleLoginFailure}
                         render={props => (
@@ -106,7 +106,7 @@ export const SignupSection: React.FC<SignUpSectionProps> = ({
                       />
 
                       <FacebookLogin
-                        appId="605728263722567"
+                        appId={process.env.REACT_APP_FACEBOOK_APP_ID}
                         
                         render={props => (
                           <FacebookBtn onFacebookClick={props.onClick} className={styles.cButton} />

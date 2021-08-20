@@ -14,7 +14,7 @@ export const FacebookLogin: React.FC<FacebookLoginnProps> = ({
     const btnCS = classNames(styles.buttonFacebook, styles.buttonFullwidth, className)
     return (
         <div className={styles.mb4} >
-            <a className={btnCS} href={`${process.env.REACT_APP_API_URL}/api/auth/facebook/url`}>
+            <button className={btnCS} >
                 <svg
                     width="2em"
                     height="2em"
@@ -28,7 +28,7 @@ export const FacebookLogin: React.FC<FacebookLoginnProps> = ({
                     />
                 </svg>
                 Log in with Facebook
-            </a>
+            </button>
         </div>
     );
 }

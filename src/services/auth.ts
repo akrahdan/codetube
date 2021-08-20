@@ -62,7 +62,7 @@ export interface LogoutResponse {
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "/",
+    baseUrl: `${process.env.REACT_APP_API_URL}/`,
     prepareHeaders: (headers, { getState }) => {
       const csrfToken = cookie.load("csrftoken");
 
