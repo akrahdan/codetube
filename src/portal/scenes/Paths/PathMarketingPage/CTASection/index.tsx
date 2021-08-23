@@ -30,7 +30,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
     <div className={styles.container}>
       <ContentContainer>
         <div className={styles.contentContainer}>
-          <h1 className={styles.title}>{get(cta_section, 'heading') || "Join Hundreds of People to become a Pro"}</h1>
+          <h1 className={styles.title}>{get(cta_section, 'heading') || "Be a codefluent pioneer. Join the first batch of students "}</h1>
           <CTAButton
             context="cta_section"
             pathId={pathId || "3"}

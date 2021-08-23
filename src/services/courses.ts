@@ -264,14 +264,14 @@ export const coursesApi = createApi({
 
     fetchPlayerCourse: build.query<CoursePlayerResponse, number>({
       query: (id) => ({
-        url: `/api/courses/${id}`,
+        url: `/api/courses/${id}/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
     }),
     fetchCourseDetail: build.query<CoursePlayerResponse, string>({
       query: (slug) => ({
-        url: `/api/course/${slug}`,
+        url: `/api/course/${slug}/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -349,7 +349,7 @@ export const coursesApi = createApi({
 
     fetchCategories: build.query<CategoryResponse[], void>({
       query: () => ({
-        url: "/api/categories",
+        url: "/api/categories/",
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -357,7 +357,7 @@ export const coursesApi = createApi({
 
     fetchCourseLevel: build.query<Options[], void>({
       query: () => ({
-        url: "/api/courses/level",
+        url: "/api/courses/level/",
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -389,7 +389,7 @@ export const coursesApi = createApi({
 
     fetchSections: build.query<Section[], number>({
       query: (pk) => ({
-        url: `/api/courses/${pk}/sections`,
+        url: `/api/courses/${pk}/sections/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -538,7 +538,7 @@ export const coursesApi = createApi({
 
     fetchExperience: build.query<Experience[], number>({
       query: (pk) => ({
-        url: `/api/courses/${pk}/experience`,
+        url: `/api/courses/${pk}/experience/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -546,7 +546,7 @@ export const coursesApi = createApi({
 
     fetchGoals: build.query<Goal[], number>({
       query: (pk) => ({
-        url: `/api/courses/${pk}/goals`,
+        url: `/api/courses/${pk}/goals/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -554,7 +554,7 @@ export const coursesApi = createApi({
 
     fetchRequirements: build.query<Requirement[], number>({
       query: (pk) => ({
-        url: `/api/courses/${pk}/requirements`,
+        url: `/api/courses/${pk}/requirements/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -616,7 +616,7 @@ export const coursesApi = createApi({
     }),
     fetchLectures: build.query<Lecture[], number>({
       query: (pk) => ({
-        url: `/api/courses/section/${pk}/lectures`,
+        url: `/api/courses/section/${pk}/lectures/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),

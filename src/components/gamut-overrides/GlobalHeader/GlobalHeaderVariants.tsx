@@ -59,7 +59,6 @@ const anonMobileHeaderItems = (
   const leftItems: AppHeaderItem[] = [logo];
 
   const rightItems: AppHeaderItem[] = [];
-  rightItems.push(instructor)
   renderLogin && rightItems.push(login);
   renderSignUp && rightItems.push(signUp);
 
@@ -144,7 +143,7 @@ export const freeMobileHeaderItems = (
   const leftItems: AppHeaderItem[] = [logo];
 
   const rightItems: AppHeaderItem[] = [];
-  rightItems.push(instructor)
+ 
   renderNotifications && rightItems.push(notifications(renderNotifications));
 
   const mainMenuItems: AppHeaderItem[] = [
@@ -204,11 +203,11 @@ export const proMobileHeaderItems = (
   const leftItems: AppHeaderItem[] = [proLogo];
 
   const rightItems: AppHeaderItem[] = [];
-  if (user.isInstructor) {
-    rightItems.push(instructorDashboard)
-  } else {
-    rightItems.push(instructor)
-  }
+  // if (user.isInstructor) {
+  //   rightItems.push(instructorDashboard)
+  // } else {
+  //   rightItems.push(instructor)
+  // }
   renderNotifications && rightItems.push(notifications(renderNotifications));
 
   const mainMenuItems: AppHeaderItem[] = [

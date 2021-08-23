@@ -10,7 +10,7 @@ export type CardProps = {
   };
   
   export const Card = ({ completionTime, project }: CardProps) => {
-    const { included, experience, difficulty, tags, goal } = project
+    const { included, experience, difficulty, tags, goal, pricing } = project
     // const { card_content: card = [] } = useContext(CMSContext);
     // const [includes, experienceLevel, forThoseWho] = card;
   
@@ -33,6 +33,7 @@ export type CardProps = {
             <Logo type="proAlt" height={21} />
           </span>
           <span>{completionTime}</span>
+          
         </div>
         <p className={styles.title}>Includes</p>
         <p className={styles.content}>{includesWithClass}</p>

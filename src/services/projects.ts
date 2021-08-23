@@ -40,15 +40,26 @@ export interface Course {
 
 export interface Cart {
   project_id: number;
-  detail: string;
+  detail: {
+    added: boolean,
+    cart_id: number
+  };
 }
+
+export interface CartRequest {
+  project_id: number;
+  cart_id: number
+}
+
 
 export interface Order {
   orderID: string;
+  cart_id: string;
 }
 
 export interface Wave {
   txRef: string;
+  cart_id: string;
 }
 
 export interface OrderResponse {
@@ -81,6 +92,7 @@ export interface ProjectEntityResponse {
   tags: string[];
   state: string;
   price: Number;
+  pricing: ProjectPricing;
   outcomes: TitleDescription[];
   included: TitleDescription[];
   syllabuses: TitleDescription[];
@@ -165,7 +177,7 @@ export const projectApi = createApi({
 
     fetchProjectCategories: build.query<CategoryResponse[], void>({
       query: () => ({
-        url: "/api/project_categories",
+        url: "/api/project_categories/",
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -174,7 +186,7 @@ export const projectApi = createApi({
 
     fetchProject: build.query<ProjectEntityResponse, number>({
       query: (id) => ({
-        url: `/api/projects/${id}`,
+        url: `/api/projects/${id}/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -251,7 +263,7 @@ export const projectApi = createApi({
       }),
     }),
 
-    cartUpdate: build.mutation<Cart, Partial<Cart>>({
+    cartUpdate: build.mutation<Cart, Partial<CartRequest>>({
       query: (body) => ({
         url: "/api/cart/update/",
         body,
@@ -404,7 +416,7 @@ export const projectApi = createApi({
 
     getMyProjects: build.query<OrderResponse[], void>({
       query: () => ({
-        url: "/api/orders/my_projects",
+        url: "/api/orders/my_projects/",
         method: "GET",
         responseHandler: (response) => response.json(),
       }),

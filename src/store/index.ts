@@ -55,7 +55,7 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => 
     getDefaultMiddleware({
         serializableCheck: false
-    }).concat(authApi.middleware, routerMiddleWare),
+    }).concat(authApi.middleware, coursesApi.middleware, projectApi.middleware, routerMiddleWare),
     enhancers: (defaultEnhancers) => defaultEnhancers.concat(routerEnhancer)
 })
 initialDispatch()

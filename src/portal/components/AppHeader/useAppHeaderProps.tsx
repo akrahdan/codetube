@@ -42,7 +42,7 @@ export const useAppHeaderProps = () => {
   const { user: currentUser } = useAuth()
   const { avatar } = useAvatar()
   const { instructor } = useInstructor()
-  console.log("Current: ", instructor)
+
   const { push } = useHistory();
   const [logout, { data: logoutResponse }] = useLogoutMutation()
 

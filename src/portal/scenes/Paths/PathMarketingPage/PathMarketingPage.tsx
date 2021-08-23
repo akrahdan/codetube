@@ -50,10 +50,14 @@ export const PathMarketingPage: React.FC<PageProps> = ({
 
   const ctaCallback = () => {
     if(user && user.email) {
+      const cart_id = localStorage.getItem('cart_id')
       cartUpdate({
-        project_id: leadProject.id
+        project_id: leadProject.id,
+        cart_id: Number(cart_id)
       }).then((res: { data: Cart}) => {
-        if(res.data && res.data.detail == "added") {
+        if(res.data && res.data.detail?.added  && res.data.detail?.cart_id) {
+          localStorage.setItem('cart_id',`${res.data.detail?.cart_id}` )
+          
           setPay(!pay)
         }
       })
@@ -118,7 +122,7 @@ export const PathMarketingPage: React.FC<PageProps> = ({
           ctaCallback={ctaCallback}
 
         />
-        <Recommendations related={leadProject.related} pathId={`${leadProject.id}`} />
+        {/* <Recommendations related={leadProject.related} pathId={`${leadProject.id}`} /> */}
 
 
       </main>
@@ -132,7 +136,7 @@ export const PathMarketingPage: React.FC<PageProps> = ({
       </SignupModal>}
 
       {pay && <Modal>
-        <Payment  onClose={() => setPay(!pay)}/>
+        <Payment  onClose={() => setPay(!pay)} project={leadProject}/>
       </Modal>}
 
      

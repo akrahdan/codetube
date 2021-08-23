@@ -2,28 +2,39 @@ import classNames from "classnames";
 import styles from "./styles.module.scss";
 import logo from "static/images/brand/logo/code.png";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
-import { useCheckoutWaveMutation } from "services/projects";
-export const CardPayment = ({ active, handleClose }) => {
+import { ProjectPricing, useCheckoutWaveMutation } from "services/projects";
+import { useAuth } from "store/useAuth";
+
+type CardProps = {
+  pricing: ProjectPricing,
+  active: boolean,
+  handleClose: () => void
+}
+
+export const CardPayment: React.FC<CardProps> = ({ active, handleClose, pricing }) => {
   const [checkoutWave] = useCheckoutWaveMutation();
+  const { user } = useAuth()
   const config = {
     public_key: "FLWPUBK_TEST-4b961393b29fe0236bb5a0e76351a99b-X",
-    tx_ref: Date.now(),
-    amount: 10,
+    tx_ref: `${Date.now()}`,
+    amount: Number(pricing?.amount),
     currency: "USD",
-    payment_options: "card,mobilemoney",
+    payment_options: "card",
     customer: {
-      email: "akrahdan@gmail.com",
-      phonenumber: "+12183910841",
-      name: "Sam Akrah",
+      email: user?.email,
+      phonenumber: '+23453444444',
+      name: user?.username,
     },
     customizations: {
       title: "Codefluent Payment",
       description: "Payment for items in cart",
-      logo,
+      logo
+  
     },
   };
 
   const handleFlutterPayment = useFlutterwave(config);
+  if(!pricing) return null;
   return (
     <div
       className={classNames("react-tabs__tab-panel", {
@@ -51,9 +62,10 @@ export const CardPayment = ({ active, handleClose }) => {
                 handleClose();
                 handleFlutterPayment({
                   callback: (response) => {
-                    console.log(response);
+                    const cart_id = localStorage.getItem('cart_id')
                     checkoutWave({
                       txRef: response.tx_ref,
+                      cart_id
                     }).then((res) => {
                       closePaymentModal();
                     });

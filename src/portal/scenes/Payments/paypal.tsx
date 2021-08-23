@@ -2,9 +2,14 @@ import classNames from "classnames";
 import { PayPalButtons, FUNDING } from "@paypal/react-paypal-js";
 import { CreateOrderActions, OnApproveData, OnApproveActions } from '@paypal/paypal-js/types/components/buttons'
 import { useEffect, useState } from "react";
-import { useCheckoutMutation } from "services/projects";
-export const Paypal = ({ active }) => {
-  const [amount, setAmount] = useState("43.00");
+import { ProjectPricing, useCheckoutMutation } from "services/projects";
+type PaypalProps = {
+  active: boolean,
+  handleClose: () => void,
+  pricing: ProjectPricing
+}
+export const Paypal: React.FC<PaypalProps> = ({ active, handleClose, pricing }) => {
+  //const [amount, setAmount] = useState("43.00");
   const [orderID, setOrderID] = useState("");
   const [onApproveMessage, setOnApproveMessage] = useState("");
   const [onErrorMessage, setOnErrorMessage] = useState("");
@@ -18,7 +23,7 @@ export const Paypal = ({ active }) => {
         purchase_units: [
           {
             amount: {
-              value: amount,
+              value: pricing?.amount,
             },
           },
         ],
@@ -31,11 +36,15 @@ export const Paypal = ({ active }) => {
   }
 
   const onApprove = (data: OnApproveData, actions: OnApproveActions) => {
+    const cart_id = localStorage.getItem('cart_id')
     return checkout({
-        orderID: data.orderID
+        orderID: data.orderID,
+        cart_id
       }).then((res) => {
         console.log(res)
         setOrderID(orderID);
+        // handleClose()
+       
 
       })
     
@@ -43,9 +52,12 @@ export const Paypal = ({ active }) => {
 
   const onError = (err: Record<string, unknown>) => {
     setOnErrorMessage(err.toString());
+    console.log('Error: ', err.toString())
+
   }
 
  
+ if(!pricing) return null;
 
   return (
 
@@ -73,8 +85,9 @@ export const Paypal = ({ active }) => {
             style={{ color: "black", shape: "pill", label: "checkout" }}
             createOrder={createOrder}
             onApprove={onApprove}
+            
             onError={onError}
-            forceReRender={[amount]}
+            forceReRender={[pricing?.amount]}
           />
         </div>
       </div>

@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 import { Search } from './Search';
 import { MobileSearchBar } from './Search/MobileSearchBar';
 import { SearchButton } from './Search/SearchButton';
-import cookie from 'react-cookies';
+
 import { store } from 'store';
 
 import { Logout, useLogoutMutation } from 'services/auth';
@@ -18,7 +18,7 @@ import { LogoutResponse } from 'services/auth';
 import { showModal } from 'state/modals/modalSlice';
 import { useAuth, useAvatar } from 'store/useAuth';
 import { useInstructor } from 'store/useInstructor';
-import { useHistory } from 'react-router';
+
 
 const AnimatedPopoverVariants: Variants = {
   enter: { opacity: 1, transition: { duration: 0.2 } },
@@ -35,15 +35,12 @@ const animatedPopoverProps: MotionProps = {
 export const useAppHeaderProps = () => {
 
 
-
-
   const [isSearchVisible, setSearchVisible] = useState(false);
-  // const { data: currentUser } = useGetCurrentUserQuery()
+  
   const { user: currentUser } = useAuth()
   const { avatar } = useAvatar()
   const { instructor } = useInstructor()
-  console.log("Current: ", instructor)
-  const { push } = useHistory();
+ 
   const [logout, { data: logoutResponse }] = useLogoutMutation()
 
   if (logoutResponse && logoutResponse.detail) {
@@ -110,15 +107,14 @@ export const useAppHeaderProps = () => {
 
   } : {
     type: 'anon',
-
-
     action: handleClick,
     search: {
       onEnable: () => console.log(),
       onSearch: (query: string) => <SearchButton toggleSearch={toggleSearch} />,
       onTrackingClick: (target: string) => console.log()
 
-    }
+    },
+    variant: 'signup'
   };
 
 

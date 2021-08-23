@@ -7,8 +7,15 @@ import { CardPayment } from './card';
 import { Paypal } from './paypal';
 import { useState } from 'react';
 import sslLogo from 'static/images/svg/ssl.svg';
-export const Payment = ({ onClose }) => {
+import { ProjectEntityResponse } from 'services/projects';
+
+type PaymentProps = {
+  project: ProjectEntityResponse,
+  onClose: () => void
+}
+export const Payment: React.FC<PaymentProps> = ({ onClose, project }) => {
   const [active, setActive] = useState('card')
+  const { pricing } = project;
   return (
     <div
       className="falcon-cart falcon-cart--visible falcon-cart--cart"
@@ -59,12 +66,12 @@ export const Payment = ({ onClose }) => {
                     <div className="_19eKHHb5cWr0K3_u6jtsx4">
                       <div className="SAw2RY4d2Dl-Vq-CLkY0i">
                         <h2 className="cf-text-h7 cf-mb-1 cf-text--uppercase">
-                          Codefluent LiveClass
+                          {project.title}
                         </h2>
                         <h3 className="cf-text-small cf-opacity--hinted">
                           TOTAL BILLED TODAY:{" "}
                           <span>
-                            <span>$240</span>
+                            <span>{`${pricing?.currency}${pricing?.amount}`}</span>
                           </span>
                         </h3>
                         <div className="row no-gutters">
@@ -114,8 +121,8 @@ export const Payment = ({ onClose }) => {
                         />
                       </li>
                     </ul>
-                    <CardPayment active={active == 'card'} handleClose={onClose}/>
-                    <Paypal active={active == 'paypal'}/>
+                    <CardPayment active={active == 'card'} handleClose={onClose} pricing={pricing}/>
+                    <Paypal active={active == 'paypal'} pricing={pricing} handleClose={onClose}/>
                   </div>
                 </div>
                 <div className="_3u-fWiJbiQTFS0AJOnOTrL">

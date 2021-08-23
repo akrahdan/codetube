@@ -27,16 +27,16 @@ export const Text = ({
   showTrialCTA,
   useContentfulCTA,
 }: TextProps) => {
-  const { header } = project
+  const { header, pricing } = project
 
   return (
     <div className={styles.text}>
       <h1 className={styles.title}>
         <span
-          className={styles.goalHeader}
+          className={styles.titleContent}
           data-testid="path-marketing-header-text"
         >
-          Project Path
+          Project Pricing: {pricing? `${pricing?.currency}${pricing?.amount}` : `$500`}
         </span>
         {get(header, 'heading') || heading}
       </h1>

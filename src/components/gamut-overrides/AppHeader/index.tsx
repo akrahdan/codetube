@@ -33,7 +33,7 @@ export const StyledAppBar = styled(AppBar)`
   width: 100%;
 `;
 
-export const AppHeaderTextButton = styled(TextButton)(textButtonStyles);
+export const AppHeaderTextButton = styled(TextButton)(focusStyles);
 // export const AppHeaderFillButton = styled(FillButton)(focusStyles);
 
 export const AppHeaderFillButton = styled(FillButton)`

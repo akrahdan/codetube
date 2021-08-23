@@ -381,12 +381,12 @@ export const unpausePro: AppHeaderFillButtonItem = {
   type: 'fill-button',
 };
 
-export const login: AppHeaderLinkItem = {
+export const login: AppHeaderTextButtonItem = {
   dataTestId: 'header-sign-in',
   id: 'login',
   text: 'Log In',
   trackingTarget: 'topnav_login',
-  type: 'link',
+  type: 'text-button',
   redirect: true,
 };
 
@@ -394,7 +394,7 @@ export const login: AppHeaderLinkItem = {
 export const instructor: AppHeaderLinkItem = {
   dataTestId: 'header-become-instructor',
   id: 'instructor',
-  text: 'Teach on Codefluent',
+  text: 'Become Instructor',
   trackingTarget: 'topnav_instructor',
   type: 'link',
   redirect: true,

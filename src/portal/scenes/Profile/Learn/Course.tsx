@@ -40,7 +40,7 @@ export const CourseProgress: React.FC<CourseProps> = ({ course, instructor, anal
         if (view && view.progress <= lecture?.duration) {
           setProgress((Math.round(view?.progress *100)) / lecture?.duration)
         }
-       
+        
         setLecture(lecture)
       }
       else {
