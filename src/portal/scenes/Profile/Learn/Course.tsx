@@ -54,6 +54,7 @@ export const CourseProgress: React.FC<CourseProps> = ({ course, instructor, anal
             updated: Date(),
             complete: false
           })
+          setLecture(flatLectures[0])
         }
 
       }

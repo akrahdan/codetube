@@ -21,7 +21,7 @@ import {
   Lecture,
   VideoAnalytics,
 } from "services/courses";
-import { Url } from "url";
+
 
 const validModes = Object.values(InteractionModes);
 const mediaType = selectVideoFormat();

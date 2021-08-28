@@ -57,10 +57,19 @@ const coursePricing = loadable(
 const courseMessages = loadable(
   () => import("./scenes/Instructor/Courses/Messages")
 );
+
+const ComposeMessage = loadable(
+  () => import("./scenes/Instructor/Dashboard/Communication/messages/compose")
+);
+
+const MessagingCompose = loadable(
+  () => import("./scenes/Profile/Messaging/newMessage")
+);
 const courseCurriculum = loadable(
   () => import("./scenes/Instructor/Courses/Curriculum")
 );
 const Settings = loadable(() => import("./scenes/Instructor/Courses/Settings"));
+const ProjectSettings = loadable(() => import("./scenes/Instructor/Projects/Settings"))
 const PayoutSettings = loadable(
   () => import("./scenes/Instructor/Dashboard/Payout")
 );
@@ -88,7 +97,8 @@ const ProjectTarget = loadable(
   () => import("./scenes/Instructor/Projects/Target")
 );
 const Learner = loadable(() => import("./scenes/Profile/Learn"));
-
+const Messaging = loadable(() => import("./scenes/Profile/Messaging"))
+const Privacy = loadable(() => import('./scenes/Privacy/Privacy'))
 const Error404 = loadable(() => import("portal/scenes/Error404"));
 // const Error500 = loadable(() => import('portal/scenes/Error500'));
 
@@ -100,6 +110,9 @@ export const routesMap = {
   [`${routeActions.projectCreate}`]: "/project/create/",
   [`${routeActions.projects}`]: "/projects",
   [`${routeActions.projectDetail}`]: "/projects/:slug",
+  [`${routeActions.messaging}`]: "/messages",
+  [`${routeActions.messageCompose}`]: "/message/compose",
+  [`${routeActions.messageThreads}`]: "/messages/thread/:id",
   [`${routeActions.courseDetail}`]: "/courses/:slug",
   [`${routeActions.courseManage}`]: "/instructor/course/:id/manage/:slug",
   [`${routeActions.projectManage}`]: "/instructor/project/:id/manage/:slug",
@@ -107,6 +120,7 @@ export const routesMap = {
   [`${routeActions.learnerStory}`]: "/learn/",
   [`${routeActions.dashboardItems}`]: "/instructor/:dashboard/:slug",
   [`${sharedRouteActions.error404}`]: "/errors/404",
+  [`${routeActions.privacy}`]: "/privacy-policy",
 };
 
 export const routesMeta: Record<string, RouteMeta> = {
@@ -175,6 +189,24 @@ export const routesMeta: Record<string, RouteMeta> = {
     scene: Learner,
     pageName: undefined,
   },
+
+  [`${routeActions.privacy}`]: {
+    scene: Privacy,
+    pageName: undefined,
+  },
+
+  [`${routeActions.messaging}`]: {
+    scene: Messaging,
+    pageName: undefined,
+  },
+  [`${routeActions.messageThreads}`]: {
+    scene: Messaging,
+    pageName: undefined,
+  },
+  [`${routeActions.messageCompose}`]: {
+    scene: MessagingCompose,
+    pageName: undefined,
+  },
 };
 
 export const routesCommunication: Record<string, RouteMeta> = {
@@ -183,6 +215,11 @@ export const routesCommunication: Record<string, RouteMeta> = {
     pageName: undefined,
   },
   [`${paths.Announcements}`]: {
+    scene: Communication,
+    pageName: undefined,
+  },
+
+  [`${paths.newMessage}`]: {
     scene: Communication,
     pageName: undefined,
   },
@@ -216,6 +253,11 @@ export const routesDashboard: Record<string, RouteMeta> = {
 
   [`${paths.Messages}`]: {
     scene: Messages,
+    pageName: undefined,
+  },
+
+  [`${paths.newMessage}`]: {
+    scene: ComposeMessage,
     pageName: undefined,
   },
 
@@ -301,6 +343,11 @@ export const routesManageProject: Record<string, RouteMeta> = {
 
   [`${paths.projectTargets}`]: {
     scene: ProjectTarget,
+    pageName: undefined,
+  },
+
+  [`${paths.projectSettings}`]: {
+    scene: ProjectSettings,
     pageName: undefined,
   },
 };

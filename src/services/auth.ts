@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { head } from "lodash";
 import cookie from "react-cookies";
 import { RootState } from "store";
-import internal from "stream";
+
 
 export interface LoginRequest {
   email: string;
@@ -43,6 +43,10 @@ export interface User {
   username: string;
   first_name: string;
   last_name: string;
+}
+
+export interface Email {
+  email: string;
 }
 
 export interface UserResponse {
@@ -109,6 +113,16 @@ export const authApi = createApi({
     facebookLogin: build.mutation<Token, Access>({
       query: (body) => ({
         url: "/api/auth/facebook/",
+        method: "POST",
+        body,
+
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+    resetPassword: build.mutation<Object, Email>({
+      query: (body) => ({
+        url: "/api/auth/password_reset/",
         method: "POST",
         body,
 
@@ -192,5 +206,6 @@ export const {
   useGoogleLoginUrlMutation,
   useUpdateAvatarMutation,
   useUpdateProfileMutation,
-  useGetProfileQuery
+  useGetProfileQuery,
+  useResetPasswordMutation
 } = authApi;

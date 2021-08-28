@@ -7,7 +7,9 @@ import { SiteState } from 'state/types';
 import { authApi } from "services/auth";
 import { projectApi } from "services/projects";
 import { coursesApi } from "services/courses";
+import { messagingApi } from "services/messaging";
 import modalReducer from 'state/modals/modalSlice';
+import messagingReducer from 'state/messaging/messagingSlice';
 import authReducer from 'state/auth/authSlice';
 import courseReducer from "state/course/courseSplice";
 import projectReducer from 'state/project/projectSplice';
@@ -44,6 +46,7 @@ export const store = configureStore({
         modal: modalReducer,
         player: playerReducer,
         course: courseReducer,
+        messaging: messagingReducer,
         curriculum: curriculumSplice,
         project: projectReducer,
         target: targetSplice,
@@ -51,6 +54,7 @@ export const store = configureStore({
         [authApi.reducerPath]: authApi.reducer,
         [coursesApi.reducerPath]: coursesApi.reducer,
         [projectApi.reducerPath]: projectApi.reducer,
+        [messagingApi.reducerPath]: messagingApi.reducer,
     },
     middleware: (getDefaultMiddleware) => 
     getDefaultMiddleware({

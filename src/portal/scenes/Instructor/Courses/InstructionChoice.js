@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const InstructionChoice = ({ handleChange }) => {
     const [value, setValue ] = useState('');
+
+
+  useEffect(() => {
+   handleChange(value)
+  }, [value])
   
   return (
     <div className="full-page-takeover--content-wrapper--3Vzz1">
@@ -26,7 +31,7 @@ export const InstructionChoice = ({ handleChange }) => {
                       value='course'
                       onChange={event => {
                           setValue('course')
-                          handleChange(event.target.value)
+                          //handleChange(event.target.value)
                       }}
                       />
                       <span className="toggle-control-label radio-label cfi-icon-check">
@@ -53,7 +58,7 @@ export const InstructionChoice = ({ handleChange }) => {
                         value='project'
                         onChange={event => {
                             setValue('project')
-                            handleChange(event.target.value)
+                            //handleChange(event.target.value)
                         }}
                        
                       />

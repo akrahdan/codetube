@@ -18,6 +18,7 @@ export type RegistrationFormProps = {
   hideRecaptchaInfo?: boolean;
   isStudent?: boolean;
   locationType?: string;
+  onFailure?: (errors: string[]) => void;
   onSuccess?: (body: SuccessCallbackProp) => void;
   redirectUrl?: string;
 };

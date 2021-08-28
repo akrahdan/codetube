@@ -1,9 +1,31 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { createApi, fetchBaseQuery, BaseQueryFn } from "@reduxjs/toolkit/dist/query/react";
 import algoliasearch from "algoliasearch/lite";
 
 import { RootState } from "store";
 import cookie from "react-cookies";
 import { DateTime } from "schema-dts";
+
+import axios, { AxiosRequestConfig, AxiosError } from 'axios'
+
+const axiosBaseQuery = (
+  { baseUrl }: { baseUrl: string } = { baseUrl: '' }
+): BaseQueryFn<
+  {
+    url: string
+    method: AxiosRequestConfig['method']
+    data?: AxiosRequestConfig['data']
+  },
+  unknown,
+  unknown
+> => async ({ url, method, data }) => {
+  try {
+    const result = await axios({ url: baseUrl + url, method, data })
+    return { data: result.data }
+  } catch (axiosError) {
+    let err = axiosError as AxiosError
+    return { error: { status: err.response?.status, data: err.response?.data } }
+  }
+}
 
 const searchClient = algoliasearch(
   process.env.REACT_APP_ALGOLIA_APP_ID,
@@ -56,6 +78,16 @@ export interface Instructor {
   email: string;
   description: string;
   avatar: string;
+}
+
+export interface InstructorSearchResponse {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  avatar: string;
+  user: User;
+ 
 }
 
 export interface InstructorResponse {
@@ -342,6 +374,14 @@ export const coursesApi = createApi({
     fetchInstructorInfo: build.query<InstructorResponse, void>({
       query: () => ({
         url: `/api/instructor/profile/`,
+        method: "GET",
+        responseHandler: (response) => response.json(),
+      }),
+    }),
+
+    fetchInstructors: build.query<InstructorSearchResponse[], void>({
+      query: () => ({
+        url: `/api/instructor/search/`,
         method: "GET",
         responseHandler: (response) => response.json(),
       }),
@@ -710,6 +750,7 @@ export const {
   useFetchCourseViewsQuery,
   useFetchCourseDetailQuery,
   useUpdatePricingMutation,
+  useFetchInstructorsQuery
 } = coursesApi;
 
 export const { updateVideoViews } = coursesApi.endpoints;

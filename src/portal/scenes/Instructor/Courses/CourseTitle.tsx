@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CourseRequest} from 'services/courses'
 type TitleProps = {
     handleChange: (value: string) => void,
@@ -8,6 +8,9 @@ type TitleProps = {
 export const CourseTitle: React.FC<TitleProps> = ({handleChange, course, updateCourse}) => {
     const [value, setValue ] = useState('');
    
+    useEffect(() => {
+       handleChange(value)
+    }, [value])
     return (
         <div className="full-page-takeover--content-wrapper--3Vzz1">
             <div className="container full-page-takeover--content--1ynJq">
@@ -39,10 +42,10 @@ export const CourseTitle: React.FC<TitleProps> = ({handleChange, course, updateC
                                             <input
                                                 placeholder="e.g. Learn Photoshop CS6 from Scratch"
                                                 maxLength={60}
-                                                value = {course ? course.title: ''}
+                                                value = {course ? course?.title: ''}
                                                 onChange={(event) => {
                                                     setValue(event.target.value)
-                                                    handleChange(event.target.value)
+                                                    //handleChange(event.target.value)
                                                     updateCourse({
                                                         ...course,
                                                         title: event.target.value
@@ -57,7 +60,7 @@ export const CourseTitle: React.FC<TitleProps> = ({handleChange, course, updateC
                                                 className="form-control-counter"
                                                 data-purpose="form-control-counter"
                                             >
-                                                60
+                                                { 60 - (course?.title?.length || 0)}
                                             </div>
                                         </div>
                                     </div>

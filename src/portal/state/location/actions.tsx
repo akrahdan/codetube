@@ -70,6 +70,9 @@ export const pathsNew = createAction('location/PATHS_NEW');
 export const projectReviews = createAction('location/PROJECT_REVIEWS');
 export const projectReviewShow = createAction('location/PROJECT_REVIEW_SHOW');
 export const projects = createAction('location/PROJECTS');
+export const messaging = createAction('location/MESSAGING');
+export const messageThreads = createAction('location/MESSAGING_THREADS');
+export const messageCompose = createAction('location/MESSAGING_COMPOSE');
 export const projectDetail = createAction('location/PROJECT_DETAIL');
 export const courseDetail = createAction('location/COURSE_DETAIL');
 export const pricing = createAction('location/PRICING');
@@ -79,8 +82,8 @@ export const search = createAction('location/SEARCH');
 export const skillPaths = createAction('location/SKILL_PATHS');
 export const stories = createAction('location/STORIES');
 export const story = createAction('location/STORY');
-export const subscriptionsCancellation = createAction(
-  'location/SUBSCRIPTIONS_CANCELLATION'
+export const privacy = createAction(
+  'location/PRIVACY_POLICY'
 );
 export const subscriptionsCancellationSurvey = createAction(
   'location/SUBSCRIPTIONS_CANCELLATION_SURVEY'

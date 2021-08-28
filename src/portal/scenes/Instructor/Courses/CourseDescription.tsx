@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RTEditor from "../Editor";
 
 import { CourseRequest} from 'services/courses'
@@ -9,6 +9,10 @@ type DescriptionProps = {
 }
 export const CourseDescription: React.FC<DescriptionProps> = ({ handleChange, course, updateCourse }) => {
     const [value, setValue ] = useState('');
+
+    useEffect(() => {
+        handleChange(value)
+     }, [value])
    
     return (
         <div className="full-page-takeover--content-wrapper--3Vzz1">
@@ -40,7 +44,7 @@ export const CourseDescription: React.FC<DescriptionProps> = ({ handleChange, co
                                         <div className="form-control-counter-container text-justify">
                                             <RTEditor editorValue={course ? course.description: ''} handleChange={value => {
                                                 setValue(value)
-                                                handleChange(value)
+                                                //handleChange(value)
                                                 updateCourse({
                                                     ...course,
                                                     description: value

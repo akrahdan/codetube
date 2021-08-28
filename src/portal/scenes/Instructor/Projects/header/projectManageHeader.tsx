@@ -83,7 +83,7 @@ export const ProjectManageHeader = () => {
               </div>
             </div>
             <div className="full-page-takeover-header--menu--30tIM">
-              <a href={`/instructor/course/${locationPayload.id}/manage/settings`}>
+              <a href={`/instructor/project/${locationPayload.id}/manage/settings`}>
                 <svg
                   aria-label="Course Settings"
                   focusable="false"

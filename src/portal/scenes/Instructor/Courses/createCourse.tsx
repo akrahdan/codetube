@@ -2,7 +2,7 @@ import './course.scss';
 import { RouteMeta } from 'libs/location/routing';
 import { getRouteComponent } from './getRouteComponent';
 import { CATEGORY, CHOICE, DESCRIPTION, TITLE } from './routes';
-
+import axios from 'axios';
 import CourseCategory from './CourseCategory';
 import CourseTitle from './CourseTitle';
 import CourseDescription from './CourseDescription';
@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
 import classNames from 'classnames';
-import { CourseRequest } from 'services/courses'
+import { CourseRequest, CourseResponse } from 'services/courses'
 import { useCreateCourseMutation } from 'services/courses';
 export const routesMeta: Record<string, RouteMeta> = {
 
@@ -48,7 +48,7 @@ const initialState = {
 }
 export const CreateCourse = (props) => {
   const [locationType, setLocationType] = useState('choice')
-  
+
   const [createCourse] = useCreateCourseMutation()
   const [value, setValue] = useState('');
   const [width, setWidth] = useState(25)
@@ -60,7 +60,7 @@ export const CreateCourse = (props) => {
   const headings = [CHOICE, TITLE, CATEGORY, DESCRIPTION,]
   const handleCreateCourse = async (courseRequest: Partial<CourseRequest>) => {
     try {
-     
+
       const result = await createCourse(courseRequest).unwrap()
       if (result) {
         setCourseId(result.id)
@@ -75,12 +75,12 @@ export const CreateCourse = (props) => {
   }
 
   const { scene: Scene } = getRouteComponent(routesMeta, locationType)
- 
+
   return (
     <div className="full-page-takeover--window--1ei3d">
       <div className="full-page-takeover--page--2QirY" data-purpose="page">
         <div>
-          
+
           <div className="full-page-takeover--header--2mfbT">
             <div className="full-page-takeover--logo-block--1Op9u">
               <img
@@ -152,7 +152,27 @@ export const CreateCourse = (props) => {
                     type="button"
                     onClick={() => {
                       if (step >= headings.length) {
-                        handleCreateCourse(course)
+                        // const token = localStorage.getItem("token")
+                        // axios({
+                        //   method: 'POST',
+                        //   url: '/api/courses/create/',
+                        //   baseURL: 'http://localhost:8000',
+                        //   headers: {
+                        //     'Authorization': `Token ${token}`,
+                            
+                        //   },
+                        //   data: course
+                        // })
+                        // .then(res => console.log(res.data))
+                        // .catch(res => console.log(res))
+                
+                        createCourse(course)
+                          .then((res: { data: CourseResponse }) => {
+                            if (res?.data?.id) {
+                              setCourseId(res?.data?.id)
+                              window.location.replace(`/instructor/course/${res?.data?.id}/manage/goals`)
+                            }
+                          }).catch(err => console.log(err))
                       } else {
                         const heading = headings[step]
                         const wd = ((step + 1) * 100 / (headings.length))
@@ -164,9 +184,9 @@ export const CreateCourse = (props) => {
                     }}
 
                     className={classNames("udlite-btn udlite-btn-large udlite-btn-primary udlite-heading-md full-page-takeover--right-button--i1q_g", {
-                      'udlite-btn-disabled': course && !course[locationType] && !value
+                      'udlite-btn-disabled': !value
                     })}
-                    disabled={ course && !course[locationType] && !value}
+                    disabled={!value}
                     tabIndex={-1}
                   >
                     <span>{locationType == DESCRIPTION ? 'Create Course' : ' Continue'}</span>

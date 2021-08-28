@@ -1,7 +1,7 @@
 import "./course.scss";
 import { useFetchCategoriesQuery } from "services/courses";
 import { CourseRequest} from 'services/courses';
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type CategoryProps = {
     handleChange: (value: string) => void,
@@ -10,7 +10,17 @@ type CategoryProps = {
 }
 export const CourseCategory:React.FC<CategoryProps> = ({ handleChange, course, updateCourse }) => {
   const {data: categories } = useFetchCategoriesQuery()
+  const [value, setValue ] = useState('');
+
+
+  useEffect(() => {
+    handleChange(value)
+  }, [value])
+  
+  
   if(!categories) return null;
+
+
   return ( 
     <div className="full-page-takeover--content-wrapper--3Vzz1">
       <div className="container full-page-takeover--content--1ynJq">
@@ -34,7 +44,8 @@ export const CourseCategory:React.FC<CategoryProps> = ({ handleChange, course, u
                   <div className="create-course-flow--formField--m9MGJ">
                     <div className="form-control-single-select-container">
                       <select id="courseCategory" className="form-control" value={course? course.category: -1} onChange={(event)  => {
-                        handleChange(event.target.value)
+                        //handleChange(event.target.value)
+                         setValue(event.target.value)
                          updateCourse({
                            ...course,
                            category: Number(event.target.value)

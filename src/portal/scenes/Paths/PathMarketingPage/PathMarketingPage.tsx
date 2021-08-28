@@ -8,12 +8,13 @@ import { projectCoursePath } from 'libs/urlHelpers';
 import { Header } from './Header';
 import { Supporting } from './Supporting';
 import { Projects } from './Projects';
-
+import { LoadingScreen } from 'components/LoadingScreen';
 import { Syllabus } from './Syllabus';
 import { CTASection } from './CTASection';
 import { Recommendations } from './Recommendations';
 import { SignupSection } from 'portal/scenes/SignupSection';
 import { SiginSection } from 'portal/scenes/SignupSection/SigninSection';
+import { ResetPassword } from 'portal/scenes/SignupSection/ResetPassword';
 import { SignupModal } from 'portal/scenes/Modal/SignupModal';
 import { Payment } from 'portal/scenes/Payments'
 import { Modal } from 'portal/scenes/Modal';
@@ -43,7 +44,7 @@ export const PathMarketingPage: React.FC<PageProps> = ({
   const modal = useAppSelector(selectModal)
   const dispatch = useAppDispatch()
   const [pay, setPay] = useState(false);
-  const { data: projects } = useFetchProjectsQuery()
+  const { data: projects, isLoading } = useFetchProjectsQuery()
   const [ cartUpdate ] = useCartUpdateMutation()
   const { user} = useAuth();
   const leadProject = projects && projects.find(element => element.lead == true)
@@ -69,7 +70,7 @@ export const PathMarketingPage: React.FC<PageProps> = ({
     
   };
   const completionTime = "24hrs"
-  if (!leadProject) return null
+  if (!leadProject || isLoading) return <LoadingScreen />
 
   return (
     <>
@@ -133,6 +134,10 @@ export const PathMarketingPage: React.FC<PageProps> = ({
 
       {modal == 'login' && <SignupModal >
         <SiginSection />
+      </SignupModal>}
+
+      {modal == 'reset' && <SignupModal >
+        <ResetPassword />
       </SignupModal>}
 
       {pay && <Modal>

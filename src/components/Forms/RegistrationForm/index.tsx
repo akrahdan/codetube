@@ -33,6 +33,7 @@ import { useSignupMutation } from 'services/auth';
 import { hideCurrentModal } from 'state/modals/modalSlice';
 export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   onSuccess = redirectAfterLogin,
+  onFailure,
   ...props
 }) => {
   const dispatch = useAppDispatch()
@@ -61,26 +62,41 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   //   return <RegistrationSSOForm onSuccess={onSuccess} />;
   // }
 
- 
+
 
   const resetRecaptcha = () => {
-    
+
     setDisabled(false);
     setRecaptchaInstanceId(uuid());
   };
 
-  const [ signup ] = useSignupMutation()
+  const [signup] = useSignupMutation()
 
   const submitForm = async (values) => {
     values.password2 = values.password1
     values.csrfmiddlewaretoken = cookie.load('csrftoken')
-    
-     values.csrfmiddlewaretoken = cookie.load('csrftoken');
+
+    values.csrfmiddlewaretoken = cookie.load('csrftoken');
+    try {
       const user = await signup(values).unwrap()
       localStorage.setItem('token', user.token);
-      
+
       dispatch(hideCurrentModal())
       setDisabled(true);
+    }
+    catch (err) {
+      if (err?.data?.non_field_errors) {
+        const errors = err?.data?.non_field_errors;
+        onFailure(errors)
+      } else if (err?.data?.email) {
+        const errors = err?.data?.email;
+        onFailure(errors)
+      } else if (err?.data?.password) {
+        const errors = err?.data?.password;
+        onFailure(errors)
+      }
+    }
+
   }
 
   /**
@@ -107,7 +123,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             defaultValue: '',
             size: 12,
             onUpdate,
-           
+
           },
 
           {
@@ -117,7 +133,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             defaultValue: '',
             size: 12,
             onUpdate,
-           
+
           },
           {
             name: UserSubmitKey.PASSWORD1,
@@ -132,9 +148,9 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             size: 12,
             onUpdate,
             defaultValue: '',
-            
+
           },
-           
+
         ]}
         submit={{
           contents: 'Create Account',
@@ -152,12 +168,12 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             {recaptchaError}
           </div>
         )}
-        
+
       </Box>
       <Text className={styles.textDisplay} >
         <p className={styles.textCenter}>
           Already have an account?{" "}
-          <a className={styles.textLink} onClick={() => dispatch(showModal('login')) }>
+          <a className={styles.textLink} onClick={() => dispatch(showModal('login'))}>
             Sign in
           </a>
           .

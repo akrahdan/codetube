@@ -55,8 +55,21 @@ export const SiginSection: React.FC<SignUpSectionProps> = ({ redirectUrl }) => {
     console.log('Error:', response)
   }
 
-  const handleFacebookResponse = (res) => {
-    console.log(res)
+  const handleFacebookResponse = async (res) => {
+    try {
+      console.log(res.accessToken)
+      const user = await facebookLogin({
+        access_token: res.accessToken
+      }).unwrap()
+      localStorage.setItem('token', user.key)
+      dispatch(getCurrentUser.initiate())
+      dispatch(hideCurrentModal())
+      
+    } catch(err) {
+     if(err?.data?.non_field_errors) {
+       setErrors(err?.data?.non_field_errors)
+     }
+    }
   }
 
   return (
@@ -118,10 +131,10 @@ export const SiginSection: React.FC<SignUpSectionProps> = ({ redirectUrl }) => {
                         </p>
                       </div>
                       {errors?.length && errors?.map((err, index) =>  <p  key={index} className="cf-text--error cf-text--center cf-mb-4">{err}</p> )}
-                      <SigninForm redirectUrl="/" />
+                      <SigninForm redirectUrl="/"  onFailure={setErrors}/>
 
                       <p className={styles.passForget}>
-                        <a>Forgot your password?</a>
+                        <a onClick={() => dispatch(showModal('reset'))}>Forgot your password?</a>
                       </p>
                     </div>
                   </div>

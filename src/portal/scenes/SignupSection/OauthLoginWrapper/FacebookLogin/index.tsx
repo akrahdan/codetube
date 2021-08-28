@@ -14,7 +14,7 @@ export const FacebookLogin: React.FC<FacebookLoginnProps> = ({
     const btnCS = classNames(styles.buttonFacebook, styles.buttonFullwidth, className)
     return (
         <div className={styles.mb4} >
-            <button className={btnCS} >
+            <button onClick={onFacebookClick} className={btnCS} >
                 <svg
                     width="2em"
                     height="2em"

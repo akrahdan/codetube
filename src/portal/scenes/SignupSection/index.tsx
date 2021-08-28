@@ -58,8 +58,21 @@ export const SignupSection: React.FC<SignUpSectionProps> = ({
     console.log('Error:', response)
   }
 
-  const handleFacebookResponse = (res) => {
-    console.log(res)
+  const handleFacebookResponse = async (res) => {
+    try {
+      console.log(res.accessToken)
+      const user = await facebookLogin({
+        access_token: res.accessToken
+      }).unwrap()
+      localStorage.setItem('token', user.key)
+      dispatch(getCurrentUser.initiate())
+      dispatch(hideCurrentModal())
+      
+    } catch(err) {
+     if(err?.data?.non_field_errors) {
+       setErrors(err?.data?.non_field_errors)
+     }
+    }
   }
 
   return (
@@ -120,7 +133,7 @@ export const SignupSection: React.FC<SignUpSectionProps> = ({
                           <span>or</span>
                         </p>
                       </div>
-                      <RegistrationForm redirectUrl="/" />
+                      <RegistrationForm redirectUrl="/" onFailure={setErrors} />
 
                       <p className={styles.passForget}>
                         <a>Forgot your password?</a>

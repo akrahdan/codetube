@@ -30,6 +30,7 @@ import { extractValidationErrors, VALIDATORS } from './validators';
 
 export const SigninForm: React.FC<RegistrationFormProps> = ({
   onSuccess = redirectAfterLogin,
+  onFailure,
   ...props
 }) => {
   const dispatch = useAppDispatch()
@@ -73,7 +74,15 @@ export const SigninForm: React.FC<RegistrationFormProps> = ({
       
 
     } catch (err) {
-      console.log("Error: ", err)
+      if(err?.data?.non_field_errors) {
+        const errors = err?.data?.non_field_errors;
+        onFailure(errors)
+      } else if(err?.data?.email) {
+        const errors = err?.data?.email;
+        onFailure(errors)
+      }
+      
+      
     }
     
   }

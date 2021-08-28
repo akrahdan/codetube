@@ -11,17 +11,17 @@ html {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
-    font-size: 62.5%
+    font-size: 16px
 }
 
-body {
-    font-family: sf pro text,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
-    font-weight: 400;
-    line-height: 1.4;
-    font-size: 1.6rem;
-    color: #1c1d1f;
-    margin: 0
-}
+// body {
+//     font-family: sf pro text,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+//     font-weight: 400;
+//     line-height: 1.4;
+//     font-size: 1.6rem;
+//     color: #1c1d1f;
+//     margin: 0
+// }
 
 body,.main-content-wrapper {
     display: flex;
@@ -129,7 +129,7 @@ body.keyboard-navigation-in-use *:not(.udlite-custom-focus-visible):focus,body.k
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -.02rem;
-    font-size: 1.4rem
+    font-size: 0.9rem
 }
 
 .udlite-heading-md {
@@ -191,7 +191,7 @@ body.keyboard-navigation-in-use *:not(.udlite-custom-focus-visible):focus,body.k
 .udlite-heading-serif-xxl {
     font-family: "Apercu",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
     font-weight: 700;
-    font-size: 3.2rem;
+    font-size: 2rem;
     line-height: 1.25;
     letter-spacing: -.05rem
 }
@@ -245,6 +245,17 @@ body.keyboard-navigation-in-use *:not(.udlite-custom-focus-visible):focus,body.k
     font-weight: 400;
     line-height: 1.4;
     font-size: 2.4rem
+}
+.udlite-btn-medium {
+    height: 2.5rem;
+}
+.udlite-btn {
+   min-width: 5rem; 
+   border-radius: 0.75rem;
+}
+
+.btn {
+    border-radius: 0.75rem;
 }
 
 .udlite-text-bold {
@@ -5836,7 +5847,8 @@ body.keyboard-navigation-in-use .udlite-text-input-container .udlite-text-input:
 
 .exitable-search-bar--search-button--3ksKn {
     border: solid #d1d7dc;
-    border-width: 1px
+    border-width: 1px;
+    border-radius: 0;
 }
 
 .exitable-search-bar--search-button--3ksKn:hover,.exitable-search-bar--search-button--3ksKn:active {
@@ -11465,6 +11477,11 @@ textarea.udlite-text-input-large {
     padding: 0 2.4rem;
     position: relative;
     z-index: 1010
+}
+
+
+.form-control {
+    border-radius: 0%;
 }
 
 

@@ -21,7 +21,7 @@ export const QandA = ({ sideNavToggle, perfNavToggle }) => {
               alt=""
               width={240}
               height={180}
-              className
+              
               src="https://s.udemycdn.com/communication/empty-mailbox-v2.jpg"
               srcSet="https://s.udemycdn.com/communication/empty-mailbox-v2.jpg 1x, https://s.udemycdn.com/communication/empty-mailbox-2x-v2.jpg 2x"
             />
