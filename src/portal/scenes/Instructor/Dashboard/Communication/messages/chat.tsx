@@ -121,7 +121,7 @@ export const AllChats = () => {
             </div>
           </div>
           <div className="filter-bar--right-cta--zHN_E">
-            <Link className="messaging--compose-button--1gXGo btn btn-quaternary" to={"/message/compose"}>
+            <Link className="messaging--compose-button--1gXGo btn btn-quaternary" to={"/instructor/communication/new_message"}>
               Compose
             </Link>
           </div>

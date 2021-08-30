@@ -145,7 +145,7 @@ export const Traffic = ({ sideNavToggle, perfNavToggle }) => {
                   Once you publish your course, come here to learn about your
                   traffic &amp; conversion.
                 </p>
-                <a href="/instructor/courses/" className="mt15 btn btn-default">
+                <a href="/instructor/courses" className="mt15 btn btn-default">
                   Go to Instructor Dashboard
                 </a>
               </div>

@@ -36,6 +36,7 @@ export const projectManage = createAction('location/PROJECT_MANAGE');
 export const dashboard = createAction('location/DASHBOARD');
 export const tutorDashboard = createAction('location/DASHBOARD_INSTRUCTOR');
 export const dashboardItems = createAction('location/DASHBOARD_ITEMS');
+export const instructorMessageThread = createAction('location/INSTRUCTOR_MESSAGE_THREAD');
 export const InstructorMessages = createAction('location/INSTRUCTOR_MESSAGES');
 export const InstructorAssignments = createAction('location/INSTRUCTOR_ASSIGNMENTS');
 export const InstructorQandA = createAction('location/INSTRUCTOR_QANDA');

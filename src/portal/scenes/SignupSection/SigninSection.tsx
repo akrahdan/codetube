@@ -15,9 +15,7 @@ import {
 } from "services/auth";
 import {
   showModal,
-  hideModal,
   hideCurrentModal,
-  selectModal,
 } from "state/modals/modalSlice";
 
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -36,7 +34,7 @@ export const SiginSection: React.FC<SignUpSectionProps> = ({ redirectUrl }) => {
 
   const handleGoogleLoginSuccess = async (res) => {
    try {
-     console.log(res.accessToken)
+     // console.log(res.accessToken)
      const user = await googleLogin({
        access_token: res.accessToken
      }).unwrap()

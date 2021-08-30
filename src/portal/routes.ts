@@ -115,10 +115,12 @@ export const routesMap = {
   [`${routeActions.messageThreads}`]: "/messages/thread/:id",
   [`${routeActions.courseDetail}`]: "/courses/:slug",
   [`${routeActions.courseManage}`]: "/instructor/course/:id/manage/:slug",
+
   [`${routeActions.projectManage}`]: "/instructor/project/:id/manage/:slug",
   [`${routeActions.tutorDashboard}`]: "/instructor/courses",
   [`${routeActions.learnerStory}`]: "/learn/",
-  [`${routeActions.dashboardItems}`]: "/instructor/:dashboard/:slug",
+  [`${routeActions.instructorMessageThread}`]: "/instructor/communication/thread/:id",
+  [`${routeActions.dashboardItems}`]: "/instructor/:dashboard/:slug/:id?",
   [`${sharedRouteActions.error404}`]: "/errors/404",
   [`${routeActions.privacy}`]: "/privacy-policy",
 };
@@ -180,6 +182,11 @@ export const routesMeta: Record<string, RouteMeta> = {
     scene: Dashboard,
     pageName: undefined,
   },
+
+  [`${routeActions.instructorMessageThread}`]: {
+    scene: Dashboard,
+    pageName: undefined,
+  },
   [`${sharedRouteActions.error404}`]: {
     scene: Error404,
     pageName: "error_404",
@@ -234,6 +241,11 @@ export const routesCommunication: Record<string, RouteMeta> = {
     pageName: undefined,
   },
 
+  [`${routeActions.instructorMessageThread}`]: {
+    scene: Communication,
+    pageName: undefined,
+  },
+
   [`${paths.Qa}`]: {
     scene: Communication,
     pageName: undefined,
@@ -252,6 +264,10 @@ export const routesDashboard: Record<string, RouteMeta> = {
   },
 
   [`${paths.Messages}`]: {
+    scene: Messages,
+    pageName: undefined,
+  },
+  [`${routeActions.instructorMessageThread}`]: {
     scene: Messages,
     pageName: undefined,
   },

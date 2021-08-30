@@ -70,7 +70,9 @@ export const SigninForm: React.FC<RegistrationFormProps> = ({
       const user = await login(values).unwrap()
       localStorage.setItem('token', user.token);
       dispatch(setCredentials(user))
+      dispatch(getCurrentUser.initiate())
       dispatch(hideCurrentModal())
+      
       
 
     } catch (err) {

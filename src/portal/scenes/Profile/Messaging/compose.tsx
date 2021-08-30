@@ -202,7 +202,6 @@ export const ComposeMessage = () => {
                 })
               }
 
-
             }}>
 
               <div className="RichEditor-root">

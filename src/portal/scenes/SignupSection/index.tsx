@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ContentContainer } from "@codecademy/gamut";
 import { RegistrationForm } from "components/Forms/RegistrationForm";
-
+import './sign.scss';
 import {
   showModal,
   hideModal,
@@ -133,6 +133,7 @@ export const SignupSection: React.FC<SignUpSectionProps> = ({
                           <span>or</span>
                         </p>
                       </div>
+                      {errors?.length && errors?.map((err, index) =>  <p  key={index} className="cf-text--error cf-text--center cf-mb-4">{err}</p> )}
                       <RegistrationForm redirectUrl="/" onFailure={setErrors} />
 
                       <p className={styles.passForget}>

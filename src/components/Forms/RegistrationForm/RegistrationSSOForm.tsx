@@ -49,23 +49,7 @@ export const RegistrationSSOForm: React.FC<RegistrationFormProps> = ({
   const captcha = useRef<RecaptchaWrapper | null>(null);
 
   const submitForm = (recaptchaToken: string) => {
-    // setDisabled(true);
-    // request
-    //   .post(registerPath)
-    //   .send({ ...serializedForm, 'g-recaptcha-response': recaptchaToken })
-    //   .use(csrf)
-    //   .accept('json')
-    //   .then(({ body }) => {
-    //     pushDataLayerEvent('user_sign_up');
-    //     onSuccess(body);
-    //   })
-    //   .catch((err) => {
-    //     setRecaptchaError(
-    //       extractValidationErrors(err.response)?.['g-recaptcha-response']
-    //     );
-    //     setDisabled(false);
-    //     resetRecaptcha();
-    //   });
+   
   };
 
   const resetRecaptcha = () => {

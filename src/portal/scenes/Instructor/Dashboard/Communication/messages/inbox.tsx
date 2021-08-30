@@ -21,6 +21,7 @@ import {
 import "./chats.scss";
 import "draft-js/dist/Draft.css";
 import "./inboxEditor.scss";
+import { SiPocketcasts, SiWprocket } from "react-icons/si";
 
 
 type InboxProps = {
@@ -31,14 +32,18 @@ type InboxProps = {
 export const Inbox: React.FC<InboxProps> = ({ threads }) => {
   const locationPayload = useAppSelector(selectLocationPayload)
   const { data: threadQuery } = useFetchThreadDetailQuery(locationPayload.id)
+  const [socket, setSocket] = useState<WebSocket>()
   const [threadMessage, setThreadMessage] = useState<MessageThread>(threadQuery)
+
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-  const [socket, setSocket] = useState<WebSocket>()
   const [focus, setFocus] = useState(false);
   const { user } = useAuth();
   const ref = useRef(null)
+
+  var timeout = 250;
+
 
   const connect = (roomId) => {
 
@@ -93,7 +98,7 @@ export const Inbox: React.FC<InboxProps> = ({ threads }) => {
       + '127.0.0.1:8000'
       + `/ws/messages/${locationPayload?.id}/?token=${token}`
     );
-
+   
 
     socket.onopen = event => {
       console.log("Connected")
@@ -102,7 +107,7 @@ export const Inbox: React.FC<InboxProps> = ({ threads }) => {
 
     socket.onclose = e => {
       console.log('Socket is closed. Reconnection attempt')
-      // check(locationPayload?.id)
+      check(locationPayload?.id)
     }
 
     socket.onerror = err => {
@@ -118,24 +123,23 @@ export const Inbox: React.FC<InboxProps> = ({ threads }) => {
   }, [threadQuery])
 
   useEffect(() => {
-    if (socket) {
+    if(socket) {
       socket.onmessage = event => {
 
         if (event?.data) {
-          console.log("DATA: ", JSON.parse(event?.data))
+          // console.log("DATA: ", JSON.parse(event?.data))
           const messages = [...threadMessage?.messages, JSON.parse(event.data)];
-          console.log("Messages: ", messages);
+          // console.log("Messages: ", messages);
           setThreadMessage({
             ...threadMessage,
             messages
           });
         }
-
+  
       }
     }
-
+    
   }, [socket])
-
 
   useEffect(() => {
     const handleClickOutside = event => {
@@ -317,8 +321,9 @@ export const Inbox: React.FC<InboxProps> = ({ threads }) => {
               "reply-form--reply-form--content--1eWln": focus
             })}>
 
-             {threadMessage && (<form onSubmit={event => {
+             { threadMessage && ( <form onSubmit={event => {
                 event.preventDefault();
+                
                 if (editorState?.getCurrentContent()?.hasText()) {
                   const html = stateToHTML(editorState?.getCurrentContent());
                   const message = JSON.stringify({ msg: html });
@@ -326,7 +331,6 @@ export const Inbox: React.FC<InboxProps> = ({ threads }) => {
                   const state = EditorState.push(editorState, ContentState.createFromText(''), 'remove-range')
                   setEditorState(state)
                 }
-
               }}>
                 <label className="sr-only">Message:</label>
                 <div className="fs-exclude form-group">

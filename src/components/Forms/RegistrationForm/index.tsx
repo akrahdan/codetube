@@ -29,7 +29,7 @@ import {
   UserSubmitKey,
 } from './types';
 import { extractValidationErrors, VALIDATORS } from './validators';
-import { useSignupMutation } from 'services/auth';
+import { useSignupMutation, getCurrentUser } from 'services/auth';
 import { hideCurrentModal } from 'state/modals/modalSlice';
 export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   onSuccess = redirectAfterLogin,
@@ -80,19 +80,25 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
     try {
       const user = await signup(values).unwrap()
       localStorage.setItem('token', user.token);
-
+      dispatch(getCurrentUser.initiate())
       dispatch(hideCurrentModal())
+     
       setDisabled(true);
     }
     catch (err) {
+      
       if (err?.data?.non_field_errors) {
         const errors = err?.data?.non_field_errors;
         onFailure(errors)
       } else if (err?.data?.email) {
+       
         const errors = err?.data?.email;
         onFailure(errors)
       } else if (err?.data?.password) {
         const errors = err?.data?.password;
+        onFailure(errors)
+      } else if (err?.data?.username) {
+        const errors = err?.data?.username;
         onFailure(errors)
       }
     }

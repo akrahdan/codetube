@@ -10,6 +10,7 @@ import {
   PieLineGraphIcon,
   RatingStarGiveIcon,
   SupportIcon,
+  ChatIcon,
 } from '@codecademy/gamut-icons';
 import { ReactNode } from 'react';
 
@@ -223,6 +224,16 @@ const profileAccount: AppHeaderLinkItem = {
   type: 'link',
 };
 
+const messagesPage: AppHeaderLinkItem = {
+  id: 'messages',
+  icon: ChatIcon,
+  href: '/messages',
+  trackingTarget: 'avatar_settings',
+  text: 'Messages',
+  type: 'link',
+};
+
+
 const profileMyHome: AppHeaderLinkItem = {
   id: 'my-home',
   icon: HouseEntranceIcon,
@@ -293,7 +304,7 @@ export const freeProfile = (
   if (!isMobile && user.isAccountManager) {
     topSection.push(profileBusinessAccount);
   }
-  topSection.push(profileHelpCenter);
+  //topSection.push(profileHelpCenter);
 
   const bottomSection = [profileLogOut];
 
@@ -322,7 +333,7 @@ export const proProfile = (
     topSection.push(referrals);
   }
 
-  topSection.push(profileHelpCenter);
+  topSection.push(messagesPage);
 
   const middleSection = [];
   if (user.isAdmin) {

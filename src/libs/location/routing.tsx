@@ -1,6 +1,8 @@
 import React from 'react';
 
 import * as sharedRouteActions from './sharedRouteActions';
+import { RootState, store } from 'store';
+import { useAppSelector } from 'store/hooks';
 
 export type MetaScene = {
   portalData: unknown;
@@ -21,6 +23,7 @@ export const getRouteMetaForLocation = (
   locationType: string,
   statusCode?: number
 ) => {
+  const locType = store?.getState()?.location?.type
   const route = (() => {
     switch (statusCode) {
       case 404:
@@ -30,7 +33,12 @@ export const getRouteMetaForLocation = (
         return routesMeta[`${sharedRouteActions.error500}`];
     }
 
-    return routesMeta[locationType];
+    const scene = routesMeta[locationType];
+    if(!scene) {
+     
+      return routesMeta[locType]
+    }
+    return scene
   })();
 
   if (!route) {
