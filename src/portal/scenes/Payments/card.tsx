@@ -1,6 +1,6 @@
 import classNames from "classnames";
+import{ PaystackButton, PaystackConsumer, usePaystackPayment } from 'react-paystack';
 import styles from "./styles.module.scss";
-import logo from "static/images/brand/logo/code.png";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { ProjectPricing, useCheckoutWaveMutation } from "services/projects";
 import { useAuth } from "store/useAuth";
@@ -12,29 +12,43 @@ type CardProps = {
 }
 
 export const CardPayment: React.FC<CardProps> = ({ active, handleClose, pricing }) => {
-  const [checkoutWave] = useCheckoutWaveMutation();
+
+  const [ checkout ] = useCheckoutWaveMutation()
   const { user } = useAuth()
   const config = {
-    public_key: "FLWPUBK_TEST-4b961393b29fe0236bb5a0e76351a99b-X",
-    tx_ref: `${Date.now()}`,
+    publicKey: "pk_test_b01c2531ff251cee291e574900e55045b42c1a33",
+    reference: `${Date.now()}`,
     amount: Number(pricing?.amount),
-    currency: "USD",
-    payment_options: "card",
-    customer: {
-      email: user?.email,
-      phonenumber: '+23453444444',
-      name: user?.username,
-    },
-    customizations: {
-      title: "Codefluent Payment",
-      description: "Payment for items in cart",
-      logo
-  
-    },
+    email: user?.email,
+    currency: "GHS",
   };
 
-  const handleFlutterPayment = useFlutterwave(config);
-  if(!pricing) return null;
+  const handlePaystackSuccess = (reference) => {
+    console.log('Reference', reference)
+    const cart_id = localStorage.getItem('cart_id')
+    checkout({
+      cart_id: cart_id,
+      txRef: reference.reference
+    }).then((res: { data: Object}) => {
+      if(res?.data && res?.data["status"]) {
+        localStorage.removeItem('cart_id')
+        window.location.replace('/learn')
+      }
+    })
+  }
+
+  const handlePaystackClose = () => {
+    console.log('closed')
+  }
+
+  const componentProps = {
+    ...config,
+    text: 'Payments for codefluent',
+    onSuccess: (reference) => handlePaystackSuccess(reference),
+    onClose: handlePaystackClose
+  }
+
+  if(!pricing || !user) return null;
   return (
     <div
       className={classNames("react-tabs__tab-panel", {
@@ -45,7 +59,7 @@ export const CardPayment: React.FC<CardProps> = ({ active, handleClose, pricing 
       aria-labelledby="react-tabs-0"
     >
       <p className="cf-text-h6 cf-py-9 cf-text--center cf-invert">
-        You will continue to Flutterwave to complete your card payments
+        You will continue to Paystack to complete your card or mobile money payments
       </p>
       <form>
         <div className="cf-forms cf-layout">
@@ -57,29 +71,20 @@ export const CardPayment: React.FC<CardProps> = ({ active, handleClose, pricing 
             </p>
           </div>
           <div className={styles.orderBtn}>
-            <button
+            <PaystackConsumer { ...componentProps}>
+              { ({ initializePayment }) =>  <button
               onClick={() => {
-                handleClose();
-                handleFlutterPayment({
-                  callback: (response) => {
-                    const cart_id = localStorage.getItem('cart_id')
-                    checkoutWave({
-                      txRef: response.tx_ref,
-                      cart_id
-                    }).then((res) => {
-                      closePaymentModal();
-                    });
-                    // this will close the modal programmatically
-                  },
-                  onClose: () => {},
-                });
+                handleClose()
+                initializePayment(handlePaystackSuccess, handlePaystackClose)
               }}
               className="c-button c-button--full-width c-button--primary c-button--md"
               type="submit"
               data-ba="CompleteOrderButton"
             >
               Place Secure Order
-            </button>
+            </button>}
+            </PaystackConsumer>
+
             <div className={styles.orderSecurity}>
               <p>
                 <svg

@@ -48,11 +48,7 @@ export const Inbox: React.FC<InboxProps> = ({ threads }) => {
   const connect = (roomId) => {
 
     const token = localStorage.getItem('token')
-    let socket = new WebSocket(
-      (window.location.protocol == 'https:' ? 'wss://' : 'ws://')
-      + '127.0.0.1:8000'
-      + `/ws/messages/${roomId}/?token=${token}`
-    );
+    let socket = new WebSocket(`${process.env.REACT_APP_SOCKET_URL}:8001/ws/messages/${roomId}/?token=${token}`)
     var connectionInterval;
 
     socket.onopen = event => {
@@ -63,7 +59,7 @@ export const Inbox: React.FC<InboxProps> = ({ threads }) => {
     socket.onmessage = event => {
 
       if (event?.data) {
-        console.log("DATA: ", JSON.parse(event?.data))
+        
         const messages = [...threadMessage?.messages, JSON.parse(event.data)];
         console.log("Messages: ", messages);
         setThreadMessage({
@@ -93,11 +89,7 @@ export const Inbox: React.FC<InboxProps> = ({ threads }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    let socket = new WebSocket(
-      (window.location.protocol == 'https:' ? 'wss://' : 'ws://')
-      + '127.0.0.1:8000'
-      + `/ws/messages/${locationPayload?.id}/?token=${token}`
-    );
+    let socket = new WebSocket(`${process.env.REACT_APP_SOCKET_URL}:8001/ws/messages/${locationPayload?.id}/?token=${token}`)
    
 
     socket.onopen = event => {
@@ -107,7 +99,7 @@ export const Inbox: React.FC<InboxProps> = ({ threads }) => {
 
     socket.onclose = e => {
       console.log('Socket is closed. Reconnection attempt')
-      check(locationPayload?.id)
+      //check(locationPayload?.id)
     }
 
     socket.onerror = err => {

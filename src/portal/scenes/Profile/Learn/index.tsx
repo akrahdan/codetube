@@ -54,7 +54,7 @@ export const Learn = () => {
             />
             <p className="cf-text--capitalize cf-mr-auto">{user.first_name ? `${user.first_name} ${user.last_name}` : user.username}</p>
             <div className="cf-ml-6">
-              <h6 className="cf-text-h6 cf-text--right">24</h6>
+              <h6 className="cf-text-h6 cf-text--right">0</h6>
               <p className="cf-text-small cf-opacity--hinted">
                 Lectures Watched
               </p>

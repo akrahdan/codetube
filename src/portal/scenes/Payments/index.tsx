@@ -16,6 +16,7 @@ type PaymentProps = {
 export const Payment: React.FC<PaymentProps> = ({ onClose, project }) => {
   const [active, setActive] = useState('card')
   const { pricing } = project;
+  console.log('Project: ', project)
   return (
     <div
       className="falcon-cart falcon-cart--visible falcon-cart--cart"

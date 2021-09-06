@@ -43,12 +43,8 @@ export const Inbox: React.FC<InboxProps> = ({ threads }) => {
   const connect = (roomId) => {
 
     const token = localStorage.getItem('token')
-    let socket = new WebSocket(
-      (window.location.protocol == 'https:' ? 'wss://' : 'ws://')
-      + '127.0.0.1:8000'
-      + `/ws/messages/${roomId}/?token=${token}`
-    );
-    var connectionInterval;
+    let socket = new WebSocket(`${process.env.REACT_APP_SOCKET_URL}:8001/ws/messages/${roomId}/?token=${token}`)
+
 
     socket.onopen = event => {
       console.log("Connected")
@@ -88,11 +84,7 @@ export const Inbox: React.FC<InboxProps> = ({ threads }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    let socket = new WebSocket(
-      (window.location.protocol == 'https:' ? 'wss://' : 'ws://')
-      + '127.0.0.1:8000'
-      + `/ws/messages/${locationPayload?.id}/?token=${token}`
-    );
+    let socket = new WebSocket(`${process.env.REACT_APP_SOCKET_URL}:8001/ws/messages/${locationPayload?.id}/?token=${token}`)
 
 
     socket.onopen = event => {

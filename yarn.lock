@@ -12822,6 +12822,11 @@ react-overlays@^5.0.1:
     uncontrollable "^7.2.1"
     warning "^4.0.3"
 
+react-paystack@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-paystack/-/react-paystack-3.0.4.tgz#c4ddb0b4ef257af7f9f18438489aeeea98dba8b6"
+  integrity sha512-4M2s2Vxcf09WIsrK/Tlf7Ah47UG0lECL7I+bD5i2Qb3pZNOhLXgas25lCLY25FpZz6GPiVtbY0+4QcKPQdsd6g==
+
 react-player@^2.3.1, react-player@^2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.9.0.tgz#ef7fe7073434087565f00ff219824e1e02c4b046"
